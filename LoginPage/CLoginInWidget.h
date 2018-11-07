@@ -33,6 +33,7 @@ public:
 private slots:
     void _SlotCheckMinButton();
     void _SlotCheckCloseButton();
+    void _SlotCheckHideButton();
     void _SlotCheckLoginButton();
 signals:
     void SigShowMainWindow(int iUserPower, QString strUserName);// 显示主窗口
@@ -50,13 +51,14 @@ private:
     QPushButton *m_pMinButton;
     QPushButton *m_pCloseButton;
     //
-    QLabel *m_pLoginLabel;
+//    QLabel *m_pLoginLabel;
     // user
     QLabel *m_pUserNameLabel;
     QLineEdit *m_pUserNameLineEdit;
     // password
     QLabel *m_pPasswordLabel;
     QLineEdit *m_pPasswordLineEdit;
+    QPushButton *m_pPasswordHidButton;
     //
     QPushButton *m_pLoginButton;
 

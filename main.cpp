@@ -98,13 +98,12 @@ int main(int argc, char *argv[])
     {
         //return 0;
     }
-    //a.connect(&a,SIGNAL(), &a, SLOT(quit()));
 
     QApplication::setQuitOnLastWindowClosed(true);
     //打开设备
     if(CHidCmdThread::GetInstance()->GetStopped() || CHidCmdThread::GetInstance()->isRunning() == false)
     {
-        CHidCmdThread::GetInstance()->start();
+        //CHidCmdThread::GetInstance()->start();
     }
     qDebug() << "open CHidCmdThread";
 

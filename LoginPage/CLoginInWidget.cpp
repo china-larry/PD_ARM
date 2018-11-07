@@ -26,7 +26,7 @@
 CLoginInWidget::CLoginInWidget(QWidget *parent) : QWidget(parent)
 {
     //
-    this->setFixedSize(1030, 680);
+    this->setFixedSize(1024, 600);
     this->setWindowFlags(Qt::CustomizeWindowHint | Qt::FramelessWindowHint);
     // 设置b背景图片
     if(gk_iVersionConfig == PIS_VERSION)
@@ -149,12 +149,17 @@ void CLoginInWidget::_SlotCheckCloseButton()
     }
 }
 
+void CLoginInWidget::_SlotCheckHideButton()
+{
+
+}
+
 void CLoginInWidget::_SlotCheckLoginButton()
 {
     // 检查用户名及权限
     qDebug() << __FUNCTION__ << __LINE__;
 
-    m_iUserPower = _CheckUserPower();
+    m_iUserPower = 2;//_CheckUserPower();
     if(m_iUserPower >= 0)
     {//
         emit SigShowMainWindow(m_iUserPower,m_pUserNameLineEdit->text());
@@ -220,21 +225,24 @@ void CLoginInWidget::_InitWidget()
     SetButtonBackImage(m_pCloseButton, ":/image/ico/login/login_close_pressed.jpg");
     connect(m_pCloseButton, SIGNAL(clicked(bool)), this, SLOT(_SlotCheckCloseButton()));
     //
-    m_pLoginLabel = new QLabel("Login", this);
-    m_pLoginLabel->setObjectName("m_pLoginLabel");
+//    m_pLoginLabel = new QLabel("Login", this);
+//    m_pLoginLabel->setObjectName("m_pLoginLabel");
     // user
     m_pUserNameLabel = new QLabel("Username: ", this);
     //m_pUserNameLabel->setFixedSize(100, 50);
    // m_pUserNameLabel->setObjectName("m_pUserNameLabel");
     m_pUserNameLineEdit = new QLineEdit(this);
-    m_pUserNameLineEdit->setFixedSize(280, 50);
+    m_pUserNameLineEdit->setFixedSize(280, 35);
     // pass
     m_pPasswordLabel = new QLabel("Password:  ", this);
    // m_pPasswordLabel->setObjectName("m_pUserNameLabel");
     m_pPasswordLineEdit = new QLineEdit(this);
     m_pPasswordLineEdit->setEchoMode(QLineEdit::Password);
-    m_pPasswordLineEdit->setFixedSize(280, 50);
+    m_pPasswordLineEdit->setFixedSize(280, 35);
     connect(m_pPasswordLineEdit, &QLineEdit::textChanged, this, &CLoginInWidget::_SlotPasswordChange);
+    m_pPasswordHidButton = new QPushButton("Hide", this);
+    m_pPasswordHidButton->setFixedSize(60, 35);
+    connect(m_pPasswordHidButton, &QPushButton::clicked, this, &CLoginInWidget::_SlotCheckHideButton);
     //
     m_pLoginButton = new QPushButton("Login", this);
     m_pLoginButton->setFixedSize(160, 35);
@@ -249,48 +257,55 @@ void CLoginInWidget::_InitWidget()
   */
 void CLoginInWidget::_InitLayout()
 {
+    int iLeftSize = 625;
     QHBoxLayout *pTitleLayout = new QHBoxLayout;
     pTitleLayout->setMargin(0);
     pTitleLayout->addStretch(100);
     pTitleLayout->addWidget(m_pMinButton);
     pTitleLayout->addWidget(m_pCloseButton);
+    // username
+    QHBoxLayout *pUserNameLableHLayout = new QHBoxLayout;
+    pUserNameLableHLayout->addSpacing(iLeftSize);
+    pUserNameLableHLayout->addWidget(m_pUserNameLabel);
+    pUserNameLableHLayout->addStretch(100);
     //
-    QHBoxLayout *pFirstLineHLayout = new QHBoxLayout;
-    pFirstLineHLayout->addSpacing(475);
-    pFirstLineHLayout->addWidget(m_pLoginLabel);
-    pFirstLineHLayout->addStretch(200);
+    QHBoxLayout *pUserNameLineHLayout = new QHBoxLayout;
+    pUserNameLineHLayout->addSpacing(iLeftSize);
+    pUserNameLineHLayout->addWidget(m_pUserNameLineEdit);
+    pUserNameLineHLayout->addStretch(100);
+    // password
+    QHBoxLayout *pPasswordLableHLayout = new QHBoxLayout;
+    pPasswordLableHLayout->addSpacing(iLeftSize);
+    pPasswordLableHLayout->addWidget(m_pPasswordLabel);
+    pPasswordLableHLayout->addStretch(100);
     //
-    QHBoxLayout *pUserHLayout = new QHBoxLayout;
-    pUserHLayout->addStretch(100);
-    pUserHLayout->addWidget(m_pUserNameLabel);
-    pUserHLayout->addSpacing(10);
-    pUserHLayout->addWidget(m_pUserNameLineEdit);
-    pUserHLayout->addStretch(100);
+    QHBoxLayout *pPasswordLineHLayout = new QHBoxLayout;
+    pPasswordLineHLayout->addSpacing(iLeftSize);
+    pPasswordLineHLayout->addWidget(m_pPasswordLineEdit);
+    pPasswordLineHLayout->addSpacing(10);
+    pPasswordLineHLayout->addWidget(m_pPasswordHidButton);
+    pPasswordLineHLayout->addStretch(100);
     //
-    QHBoxLayout *pPassHLayout = new QHBoxLayout;
-    pPassHLayout->addStretch(100);
-    pPassHLayout->addWidget(m_pPasswordLabel);
-    pPassHLayout->addSpacing(10);
-    pPassHLayout->addWidget(m_pPasswordLineEdit);
-    pPassHLayout->addStretch(100);
     //
-    QHBoxLayout *pEndLineHLayout = new QHBoxLayout;
-    pEndLineHLayout->addSpacing(435);
-    pEndLineHLayout->addWidget(m_pLoginButton);
-    pEndLineHLayout->addStretch(200);
+    QHBoxLayout *pLoadInHLayout = new QHBoxLayout;
+    pLoadInHLayout->addSpacing(iLeftSize+60);
+    pLoadInHLayout->addWidget(m_pLoginButton);
+    pLoadInHLayout->addStretch(100);
     //
 
     QVBoxLayout *pVLayout = new QVBoxLayout;
     pVLayout->setMargin(0);
     pVLayout->addLayout(pTitleLayout);
     pVLayout->addStretch(100);
-    pVLayout->addLayout(pFirstLineHLayout);
-    pVLayout->addSpacing(30);
-    pVLayout->addLayout(pUserHLayout);
-    pVLayout->addSpacing(30);
-    pVLayout->addLayout(pPassHLayout);
-    pVLayout->addSpacing(71);
-    pVLayout->addLayout(pEndLineHLayout);
+    pVLayout->addLayout(pUserNameLableHLayout);
+    pVLayout->addSpacing(10);
+    pVLayout->addLayout(pUserNameLineHLayout);
+    pVLayout->addSpacing(10);
+    pVLayout->addLayout(pPasswordLableHLayout);
+    pVLayout->addSpacing(10);
+    pVLayout->addLayout(pPasswordLineHLayout);
+    pVLayout->addSpacing(50);
+    pVLayout->addLayout(pLoadInHLayout);
     pVLayout->addStretch(100);
     //
     this->setLayout(pVLayout);
