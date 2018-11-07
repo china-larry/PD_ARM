@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">	 
+</head>
+<style type="text/css"> 
+ body{
+	color: rgba(40, 40, 40, 1.0);
+}  
+input,label{ font:14px/18px "Microsoft Yahei", Tahoma, Helvetica, Arial, Verdana, "\5b8b\4f53", sans-serif;  }
+
+.chk_1,.chk_2,.chk_3,.chk_4 {
+    display: none;
+}
+  
+.chk_1 + label {
+	background-color: #FFF;
+	border: 1px solid #000; 
+	padding: 6px; 
+	display: inline-block;
+	position: relative;
+	margin-right: 30px;
+}
+.chk_1 + label:active { 
+}
+
+.chk_1:checked + label { 
+	border: 1px solid #000; 
+	color: #000;
+}
+
+.chk_1:checked + label:after {
+	content: '\2714';
+	position: absolute;
+	top: -5px;
+	left: 0px;
+	color: #000;
+	width: 100%;
+	text-align: center;
+	font-size: 1.3em;
+	padding: 1px 0 0 0;
+	vertical-align: text-top;
+}
+ .chk_1 + label{
+  margin-right:0px;
+ }
+ .table1{
+	height: 400px;
+ }
+
+</style> 
+<body style="margin:1px">
+	
+	<table border="0" cellspacing="0" cellpadding="0" style="width:100%;height:100%;border:5px solid #008cd6;padding:0px;margin:0px;">
+		<tr>
+		<td> 		
+		<table border="0" cellspacing="0" cellpadding="0" style="width:98.5%;height:98%;font-family:Tahoma;border:2px solid #008cd6;text-align: center; padding: 0px 0px 40px 20px;margin:6px;">
+			<tr>
+			<td style="padding: 0px 50px;text-align:center;"> 
+				<div style="width:100%;height:40px;padding:0px;color:#008cd6;font-family:Impact;font-size:35px;margin-top: 35px;margin-bottom: 15px;">${ReportTitle}</div>
+			</td>
+			</tr>
+			<tr>
+			<td style="padding: 0px 50px;">
+				<img style="width:474px;height:40px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA8oAAABDCAYAAABEOPy5AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAgAElEQVR4nO3dfVBb15038C+K3pCQMIgXIRzA2AZSarKmthvcQvMkdrKtKfFL9xnX7Tppi+3tuulkSOwk3afb6Ty7k9hOup6mmWkwndR+Om5mEzsOwemkJA2BJmRNxm6g2AHHGOMA4lUgEAZJgecPIcybpHOv7tW9kn6fGc8ktqRzdO/Rued3z7m/EzMzMzMDQgghhBBCCCGEAAAUUleAEEIIIYQQQgiREwqUCSGEEEIIIYSQeShQJoQQQgghhBBC5qFAmRBCCCGEEEIImUcpdQWimWNqGt22SfSNujHocGHQ4cbVoSkAwFqTBkl6JZL0KqTGK5GeoIVeEx33NWJ+9WnA17TtyUCOWReC2hBCCCGEEEKiTcBAud06gdzTXaGoCy+HsnU4uj1D6mow67K78fYnQ7jQfQtVPZO+X9gxseSvyi1abEqPxYN3m5BhpHschBBCCCGEECIGirZCpKHNjuca+1E97Ob9GVU9k57gusmGcosWe9cnojjXKGAtCSGEEEIIIYRQoCwyIQLk5XiC5h6UNfbjiaIUCpgJIYQQQgghRCDR8dCrBBxT0zh8rgsl53sED5Lnqx52o+R8Dw6f64Jjalq0cgghhBBCCCEkWtCMsgga2ux4staKRmfoAtdjHRP464nPcGSrmWaXCSGESMSJhrZJDDpc+KhxAEenlnuNCoe3pOMetwNmsx5FFm2oK0kIIYQERIGywE409GF/k02Sshud0yg534PK/lvYV5wqSR0I4caJS7U3UdjiCupTSvPN+GHyF3P//5U18ZTwTpaEOd8sdCkmfPb9ZKSJXhIBAPeNXvzur2P4lz6WG8QuHH2nc/a/BwCoULkxjhJVEvHMOPDcCzdxiHWBn8qAph+nYwM1R0biXMvvKTRRH04kRV2AgKQMkufz1oGC5ejFssXWTEXe3OueWWfEU1stS17zbG0Pnm6xyz67fE2rFTXz/6JuALoUE/7wJQUeyE+Imq3VCAk9zwB5Z4sLnbw/w+W5bjWN4/ldq3DADPrNEhKFlruWl+ab8WJRHN1EI5KgVicQuQTJXhQsR7ez9ybP/fegw439TTZUbkxAkn75n/zTLXY8WmJeMDh1TE3j6Ra76HUVy0T/EHb2A7rL03jnPgMt7yREaI4xvHSul3EWmYULj59px3v5ZlQ+uIJmkgghnuC53YBze9LwkIluoJHQChgoa3VqHMrW8frwthEnUyKrIrUCX1/JbxC71qTh9T4hvX5xSFZBstf+JhvyUmLpmeUotKPQNPff7dYJoMmGb6w1IMfs+7d8sXN8QVu52Dkuah1DZaJ/CJvPOOkiS4ignLj0Yb+AQfJtNa1WPJWsxe8KtXQ3nxACuMaw/TToOk5CLuA1KMOo5L3k8vWLQ6iuGwj4uq+v1Mp6Wac/7dYJ7GT4jlKo32ahIJkEdChbh79+PokPuhYGyh90jaPcovXs3R3uXGPY8yc1PbNKIpL7Ri/WnhllXPqswvO7VqEiM7jBpvvGEA62fRH4hTyd+mAIjxbQM6KEkFl0HY8KUlzP/KHbMkFwTE3jkdc+D+ozyi1a1G+zoG1PBsYP5mCmIg8zFXkYP5iDtj0ZqN9mQTnHJaNFagXa9mRQkEyY/eDueDzdYp/bYsy77Hrv+kSJayacif4hHG+OgKCfEMk5UX9pTNydHVxjePUy/V4JIbdN9Nvxxxu0FSoJHbpXG4TTFwZ4DxQqNyZgz6ZknwlL9BoFcsw65JiB4lwjjk9N4/SFgYBLvMstWvz8Wysp6QHh5MG7TUCTbW75tXfZdWFWnMQ1E9arVjf+PXeaEgUREgzHFN7uFn+w+qrVjf8soIEKEUCMHk/8NA9PSF0PEiQXftM2gQNmHV3HSUhQK+Op3TrB67nkcosW4wdzsK84ldOPXK9RYF9xKsYP5vicYS63aHF8RwYFyYSzDKMSZYlKfNDlCZDfvDKCZ9YZI+5CdL1tFFfuiKzvREiouQfH0TDD/jsqzTejpyIPMxXZeDeb/X19/bcgzwebCCFSud42CnuEjU2IfFFExVPVR4Oc31O5MSHoLNR6jQIndmdh06Is21w+u8vuxuSEM+Dr/CV+8qehzY5BR+C99PItsbzLiBTec9E36p47ZvmWWAD8jz9fpasN2N9kw56vpuBYxwTqty3dLkoO9t6bhZOFWsAxhnfe68e+dg7b0rgm0T06jQ2UDIQQ3gZG3ehlXU2lMuAX93szWKtRst6ArA62588mbE50u4E0GqkQEnG813Jue7ADcE3iwtA0JfUiIUGXHx667G4c65jg9B4hguT5vJ+1v8nGOWnXb/7Sw1T/mYo8XnV788oI0+efvTc56gJlx9Q0LnaO44OucVS3jQdcul9u0WJTeqzfZfpC8S6//r9veZ67l/2ya70BW7Yp8NRoN6fMu9fGAZjm/cWMA8+9cBOHAifoBwCs+vJKtD8Qd7vzdIzh9TYnztUNoMH7b7ZBPPzyIE4x1mku+AcAOHH2Dx3Y1c+zPovN1u+jxgEcnZr39yoDKv9BifVFqQsSJvU238TmdxxMgczCerNQY/3W1ZjZuvy/9jbfhOUdB/OnBfzuflg7h9E4PIP+K0M+2o8KlRvjkKRX4itr4oNfqTN7HgDg2IdDy//2Z89Jkl6JewpNsk5Y08n4Ol2CGunzDp3SqEIJh/dzFfC8zjvGzHusi9FHBPs9hG6foSib43HUpZgWJG7y1mvx76c034wfJn/h/3xyLBsqA5p+PC+ZnJR1X0xWfXrwlJlpOJAUh47fdy/8Pn4suY4HIO7vids1e3Hb8HU+ebWNeVi+8+Et6bjH7cCdBSZuiRMl6BOlItd6ydrbnwxxer3QQbLXvuJUPHi3iZZahwHH1DT+3GrzPUD2oapnElU9k9jfZMOhbB3K70kS7eaCd/l1Vc9k+Cy7jlFhU8odgAhb1PhSnKSc7Tid6G3uw676W3PndFXIasFiaf0WcI1hfxOAJhtK5+1ba+1zihbESM+JS7U3cbzFxXATw3V71U7dAErzzfjZOi3H/bg95+B4g4NtAOg9J0xlchuczSsEj59px+Oz/yfFwFh4HI7zgmM8gsNb0nEwSynodZR/HxHq9imXsgNwjOHs690+23pNqxU1AHSXp/HOfQbx6sGHoHWP4D5dr8FX4wFw7s/8kXGbnle/nS3Lr4rj1665feej78yWXDcAqAw4+zUt78Dcn0B9olLG1zOKsHh4+ZNR5teWJSqxZ1OyaHWJ1iA593QX7/eWJSpRutqAvJRYFGbFiR4QNrTZ8WStNegMscc6JnCsowvPrDPi0RKzKPUuXW1A9bANX8uQ+Wwyby70jToBBNuROvGXc524v0O+2Td7m/uYZxFqWq1YM+DClbIEXO8L/NhEOHLf6MW/1Ywyz1gsVtNqRU2r5y7/i0Vxgfte2yBeems4qH2G55fpHfRKzwlrX+BHdwTB8KhEcOfVM1A8OrvFyE8zFQIOirj1ESFvnzIpOxCX3Y3nft/NNHM10T+Eza/Yce7hVbJYlit03alP93LhkyEnkOn7Oi7nNp2aEgvj1DReeq2T6frA2q6D/c5wjWFn3ZiIN5zkP25ajvQ9SZhp7JnkFPAc+0dLeMzMRZHqYTf2N9lQcr4HcS+249naHrRbuS2lZ+GYmsaztT0oOd8j6DYqT7fYsfXEZ8x1zjHrMFORt+xM9ExF3oI9zPcVp2KmIm/BUv7Frwl3Vtald8tS4W6TGr3NffiRnDt72yCeYhxQeU30D+Grr3TiDUHv6MtDb/NNlLw5xn8AMU9NqxV3VdvQZffTkBxjeO7/DQYVJC8uc//bI+gV5NNCa8ImXlAt3Hn1zEr86OLk3BZ5/HHvI0LePmVSdiCpKbH4uPoz9uXSAAAX9vxpSPLfiuB1pz6dmZzbtNfbr7ZzvD64sP10r8927b7Rix+dCSJInscTmHfjV4JtwxUm4yYfKILj6O/X2GeTD2Xrou4Z3FA5lC3ccX26xY7c0104fK5LsIDZMTWNx17vwtMtdkE+b7FG5zRyT3ehoU2czye+OdutnAcsoXbp41Hm56Pns467eb1P1mYHmELerJroH8Jd1TYfgxYnLn3Yz3GAHFhNqxVPCRLIBUvN+R3dAh8LwDMw9LkEladTdZ3411Yngq0upz4i5O1TJmUzuP73z3ksxZTHXrtC1536dEYyb9MA/7YB1+Ty7do2iH+r4dc+/BSGx89cxxtDwhzHcBg3+UKBMkdXh9hv1+zYlCJiTaJb+T1JeGYdewIzFsc6JpB7ugsnGvqC+hxvkFzVMylQzXwrOd9DwXJIuVDdNi7vgceMAxf6v5C6FjLhxNnz7EnVuJjoH8JTFyeXBlWOKbzSLs5Sx1N13XhnXJSP5sScyiFYdo3hl++O3A7wE5JwsiIPM0x/Vi+/1NAxhuNvjAo6GPY6VdeN80ENDrn0ERK0T1mULbbZpblhaZm6U5/OKJLbNAC48N6n9kV1cOLSx8LMJC9XnjCrM8Jg3OQHBcocsWa7LlIr5JVQIgI9WmL2uad0MPY32XD4XBevmZtQBsleJefFWTpOlifG4FxQE9PoGJF5HUPEfWMIz42Id5k79cEQ/rZo5NR7bQT/LcqgBQBcqPp48UBJGlkcXlvTasW/tjoFmw3vvTaCF0U7CMEfY9Y+Qor2KYeyQ6Fh0C2L3wkfS+pOffoS5mUeGY70Ng0ArTGLvrjNjuMt4j2DLtTqDNmPm/ygQJkDLhf5stxITYYkH3qNAj//1koUqYVvxsc6JvDY69wThp2+MBDSINnrkdc+l8GSTCILzilYOQRquhQTbpSvwUxFHnq26DkFQHLX0j7BfIHWpZjQU5GHmYpsvJvN2Ke4xvDq5YW/d/YMsyoc3pIFV0UeZg6k47epbGXeHiipsfP7nplX1654DudNhed35czN2vLJEJocr0Qax373VF0ndtfZ8XHQA00nrnTcYt+eisd5rWl3YIB3/dhJ0T7lUDa7eW31B0nYy/HdU5JeEwWsO/Xpi6iQGr90VUt4tGlAyLbRe/MW80zt7XbB4TvDhd+0TYg+vnRLeD0LhAJlDrpt7D+QXJNGxJoQrwyjEs/vFCfRVFXPJKdl2O3WidvbC3BQpFbgULZu7k9ZIvfsio3OaZy+EIqhHZE7t92Feg6v/0mBYS6jZ9qdsSgRp1oScHLK9vqdLxlms0qrUbLewHyhftXqnjeI4LDcU6XFYwVaT5ZlvQFl62KZ3tbXfyskQZw/ygwjHk7g/r6aVis2/voanmye5L+cb8aFq+xbbfM7r76eBRSUFO1TDmVzoNLiu5mzw9QEIx7i8DRbX/8t2KVMpCpg3aOiT3dM4X/YUwBh9ZK5qDBp0wB0KUaB2obnpiGr73zJ2y64fefrbaO4ckf0hovR+81FZjbrpa5C1CiyaFG/zSLKZ+9vsqGRcYa46qNBTp/9zDoj2vZk4MOf5ODo9oy5P288sgbjB3Nw9t5kTrPl+5tstASbcLT8nfmIMONCxzDriz1ZOflYPIhgHazpEsL4uMfoPfuX8+LZksnyQje/RDGclqEuPK9Ko4oxaPBuIyciidqn5GVzEM6/EenqHoZ9umMML53rZX/OVqXFpsW5C8KkTQOejOjzN41dEcfz8zjdNOT/nb3b9EWr6NyENwRMiuhtVFIozjWiLZ6tOb9/dYzTzO+zf/4cbzyyxu9r2q0TnJ5f//13VvrNiK7XKLCj0IQH8hPwyz99zvzZZ1tG8BRlWicEGLmFFp7LfL0BVSfLixn2+o1E6zen4HB7d1B7dm4/OcZ9j2iOy1D5utw7Cbd3xl8MUrbPMPltePebxewM2qpUFdAfHnsCh3PdQ+VUXSdO1XF/X2mOfkGgCSBs2vRyEvR3ABD7puFCnL4zgGvjAEy8igp70XVlJxEtx6xj+rOvOBXjB3OYs2ZXD7sDZpY+2zLC9FlliUrU7lvDvG2YXqPA0e0ZqNzIts7x6RY7PatMSIhd45GJWsz9hUNCb8BjxcE//1jTauU0u+y2u3BVhLwUiy1JmhPG+LRPuZSt4bl8esLmFGVbMi7Cue7ypUL5BqOks3xS/p4WCNFNw2hHgbJI+kapl5MzvUaBp7ZamAPQ5xp9b3rnmJpm2i+5SK3ACzuzoOdx8dxXnMqc4ftip1x6cUKkw/W5PqGsSlWxvTAkz8GKK60gFb9jTgrjh2sM209ex5PNbPtE94ZxBlUvqdqn1GUTwpcuxYRzD69adss4atNELJFzyxSe5a+5p7lnKl7OoWwdjm7nnyTq0/5bKM4Vdp9fIrx9xakAEHApdvWwG11291yCjPmaGfdrPLTZtOz7WR3fkYGqF9sDvu7NKyPU9kJChcNb0rE5XY1tJkVkdaaEJ7Vnj2Gm7TpcePzMdWDXKvw0U4G0gjsxUyB6BQWmxn3bs/DuuU7c3xFs8Op5dvlyL8el2CLxJE2LC7IevvsIupVOSGCl+Wb8MPkLmM162nJ1kfC8ORB+46ZwqKNssC6XBYAL3bewT8S6EOHs2ZSMmmtjqB72P3S50TuBDOPSAPTv1wKnaixSe545DoZeo0DlxoSAQf2xjgkcDaokEpDKgHN70pa9s03CkQuPn2nH4zzf60n85BnEJccrUaRWMG5T4in3vXwzfrZOG6YDQU+w3NPch131t4LeL7Om1Yr9gCyC5aAI2kcI1z7Dq2wS7WparUC+GeWZarghVNBCbVoSYTpuokCZI9YBUFXPJI5PTfNaZktCS69R4ImiFFSf7/H7ug+6xpedqb06FPghkUbnNGJ+9SnvOnLloLYnIhWeLwu/zp6IxzrvHptn66QxNLLvLIeaVitqWj2zJ7+4fwU2hN2VWY20gjtRH9+L3/11DP/SJ0yw/Mq9RmH7sYQknKxIwknhPtEHefURVgmnr6Usm0QGT/9oRWm+GS8WxQW1Mk8I1Kb5kFefyEX41VhiZblLNm/z6c+t3PfUJdIozAp8Xocdy/eOtkn5PS/HZc9vwpFKi5J06jqJDzF6/OjrBk5bu3l59hn+FN9+e4R5Wzo5UWam4cD3snBxnUqAJF9DeMkqRK0kQH0EIYKrabXirmob/z3YiXTCuE8Mz1pL6GsZ7IHy75ttlIE4TLDMWvjaoqkqDAe0hD9dghrpYTfjR0JJmZmGMyWxvIJlwDMg3PxKJ7799gg+DrvZCzXWb12Nq7vicVgTzOe48POGobAcFFMfQUhge+/NwkxFHmYOpOO3qWx95UT/EPa/PULP+IeZcO4TKVDmiGXm0at62E2zyoQQEoXSCu5E/bcN2BvEZ3hmmK/hyebJsAsYlZlpOHIwO6jZ5Yl+e9hnBieEBKA34MD2NOYbazXtDvyNImUSIhQoc6TXKJi36QGAnXUD6LLTLzqSlSWG6W0yQoiolJlpOHkgHbU5wSxF9mSDXvOHgTBcju2ZXW7cmcJzdtmbOIcQEtF0CmSvYAxJXJOo76YbaCQ0aITPw971iajq8Z/4ab7dpzpQu28NJVeSsXbr8suqWeSuUAMBMmaHmlanlroKESs1JRbJUleCCEyF53etQkWmCH203oAtpQZcvRFcoquJ/iFsPuNE04/Twy7ZlzkrEUceUSH7XC/n7/+q1Y3/LAivwYrwfYSI7VPWZZOoEaNC8kyogl9q06EWzuOmcLr2yEZhVhyH7T88GY8fe70Lx3dkCBYsO6amMTQ1LXn2v0jx/tWxgK85lL389mBrTRrAx/PLXmWJShz7RwuvuvFB7YIQeVFmpuFAZhoe6hzGf53vx9HAyfKXco3hl++OCJ8NmivbIB5+eRCnWF6rMniCe70BB76nwVqOey4Ls5/xbb3NN2F5xxHwdboUEz77fnJ4b1FFSESiLZpI6NBomge9RoFDm03YWTfA/J6qnkm0nvgMr+zNDjqIabdO4JHXPkd+klrQ4DtaOaam8fIngfdCXmtafu1gXkosAP/PolcPu3EM3PbiJoRIxYlLtTdR2OJievXee7NwspBt0GbOSsSRg3F4rLkPxxscnAPmmnYHrty/Ahu4vU0m1LhvaxoO/76b+XtP2JzodgNpNFqZR7z2Ke+yCfEQdosmatPEt4i69OSYdZipyAtJWQ/kJ6DowyHmWWXAM7OcWfUZKjcmYM+mZM4BrmNqGqcvDGB/kycoa+yZBASeqY5GL9Rbmc6jJyBeKjONLfg9Vtcf1Ll6/eIQ3mofw2qTGrkmDcxmPdLjlDR7TJZIUyvQydQ3Lbwz77a7cFWtADj0a4QPz77DRwqc2F17EwfbvmC/lrjG8OrlSWwoCNOBml6DB9MVOMphVpmQaEd9OiHSoBE2T3qNAke2mlFynv1ZZa/9TTa8/MkofnB3PB682xQw0Omyu/H2J0N4+ZPRJYOpqtlg+cTuLM71kKtyizZkWy41tNnxdIud6bW+Mp5nGJUoS1SiOsBzylU9k9h0YQD7ilN51XNuBcPcsbm9oqHcop0LoB/IT6AbJ1FMaVRhrXMajYyvv9w7id4CLdLgRP2lMU43/8hSXJf2rt+6Gh9uGMRLbw0zP797uXcS7gJtmF7A1UjQ3wFA3u0snJ+pI5GF+nRCpBOe11mZKM414pmuceZAa75G5zQam2xAkw1liUoUpeuQu2hpb9vQFBq7J9gCsIY+XgGYHB3fkYHWE5+J3rmfaOibm50PpNyi9Rt8PlGUgmqGmybe8risKGhoswe8IVPVMwn0TKIsUYkdhSamzyURSq2BWQOAcWlrTasVllarqFWKdOZgr6QJSfjR1104+SbboLY1Jrwv3eZUNcC4zBGuSXSPTmODydNfKo0qlADoFK12kSfo9hmmZUcM6tNlRS5tmvrC0JDJ6Q5fj5aYmYJZf6qH3age5h5sz+cNwCIhWNZrFHhlbzZ2n+oQJVhuaLPjucZ+Tuds7/pEv//OJcHb/iYbaq6N4YmiFBTnGn2+rsvuxm/+0oNjARKFzfdEUQrzayOFzfGF1FUQ1owLAzEK8J5x826zwTO7cqQI3SBChdT44LPMK5PiUBwzyjxrFO6yEN0DPCnbZ7j9NqIe9ekBUZsmYqFAOUh6jQIv7MzCgEhBHReRFCxnGJV4ZW82Mqs+W/bf3786hvevjuHqELdMOFyCTq8itcLnsmsvrgneqofdqD7fg7LGfpSuNiBJr0S+JRZ9o24MOlx4q32M8/LzskSl38A7Uo2MR97gYWwoiO8Uo8emlDtoUBVudAokR9g9H0GotEiPn7f6huPs2kJOWPvY9mUuTlLSAInIA/XpRGKr/Q+BIxpdBwTgDerEmgHlYn+TDXkpsYIETK9fHOL1vrYRtoFIIBlGJeq3WZZddsy6ZFoIR7aamZZJ7yg0oZxjgOtZTSDMdwnl9lOy4ZjC/wROWD6PCnebQnA3eEUs1ikBMC5aGB6YhBvCPXO6fkM89rYwbt8TqTieA6EkxyuZZksnbML0k5IQ4Nh28n0jp9k1/tvIiL68UqL2KXnZhBfq0wMIszY9NTUN5ey4kveqOE7fOYgkb4tvVkYZWQTKvrbdCSdyCpafrLWiNivOZ3D37btWMM2sctn+SizFuUacdbgkq0u5RcvppsPPv7USrRK0gcqNCdG39ZRjDC+d6+W3H63MCP7MaUISnt1yC1frb3Foiyoc3pKO7JYu5qRSshajQnYigH6WF7vwyZATyLwdUF3vY3yGVqVFSfrCvpY1Q+2CbY9GbqGFcZCXPyPxaJDLsXVNor57GhsyvcfIiSsdtzgVlz7/5xGjwlo9+3sXJD6bceFCP8ugVIXN6SLfUJOwfUpaNuGH+nT/wqhN9/Xfgl0TB283FsyqOIOJfUn+4i21ejmMU9NlES1KQ9IerEitwIe7syJiqTBwO1guS5SuRZVbtHhlb7bfGdBAy4jlZkehCZUbE0JebpFagZ9/ayWn92QYlTiy1SxSjZZ3KFsXMb8hFqfqOhHzq08R81J3xFz8r7eN4m+zF7HelmGcVQTfNacV3ImzpUk4zHIfUmXAuYdX4UiBAskzkXFMATVWpaqYX/3a5TF02T0nobe5D8+NsJ2DVbnxuOuL28fM86wxwzF0jeGF5kk4pqYBOHHp41HUM9b1S2nBrD7wziwEh/3YuvDep3b0zv5fb3Mf/s/n7OXoEhYHrN6s2WxqWofw6xue89HbMoyTDAt4dClGbDKJPTySpn1KXzbhi/p0f8KnTU/02/HH2T4JNjveYAruPRZk4+d40/D2d/ZkQ+9kfN+q3HgYp+TahoS5nvkjWUT3zDojHi1hW9IaTjKMSpz+bjZeqLfyyoYdDNZjqtcoULkxQZTly+UWzx06obd32rMpGRe6b4Vs2ygAeH5nBq89iotzjagHeG0dxlW5RYtffJNbMB/VQjjDweVOL1xj2PjrTwWvgzkrEUcOxuGx5j585Nbh2KK930vzzfhh8hcRu6XYuhwditrYMklP9A8hs4r74yb/ZFYuPHYclgafquvEqTquJQafnOn29jF8qWFOVSOrxcVUZjBZeO9LVi3ZponLeQVcePxMOx7nUOZPCgxBHBt2krRPGZRN+Iv2Pt2f8GnT3Pskr4WridS4KzsWWR0Opn6Y33dW4Se5upC2pdBfzwLUR6TP9alIrcDzOzNQZOH+zFC40GsUeGqrBd/IT8TjZ7tEX4ZblqjEUw+s5HRM92xKFjxQLrdocXxHBn75Jw7TBYz0GgWO78hA/x87gsowzqp+myWoNuoNlp+stYp2/is3JnDaZop4hGQJEcc7veJSI63gTuwAom7rMGWmCS/mTqCwRZzfoC7FhMcKFvUTMXqUrYvFs31sgxfOVFp8NzO43/yCwFVlQNOP07GB4+8ibfUK/O8Gh8iPPqjwv/KMSwYqykwT/mPlGO7vEL7EZc+pSCRpnzIomwQrevt0f6KhTS9eTZS2egUO1jlwSKRhsS7FGPT1RmxCXM/8Cem3P5StQ+2+NREdJM9XZNGidt8anL03GUVq4Q91kVqBs/cm4/R3szkfU71GgfptwiV/8i5TFtuBQxgAAAYvSURBVDNo82YYF+NYehWpFbhRvkaQZGjFuUa8sjd7bpZdKEVqz7nbV5xKQTJHpTn6JbNT4pi90xuSsgQ040LHMOuLQ5QYLShqrN+cgmOi3BxR4fQ3TcvexU5bvQIHRbohc/gby5TpTeoSSnoNduewL3XkxedNATXu+0Yi9gpfoM9zKg5p2qf0ZZOQibg+3Z/waNPmOCXPcewyW1PpDfjevXqRxhoS/Y6luJ75EZKqFKkVOLLVHJVb1+g1CuwoNOGB/ARc7BzHqUvDQS8fLrdosXd9Igr9JOxiIdQS4SK1Z99jPsuUuQq0bVQwxJihzTAqcWJ3Fva22QWZXaZZ5CCoDPjF/StCtoyG751ec5wSe11u3jN17hu9WHtmlG02U4S7r7KjN+Cxh+LRcmZUwIyxKjy/axUe8vUcq96AJ/45CS0vC5ultjTfjH/PXWYgG6PC/XepgBbGhDSC8AxKf9vfK1KuABWeL0vzPUjjldwoQHn+zqlYpGifciibMKM+nYMwaNOxWWa8GNPHeeZ71ZdTcWCZFDhpBak423cThYL2/xL+jiW5nvkm+hHwziJHY5A8n16jQHGuESd2Z2H8YA7qt1lQuTGBabax3KJF5cYE1G+zYPxgDk7szkJxrlGQYKk414i2PRm8E5CFMkj28m4bJZTKjQlo25Mh6gxtca4RtfvWoH6bhfMMc5Ha80z5+MEcmkXmzTPoDungYfaCzenOscqAs6Urg9pP1/t8Dy8cMi+HE2VmGk7+IAm/TRXgtzObJKci0HK0hCThyoQnSK58cIWP37+YMyl+6A048K1Ewb7jbZ5B2k8DHGNvcqOgZ5ZZz6lIJGmfMiibsKE+nZtwaNPrt96Jd7O5jQ3+6yu+nhVWY/3WO3FxnUqYmWXJf8cSXc98ELUaD+Qn0PMTy/AGzcW5RuwDcAKAY2oa3baFM83pCdqQBEU5Zh3eeGQNGnsm8fdro7g6xD6V9ZP7LEuC5LUmDQ4xvDdJz3/Znnc2/M0rI7zev9akQV5KbNCz8lzMP+/Hp6ZxsXMcgw4XGrscPuuXmaYL6U2ISFSab8Yv7l8hyR12ZWYazpZq8OTZ/oB3t0vzzXixKA4Zhil8EEyhag3MGgAsP2PXGH757ggqH1yBNDjxl/eHOd2FXx1OCfQTknDge0aUNfehuuUWj1lQz1YrB7OUyDAy9hlBl+lpFz9bpw38eM3sLLbhreHQZoOf/Y6bam9iJ2NyL390KSa8c58BRRa2Y2zOSsTJAyr883v92NfOtXwe51QsUrRPOZRNAqM+nTuZt2k31LhvexZ6mvuwK8CqmLk+0e/srhrrt65G49phvPHBIM9rgAqVG+NQWpwq/WMTUl3PliHq0JFmvtjpNQrJ98EtsjAMxhiEaqsib9AZjrxBM0DJOASnMqDyH5RI0ivxlTXxkt9oMGcl4mRFHMrbJnH5Y+uiTt9zMd6crsY2k8LTITtuYeAOAHxnAfQafDUejPtJBpGRWKUNwRY6QvMkwTlQABxwjOH1Ns+2EufqBpYfTM5rS/cU8n1Wa2GZDZ/PYNDh8l3m7GCFV/tNSMKB7yXhoc5hNA7P4KPGgRDtM+4ZpF3N6UVdywSPgNUzGDz9TdPt3wEXegO2lBpwHU40tE1i0OFC/5UhHwOs28eX/zkVixTtUw5lE7+oT+dJ7m3aU78PV3vqtri/5pPB3JyViANZiQuuNb77wttlKDIT+PW9YpLserZQzMzMzEzoiyWEECKWS7XXBH5eaanDW7JwhLLakmVxC1jlcEOLEDmjPl3OnDj7hw7sYryRserLK9H+QJy8glLiE50nQgiJMOs3p+Bwe7dod19L882Sb5NB5EyNYm/SsUITDkhbGULCHvXphEgjktZYEEIIATyJxIr1omylpksx4cWiOFpqSQghoUJ9OiGSoECZEEIiUFpBKs6UxAo6sCrNN+Oz7yfTMllCCAkx6tMJCT0KlAkhJCLNJgr5QRpqc4LbNqI034wPd2fhzQdX0KwDIYRIgvp0QkKNknkRQkhUcKK3uQ8fuXV+s2ACtzNhAuCUcZMQQkioUJ9OiNgoUCaEEEIIIYQQQuahW0qEEEIIIYQQQsg8FCgTQgghhBBCCCHz/H+y0Huo7+LE7gAAAABJRU5ErkJggg=="/>
+			</td>
+			</tr>
+			<tr>
+			<td> 
+				<div style="width:92%;text-align:left;background-color:#727171;padding:0px;color:#fff;font-family:Tahoma;font-size:20px;font-weight:bold;border-radius: 5px;margin-top: 25px;margin-left: 26px;margin-right: 26px;">&nbsp;&nbsp;&nbsp;Test Information</div>
+			</td>
+			</tr>
+			<tr>
+			<td> 
+				<table border="0" cellspacing="0" cellpadding="0"  style="width:92%;height:100%;font-size:15px;text-align:left;border:1px solid #727171;border-radius: 5px;margin-top: 20px;margin-left: 26px;margin-right: 26px;padding: 8px;">
+					 					
+					<tr>
+					<td style="padding: 5px 0px;">
+					<div  style="float: left;width: 33%;white-space: nowrap;">
+						<table border="0" cellspacing="0" cellpadding="0" width="100%">
+							<tr>
+							<td style="width:90px;">
+							Operator ID:
+							</td>
+							<td style="border-bottom: 1px solid;">${OperatorID}
+							</td>
+							<td style="width:10px;">
+							</td>
+							</tr>
+						</table>
+					</div>
+					<div style="float: left;width: 33.33%;white-space: nowrap;">					
+						<table border="0" cellspacing="0" cellpadding="0" width="100%">
+							<tr>
+							<td style="width:75px;">
+							Test Date:
+							</td>
+							<td style="border-bottom: 1px solid;">${TestDate}
+							</td>
+							<td style="width:10px;">
+							</td>
+							</tr>
+						</table>
+					</div>
+					<div style="float: left;width: 33.33%;white-space: nowrap;">
+						<table border="0" cellspacing="0" cellpadding="0" width="100%">
+							<tr>
+							<td style="width:75px;">
+							Test Time:
+							</td>
+							<td style="border-bottom: 1px solid;">${TestTime}
+							</td>
+							<td style="width:10px;">
+							</td>
+							</tr>
+						</table>
+					</div>
+					</td>
+					</tr> 
+					
+					<tr>
+					<td style="padding: 5px 0px;">
+						<div style="float: left;width: 33%;white-space: nowrap;">
+						<table border="0" cellspacing="0" cellpadding="0" width="100%">
+							<tr>
+							<td style="width:70px;">
+							Donor ID:
+							</td>
+							<td style="border-bottom: 1px solid;">${DonorID}
+							</td>
+							<td style="width:10px;">
+							</td>
+							</tr>
+						</table>
+						</div>
+						<div style="float: left;width: 33.33%;white-space: nowrap;">
+						<table border="0" cellspacing="0" cellpadding="0" width="100%">
+							<tr>
+							<td style="width:75px;">
+							Donor FN:
+							</td>
+							<td style="border-bottom: 1px solid;">${DonorFN}
+							</td>
+							<td style="width:10px;">
+							</td>
+							</tr>
+						</table>
+						</div>	
+						<div style="float: left;width: 33.33%;white-space: nowrap;">
+						<table border="0" cellspacing="0" cellpadding="0" width="100%">
+							<tr>
+							<td style="width:75px;">
+							Donor LN:
+							</td>
+							<td style="border-bottom: 1px solid;">${DonorLN}
+							</td>
+							<td style="width:10px;">
+							</td>
+							</tr>
+						</table>
+						</div>												
+					</td>
+					</tr>
+					<tr>
+					<td style="padding: 5px 0px;">
+						<div style="float: left;width: 50%;white-space: nowrap;">
+						<table border="0" cellspacing="0" cellpadding="0" width="100%">
+							<tr>
+							<td style="width:45px;">
+							Email:
+							</td>
+							<td style="border-bottom: 1px solid;">${Email}
+							</td>
+							<td style="width:10px;">
+							</td>
+							</tr>
+						</table>
+						</div>		
+						<div style="float: left;width: 50%;white-space: nowrap;">
+						<table border="0" cellspacing="0" cellpadding="0" width="100%">
+							<tr>
+							<td style="width:63px;">
+							Address:
+							</td>
+							<td style="border-bottom: 1px solid;">${Address}
+							</td>
+							<td style="width:10px;">
+							</td>
+							</tr>
+						</table>
+						</div>
+					</td>
+					</tr>
+					<tr>
+					<td style="padding: 5px 0px;">
+						<div style="float: left;width: 50%;white-space: nowrap;">
+						<table border="0" cellspacing="0" cellpadding="0" width="100%">
+							<tr>
+							<td style="width:88px;">
+							Testing Site:
+							</td>
+							<td style="border-bottom: 1px solid;">${TestingSite}
+							</td>
+							<td style="width:10px;">
+							</td>		
+							</tr>
+						</table>
+						</div>
+						<div style="float: left;width: 50%;white-space: nowrap;">
+						<table border="0" cellspacing="0" cellpadding="0" width="100%">
+							<tr>												
+							<td style="width:160px;">
+							Specimen Type:
+							</td>
+							<td > 
+								<div style="float: left;width: 40%;white-space: nowrap;"><input type="checkbox" class="chk_1" ${UrineCheck} /><label></label>&nbsp;Urine</div>
+								<div style="float: left;width: 20%;white-space: nowrap;"><input type="checkbox" class="chk_1" ${SalivaCheck} /><label></label>&nbsp;Saliva</div>
+							</td>
+							<td style="width:10px;">
+							</td>
+							</tr>
+						</table>
+						</div> 
+					</td>
+					</tr>
+					<tr>
+					<td style="padding: 5px 0px;">
+						<div>
+						<table border="0" cellspacing="0" cellpadding="0" width="100%" >				
+							<tr>
+							<td style="padding: 5px 0px;">
+								<tr>
+								<td style="padding: 5px 0px;">
+									<div style="float: left;width: 20%;white-space: nowrap;">
+										<table border="0" cellspacing="0" cellpadding="0" width="100%">
+										<tr>
+										<td style="width:100px;">
+										Reason for Test:
+										</td>
+										<td style="width:10px;">
+										</td>		
+										</tr>
+										</table>
+									</div>
+									<div>
+										<div style="float: left;width: 20%;white-space: nowrap;"><input type="checkbox" class="chk_1" ${PreEmploymentCheck} /><label></label>&nbsp;Pre-employment</div>
+										<div style="float: left;width: 20%;white-space: nowrap;"><input type="checkbox" class="chk_1" ${RandomCheck} /><label></label>&nbsp;Random</div>
+										<div style="float: left;width: 20%;white-space: nowrap;"><input type="checkbox" class="chk_1" ${ScheduledCheck} /><label></label>&nbsp;Scheduled</div>
+										<div style="float: left;width: 20%;white-space: nowrap;"><input type="checkbox" class="chk_1" ${InitialCheck} /><label></label>&nbsp;Initial Intake</div>
+									</div>
+								</td> 
+								</tr>
+								<tr>
+								<td style="padding: 5px 0px;">
+									<div style="float: left;width: 20%;white-space: nowrap;">
+										<table border="0" cellspacing="0" cellpadding="0" width="100%">
+										<tr>
+										<td style="width:100px;">
+										&nbsp;
+										</td>
+										<td style="width:10px;">
+										</td>		
+										</tr>
+										</table>
+									</div>
+									<div>
+										<div style="float: left;width: 20%;white-space: nowrap;"><input type="checkbox" class="chk_1" ${CourtHearingCheck} /><label></label>&nbsp;Court Hearing</div>
+										<div style="float: left;width: 20%;white-space: nowrap;"><input type="checkbox" class="chk_1" ${Post-accidentCheck} /><label></label>&nbsp;Post-accident</div>
+										<div style="float: left;width: 20%;white-space: nowrap;"><input type="checkbox" class="chk_1" ${ReasonableCauseCheck} /><label></label>&nbsp;Reasonable Cause</div>
+										<div style="float: left;width: 20%;white-space: nowrap;"><input type="checkbox" class="chk_1" ${FollowUpCheck} /><label></label>&nbsp;Follow-up</div>
+									</div>
+								</td> 
+								</tr>
+								<tr>
+								<td style="padding: 5px 0px;">
+									<div style="float: left;width: 20%;white-space: nowrap;">
+										<table border="0" cellspacing="0" cellpadding="0" width="100%">
+										<tr>
+										<td style="width:100px;">
+										&nbsp;
+										</td>
+										<td style="width:10px;">
+										</td>		
+										</tr>
+										</table>
+									</div>
+									<div>
+										 <table border="0" cellspacing="0" cellpadding="0" width="80%">
+											<tr >
+											<td style="width:70px;">
+											<input type="checkbox" class="chk_1" ${OtherCheck} /><label></label>&nbsp;Other:
+											</td>
+											<td style="border-bottom: 1px solid;">${Other}
+											</td>
+											<td style="width:10px;">
+											</td>
+											</tr>
+										</table>
+									</div>
+								</td>
+								</tr>
+							</td>
+							</tr>
+						</table>
+						</div> 
+					</td>
+					</tr>
+				</table>
+			</td>
+			</tr>
+			<tr>
+			<td> 
+				<div style="width:92%;text-align:left;background-color:#727171;padding:0px;color:#fff;font-family:Tahoma;font-size:20px;font-weight:bold;border-radius: 5px;margin-top: 25px;margin-left: 26px;margin-right: 26px;">&nbsp;&nbsp;&nbsp;Product Information</div>
+			</td>
+			</tr>
+			<tr>
+			<td> 
+				<table border="0" cellspacing="0" cellpadding="0"  style="width:92%;height:100%;font-size:15px;text-align:left;border:1px solid #727171;border-radius: 5px;margin-top: 20px;margin-left: 26px;margin-right: 26px;padding: 8px;">					 					
+					<tr>
+					<td style="padding: 5px 0px;">
+					<div style="float: left;width: 35%;white-space: nowrap;">
+						<table border="0" cellspacing="0" cellpadding="0" width="100%">
+							<tr>
+							<td style="width:80px;">
+							Product ID:
+							</td>
+							<td style="border-bottom: 1px solid;">${ProductID}
+							</td>
+							<td style="width:15px;">
+							</td>
+							</tr>
+						</table>
+					</div>
+					<div style="float: left;width: 35%;white-space: nowrap;">					
+						<table border="0" cellspacing="0" cellpadding="0" width="100%">
+							<tr>
+							<td style="width:85px;">
+							Product Lot:
+							</td>
+							<td style="border-bottom: 1px solid;">${ProductLot} 
+							</td>
+							<td style="width:15px;">
+							</td>
+							</tr>
+						</table>
+					</div> 
+					</td>
+					</tr> 					
+					<tr>
+					<td style="padding: 5px 0px;">
+						<div style="float: left;width: 35%;white-space: nowrap;">
+						<table border="0" cellspacing="0" cellpadding="0" width="100%">
+							<tr>
+							<td style="width:80px;">
+							Exp. Date:
+							</td>
+							<td style="border-bottom: 1px solid;">${ExpirationDate}
+							</td>
+							<td style="width:15px;">
+							</td>
+							</tr>
+						</table>
+						</div>
+						<div style="float: left;width: 35%;white-space: nowrap;">
+						<table border="0" cellspacing="0" cellpadding="0" width="100%">
+							<tr>
+							<td style="width:120px;">
+							*Temp. in Range:
+							</td>
+							<td style="width:30px;">
+							</td>
+							<td> 
+								<input type="checkbox" class="chk_1" ${TemperatureinRangeYesCheck} /><label></label>&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<input type="checkbox" class="chk_1" ${TemperatureinRangeNoCheck} /><label></label>&nbsp;No
+							</td>
+							<td style="width:10px;">
+							</td>
+							</tr>
+						</table>
+						</div>
+					</td>
+					</tr>
+					<tr>
+					<td colspan="5" style="padding: 3px 0px;font-size:9px;font-weight:bold;color: #000;">
+						<div>
+							*Disclaimer:
+						</div> 						
+					</td>
+					</tr> 
+					<tr>
+					<td colspan="5" style="padding: 3px 0px;font-size:9px;color: #000;">						
+						<div>
+							Alcohol Saliva Test Strip, Adulteration and Temperature Strips must be read by direct optical observation based on specific instruction in product insert accordingly after specimen is collected.
+						</div> 
+					</td>
+					</tr> 
+				</table>
+			</td>
+			</tr>
+			
+			<tr>
+			<td> 
+				<div style="width:92%;text-align:left;background-color:#727171;padding:0px;color:#fff;font-family:Tahoma;font-size:20px;font-weight:bold;border-radius: 5px;margin-top: 25px;margin-left: 26px;margin-right: 26px;">&nbsp;&nbsp;&nbsp;Test Result</div>
+			</td>
+			</tr>
+			<tr>
+			<td> 
+				<table border="0" cellspacing="0" cellpadding="0" class="table1" style="text-align:center;width:92%;font-size:14px;text-align:left;border:1px solid #727171;border-radius: 5px;padding: 8px;margin-top: 20px;margin-left: 26px;margin-right: 26px;">
+					 					
+					<tr style="margin-left: 26px;text-align:center">
+					<th style="width:4.5%; ">
+					  &nbsp;
+					</th>
+					<th style="width:15%; padding:3px;">
+					  Strip
+					</th>
+					<th style="width:16%;padding:3px;">
+					  Drug
+					</th>
+					<th style="width:20%;padding:3px;">
+					  Cutoff(ng/ml)
+					</th>
+					<th style="width:15%;padding:3px;">
+					  Control Line
+					</th>
+					<th style="width:25%;padding:3px;">
+					  Result
+					</th> 
+					<th style="width:4.5%; ">
+					  &nbsp;
+					</th>
+					</tr> 			
+					${ResultData}	
+					<tr>
+					<td colspan="7" style="height:100%;">
+						&nbsp;
+					</td>
+					</tr> 
+					<tr>
+					<td colspan="7" style="padding: 5px 0px;font-size:9px;font-weight:bold;">
+						<div style=";text-align:left;">
+							*Disclaimer:
+						</div> 						
+					</td>
+					</tr>
+					<tr>
+					<td colspan="7" style="padding: 5px 0px;font-size:9px;">
+						<div>
+							The test provides only a qualitative, preliminary analytical result. For the result that is non-negative, adulterated or substituted should be confirmed by GC/MS at a certified laboratory and then reviewed by an MRO.
+						</div> 
+					</td>
+					</tr> 
+				</table>
+			</td>
+			</tr>
+
+<tr>
+			<td> 
+				<div style="width:92%;text-align:left;background-color:#727171;padding:0px;color:#fff;font-family:Tahoma;font-size:20px;font-weight:bold;border-radius: 5px;margin-top: 25px;margin-left: 26px;margin-right: 26px;">&nbsp;&nbsp;&nbsp;Signature</div>
+			</td>
+			</tr>
+			<tr>
+			<td> 
+				<table border="0" cellspacing="0" cellpadding="0"  style="width:92%;height:100%;font-size:15px;text-align:left;border:1px solid #727171;border-radius: 5px;margin-top: 20px;margin-left: 26px;margin-right: 26px;padding: 8px;">			  
+					 				
+					<tr>
+					<td style="padding: 5px 0px;">
+						<div style="float: left;width: 50%;white-space: nowrap;">
+						<table border="0" cellspacing="0" cellpadding="0" width="100%">
+							<tr>
+							<td style="width:115px;">
+							Donor Signature:
+							</td>
+							<td style="border-bottom: 1px solid;">
+							</td>
+							<td style="width:10px;">
+							</td>
+							</tr>
+						</table>
+						</div>
+						<div style="float: left;width: 50%;white-space: nowrap;">
+						<table border="0" cellspacing="0" cellpadding="0" width="100%">
+							<tr>
+							<td style="width:135px;">
+							Operator Signature:
+							</td>
+							<td style="border-bottom: 1px solid;">
+							</td>
+							<td style="width:10px;">
+							</td>
+							</tr>
+						</table>
+						</div>
+					</td>
+					</tr> 
+								
+					<tr>
+					<td style="padding: 5px 0px;">
+						<div style="float: left;width: 50%;white-space: nowrap;">
+						<table border="0" cellspacing="0" cellpadding="0" width="100%">
+							<tr>
+							<td style="width:40px;">
+							Date:
+							</td>
+							<td style="border-bottom: 1px solid;">
+							</td>
+							<td style="width:10px;">
+							</td>
+							</tr>
+						</table>
+						</div>
+						<div style="float: left;width: 50%;white-space: nowrap;">
+						<table border="0" cellspacing="0" cellpadding="0" width="100%">
+							<tr>
+							<td style="width:40px;">
+							Date:
+							</td>
+							<td style="border-bottom: 1px solid;"> 
+							</td>
+							<td style="width:10px;">
+							</td>
+							</tr>
+						</table>
+						</div>
+					</td>
+					</tr> 
+				</table>
+			</td>
+			</tr>
+						
+			
+			
+			
+		</table> 		
+		</td>
+		</tr>		
+	</table>
+	
+	<table border="0" cellspacing="0" cellpadding="0" style="width:100%;height:100%;border:5px solid #008cd6;margin-top:30px;">
+		<tr>
+		<td> 		
+		<table border="0" cellspacing="0" cellpadding="0" style="width:98.5%;height:98%;font-family:Tahoma;border:2px solid #008cd6;text-align: center; padding: 0px 20px 497px;margin:6px;">
+			<tr>
+			<td style="padding: 0px 50px;text-align:center;"> 
+				<div style="width:100%;height:40px;padding:0px;color:#008cd6;font-family:Impact;font-size:35px;margin-top: 35px;margin-bottom: 15px;">${ReportTitle}</div>
+			</td>
+			</tr>
+			<tr>
+			<td style="padding: 0px 50px;">
+				<img style="width:474px;height:40px;" src="data:image/png;base64,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"/>
+			</td>
+			</tr>	
+			
+			<tr>
+			<td> 
+				<div style="width:92%;text-align:left;background-color:#727171;padding:0px;color:#fff;font-family:Tahoma;font-size:20px;font-weight:bold;border-radius: 5px;margin-top: 25px;margin-left: 26px;margin-right: 26px;">&nbsp;&nbsp;&nbsp;Test Image</div>
+			</td>
+			</tr>
+			<tr>
+			<td> 		
+				<table border="0" cellspacing="0" cellpadding="0"  style="width:92%;height:100%;text-align:left;border:1px solid #727171;border-radius: 5px;margin-top: 20px;margin-left: 26px;margin-right: 26px;padding: 8px;">
+					<tr>
+					<td>  
+					<div style="float: left;width: 50%;white-space: nowrap;">
+						<table border="0" cellspacing="0" cellpadding="0" width="100%">
+							<tr>
+							<td>
+							<image style="width:600px;height:180px;" src="data:image/png;base64,${test_image_01}"/> 
+							</td>
+							</tr>
+						</table>
+					</div>
+	
+					</td>
+					</tr>   
+				</table>
+			</td>
+			</tr>
+			
+			<tr>
+			<td> 
+				<div style="width:92%;text-align:left;background-color:#727171;padding:0px;color:#fff;font-family:Tahoma;font-size:20px;font-weight:bold;border-radius: 5px;margin-top: 25px;margin-left: 26px;margin-right: 26px;">&nbsp;&nbsp;&nbsp;Note</div>
+			</td>
+			</tr>
+			<tr>
+			<td> 
+				<table border="0" cellspacing="0" cellpadding="0"  style="width:92%;font-size:15px;text-align:left;border:1px solid #727171;border-radius: 5px;margin-top: 20px;margin-left: 26px;margin-right: 26px;padding: 8px;height: 310px;">			
+					<tr>
+					<td style="padding: 50px 60px 0px;">
+						<div style="float: left;width: 100%;white-space: nowrap;">
+						<table border="0" cellspacing="0" cellpadding="0" width="100%">
+							<tr>														
+							<td style="border-bottom: 1px solid;">
+							</td>							
+							</tr>
+						</table>
+						</div>						
+					</td>
+					</tr> 
+								
+					<tr>
+					<td style="padding: 5px 60px;">
+						<div style="float: left;width: 100%;white-space: nowrap;">
+						<table border="0" cellspacing="0" cellpadding="0" width="100%">
+							<tr>						
+							<td style="border-bottom: 1px solid;">
+							</td>
+							</tr>
+						</table>
+						</div>						
+					</td>
+					</tr> 
+					<tr>
+					<td style="padding: 5px 60px;">
+						<div style="float: left;width: 100%;white-space: nowrap;">
+						<table border="0" cellspacing="0" cellpadding="0" width="100%">
+							<tr>						
+							<td style="border-bottom: 1px solid;">
+							</td>
+							</tr>
+						</table>
+						</div>						
+					</td>
+					</tr> 
+					
+				</table>
+			</td>
+			</tr>
+			
+		
+		</table> 		
+		</td>
+		</tr>		
+	</table>
+	
+</body>
+</html>	
