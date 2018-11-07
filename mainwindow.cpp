@@ -55,24 +55,8 @@ MainWindow::MainWindow(QWidget *parent) :
     int iActScreenW = screenRect.width();
     int iActScreenH = screenRect.height();
 
-    if(iActScreenH <= 1080)
+    this->setMinimumSize(1024, 600);
 
-    {
-        g_iSCreenSize = SCREEN_SMALL;
-        this->setMinimumSize(1000, 710);
-    }
-//    else if(iActScreenH >= 1000 && iActScreenH <= 1080)
-//    {
-//        g_iSCreenSize = SCREEN_MIDDLE;
-//        this->setMinimumSize(1030, 768);
-//        this->resize(1030,800);
-//    }
-    else
-    {
-        g_iSCreenSize = SCREEN_BIG;
-        this->setMinimumSize(1030, 800);
-        this->resize(1030,800);
-    }
 
     GetQCameraInfo();
 
