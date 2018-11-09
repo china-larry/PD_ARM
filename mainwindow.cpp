@@ -636,7 +636,8 @@ void MainWindow::_InitWidget()
     connect(m_pHistoryPageTitleWidget, SIGNAL(SignalMaxWindow()), this, SLOT(SlotMaxWindow()));
     connect(m_pHistoryPageTitleWidget, SIGNAL(SignalReturnWindow()), this, SLOT(SlotGoHistoryPage()));
     // 多标签
-    m_pStackedWidget = new QStackedWidget(this);
+    m_pStackedWidget = new QTabWidget(this);
+    m_pStackedWidget->setTabPosition(QTabWidget::West);
     // 测试页
     m_pDetectorPage = new CDetectorPage(this);
     connect(m_pDetectorPage, &CDetectorPage::SignalStartTest, this, &MainWindow::SlotDetectorPageStartTest);
@@ -657,10 +658,10 @@ void MainWindow::_InitWidget()
     connect(m_pSettingPage, &CSettingPage::SignalAutoConnectPoct, this, &MainWindow::SlotAutoConnectPoct);
 
     // 布局
-    m_pStackedWidget->addWidget(m_pDetectorPage);
-    m_pStackedWidget->addWidget(m_pCalibrationPage);
-    m_pStackedWidget->addWidget(m_pHistoryPage);
-    m_pStackedWidget->addWidget(m_pSettingPage);
+    m_pStackedWidget->addTab(m_pDetectorPage, tr("HomePage"));
+    m_pStackedWidget->addTab(m_pHistoryPage, tr("History"));
+    m_pStackedWidget->addTab(m_pSettingPage, tr("Setting"));
+    m_pStackedWidget->addTab(m_pCalibrationPage, tr("Calibration"));
 
     //
     m_pStackedWidget->setCurrentIndex(0);

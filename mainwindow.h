@@ -16,6 +16,7 @@
 #include <QMainWindow>
 #include <QPoint>
 #include <QStackedWidget>
+#include <QTabWidget>
 #include <QCameraInfo>
 #include "DetectorPage/CDetectorPageTitleWidget.h"
 #include "HistoryPage/CHistoryPageTitleWidget.h"
@@ -52,7 +53,7 @@ public slots:
     void SlotGoSettingPage();// 前往设置页面
     void SlotMinWindow();// 最小化
     void SlotMaxWindow();// 最大化
-    void SlotCloseWindow();// 关闭    
+    void SlotCloseWindow();// 关闭
     void SlotCheckHistoryItem();// 前往历史页
     // 测试开始，更改状态栏
     void SlotDetectorPageStartTest(int iTestDelayTime);
@@ -88,7 +89,7 @@ private:
     CHistoryPageTitleWidget *m_pHistoryPageTitleWidget;
     bool m_bShowMaxFlag;
     // 多标签 切换控件
-    QStackedWidget *m_pStackedWidget;
+    QTabWidget *m_pStackedWidget;
     // 检测页面
     CDetectorPage *m_pDetectorPage;
     // 校正

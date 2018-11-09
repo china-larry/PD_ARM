@@ -145,54 +145,7 @@ private:
     QString _GetSoftWareType();
     void GetReportTitle(bool &bIsDefault,QString &ReportTitle);
 
-private:
-    // donor details 1line
-    QLabel *m_pTempInRangeLabel;
-    QButtonGroup *m_pTempInRangeBGroup;
-    QRadioButton *m_pTempValRButton;
-    QRadioButton *m_pTempNoValRButton;
-    // last first donor id
-    CLabelLineEditWidget *m_pLastNameWidget;
-    CLabelLineEditWidget *m_pFirstNameWidget;
-    CLabelLineEditWidget *m_pDonorIDWidget;
-    // data of birth email
-    CLabelDateWidget *m_pBirthDateWidget;
-    CLabelLineEditWidget *m_pEmailWidget;
-    CLabelLineEditWidget *m_pAddressWidget;
-    // test time
-    CLabelDateTimeWidget *m_pTestTimeWidget;
-    CLabelLineEditWidget *m_pTestingSiteWidget;
-    // reason of test    
-    CLabelCommoBoxWidget *m_pReasonForTestWidget;
-    QStringList m_strReasonForTestList;
-    QLineEdit *m_pOtherLineEdit;
-    //////////////////////////////////////
-    // adulterants
-    QLabel *m_pAdulterantsLabel;
-    QButtonGroup *m_pOxidantBGroup;
-    QRadioButton *m_pOxidantRButton;
-    QRadioButton *m_pOxidantNoRButton;
-
-    QButtonGroup *m_pPHBGroup;
-    QRadioButton *m_pPHRButton;
-    QRadioButton *m_pPHNoRButton;
-
-    QButtonGroup *m_pNitriteBGroup;
-    QRadioButton *m_pNitriteRButton;
-    QRadioButton *m_pNitriteNoRButton;
-
-    QButtonGroup *m_pCreatinineBGroup;
-    QRadioButton *m_pCreatinineRButton;
-    QRadioButton *m_pCreatinineNoRButton;
-    //////////////////////////////////////
-    // Product Details
-    QStringList m_strCupTypeList;// 杯类型数据
-    CLabelCommoBoxWidget *m_pProductDefinitionWidget;
-    CLabelLineEditWidget *m_pProductLotWidget;
-    // expiration date
-//    CLabelLineEditWidget *m_pExpirationWidget;
-    CLabelDateWidget *m_pExpirationWidget;
-    CLabelLineEditWidget *m_pProductIDWidget;
+private:    
     //////////////////////////////////////
     // push button
     QPushButton *m_pReadTestDeviceButton;
