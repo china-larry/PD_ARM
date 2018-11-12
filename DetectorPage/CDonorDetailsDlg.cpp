@@ -5,6 +5,37 @@ CDonorDetailsDlg::CDonorDetailsDlg(QWidget *parent) : QWidget(parent)
 
 }
 
+void CDonorDetailsDlg::_SlotOkCheck()
+{
+    m_sDonorDlgData.bTemperatureinRangeYesCheck = m_pTempValRButton->isChecked();
+    m_sDonorDlgData.bTemperatureinRangeNoCheck = m_pTempNoValRButton->isChecked();
+    m_sDonorDlgData.strDonorFN = m_pFirstNameWidget->GetLineText();
+    m_sDonorDlgData.strDonorLN = m_pLastNameWidget->GetLineText();
+    m_sDonorDlgData.qTestDate = m_sDetectorPageUserDataStruct.qTestDateTime.date();
+    m_sDonorDlgData.qTestTime = m_sDetectorPageUserDataStruct.qTestDateTime.time();
+    m_sDonorDlgData.strDonorID = m_pDonorIDWidget->GetLineText();
+    m_sDonorDlgData.strEmail = m_pEmailWidget->GetLineText();
+    m_sDonorDlgData.strAddress = m_pAddressWidget->GetLineText();
+    m_sDonorDlgData.strTestingSite = m_pTestingSiteWidget->GetLineText();
+    m_sDonorDlgData.strTestReason = m_pReasonForTestWidget->GetCurrentSelectText();
+    m_sDonorDlgData.bOxidantCheck = m_pOxidantRButton->isChecked();
+    m_sDonorDlgData.bPHCheck = m_pPHRButton->isChecked();
+    m_sDonorDlgData.bNitriteCheck = m_pNitriteRButton->isChecked();
+    m_sDonorDlgData.bCreatinineCheck = m_pCreatinineRButton->isChecked();
+
+}
+
+SDonorDlgData CDonorDetailsDlg::GetDlgData()
+{
+    return m_sDonorDlgData;
+}
+
+void CDonorDetailsDlg::ReSetTestTime()
+{
+    m_pTestTimeWidget->SetDateTime(QDateTime::currentDateTime());
+}
+
+
 void CDonorDetailsDlg::_InitWidget()
 {
     //

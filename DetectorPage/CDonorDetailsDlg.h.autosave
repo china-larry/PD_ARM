@@ -42,11 +42,13 @@ public:
 signals:
 
 public slots:
-
+private slots:
+    void _SlotOkCheck();
 public:
     QString GetProductDefinitionText();
     // 数据
     SDonorDlgData GetDlgData();
+    void ReSetTestTime();// 重置时间为当前时间
 
 private:
     void _InitWidget();

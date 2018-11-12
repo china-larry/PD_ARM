@@ -72,7 +72,8 @@ SOURCES += \
     SettingPage/CTestModeWidget.cpp \
     SettingPage/CUpdateSettingWidget.cpp \
     PublicConfig.cpp \
-    DetectorPage/CDonorDetailsDlg.cpp
+    DetectorPage/CDonorDetailsDlg.cpp \
+    DetectorPage/CProduceDetailsDlg.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -121,7 +122,8 @@ HEADERS += \
     SettingPage/CTestModeWidget.h \
     SettingPage/CUpdateSettingWidget.h \
     PublicConfig.h \
-    DetectorPage/CDonorDetailsDlg.h
+    DetectorPage/CDonorDetailsDlg.h \
+    DetectorPage/CProduceDetailsDlg.h
 
 FORMS += \
         mainwindow.ui \

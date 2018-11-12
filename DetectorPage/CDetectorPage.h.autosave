@@ -101,6 +101,8 @@ public slots:
 
 private slots:
     // 控件
+    void _SlotOpenDonorDetailsDlg();
+    void _SlotOpenProduceDetailsDlg();
     void _SlotCheckReadTestDevice();// 开始测试
     void _SlotStopTest();// 主动停止测试
     void _SlotClearData();// 清空数据
@@ -148,6 +150,8 @@ private:
     CDonorDetailsDlg *m_pDonorDetailsDlg;
     CProduceDetailsDlg *m_pProduceDetailsDlg;
     // push button
+    QPushButton *m_pDonorDetailsButton;
+    QPushButton *m_pProduceDetailsButton;
     QPushButton *m_pReadTestDeviceButton;
     QPushButton *m_pStopTestButton;
     QPushButton *m_pClearDataButton;
