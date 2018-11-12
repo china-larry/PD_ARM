@@ -13,25 +13,20 @@ struct SDonorDlgData
 {
     QString strDonorFN;
     QString strDonorLN;
-    QDate   qTestDate;
-    QTime   qTestTime;
     QString strDonorID;
+    QDate   qBirthDate;
     QString strEmail;
     QString strAddress;
     QString strTestingSite;
-    bool    bUrineCheck;
-    bool    bSalivaCheck;
     QString strTestReason;
+    QDate   qTestDate;
+    QTime   qTestTime;
     bool   bTemperatureinRangeYesCheck;
     bool   bTemperatureinRangeNoCheck;
     bool   bOxidantCheck;
-    bool   bOxidantNolCheck;
     bool   bPHCheck;
-    bool   bPHNolCheck;
     bool   bNitriteCheck;
-    bool   bNitriteNolCheck;
     bool   bCreatinineCheck;
-    bool   bCreatinineNolCheck;
 };
 class CDonorDetailsDlg : public QWidget
 {
@@ -42,11 +37,14 @@ public:
 signals:
 
 public slots:
-
+private slots:
+    void _SlotOkCheck();
 public:
     QString GetProductDefinitionText();
     // 数据
     SDonorDlgData GetDlgData();
+    void ReSetTestTime();// 重置时间为当前时间
+    void ClearData();// 清除所有data
 
 private:
     void _InitWidget();

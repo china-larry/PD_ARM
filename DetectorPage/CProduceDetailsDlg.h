@@ -23,14 +23,19 @@ public:
 signals:
 
 public slots:
+private slots:
+    void _SlotOkCheck();
 public:
     QString GetProductDefinitionText();
 
     void SetProdectLotText(QString strLotText);
     void SetExpirationDate(QDate qDate);
     void SetProductID(QString strID);
+    void SetCupType(QStringList strCupTypeList);
+    void SetCurrentType(QString strCupType);
     // 数据
     SProductDlgData GetDlgData();
+    void ClearData();// 清除所有data
 
 private:
     void _InitWidget();
@@ -38,8 +43,8 @@ private:
 private:
     // Product Details
     QStringList m_strCupTypeList;// 杯类型数据
-    CLabelCommoBoxWidget *m_pDefinitionWidget;
-    CLabelLineEditWidget *m_pLotWidget;
+    CLabelCommoBoxWidget *m_pProductDefinitionWidget;
+    CLabelLineEditWidget *m_pProductLotWidget;
     // expiration date
 //    CLabelLineEditWidget *m_pExpirationWidget;
     CLabelDateWidget *m_pExpirationWidget;

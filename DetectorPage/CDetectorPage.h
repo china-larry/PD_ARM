@@ -93,14 +93,10 @@ public slots:
     void SlotStopBegin();
     void SlotStopEnd();
     void SlotReceiveProjectName(QString strCupType,QString strProjectName);
-    void SlotOxidantNoRButton(bool);
-    void SlotPHNoRButton(bool);
-    void SlotNitriteNoRButton(bool);
-    void SlotCreatinineNoRButton(bool);
-    void SlotTempNoValRButton(bool);
-
 private slots:
     // 控件
+    void _SlotOpenDonorDetailsDlg();
+    void _SlotOpenProduceDetailsDlg();
     void _SlotCheckReadTestDevice();// 开始测试
     void _SlotStopTest();// 主动停止测试
     void _SlotClearData();// 清空数据
@@ -124,6 +120,7 @@ public:
 
 private:
     void _LoadQss();
+    void _InitTableWidget();
     void _InitWidget();
     void _InitLayout();
     // 数据输入判定
@@ -148,6 +145,8 @@ private:
     CDonorDetailsDlg *m_pDonorDetailsDlg;
     CProduceDetailsDlg *m_pProduceDetailsDlg;
     // push button
+    QPushButton *m_pDonorDetailsButton;
+    QPushButton *m_pProduceDetailsButton;
     QPushButton *m_pReadTestDeviceButton;
     QPushButton *m_pStopTestButton;
     QPushButton *m_pClearDataButton;

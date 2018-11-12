@@ -161,7 +161,7 @@ void CDetectorPage::SlotReceiveQRCodeInfo(QRCodeInfo sQRCodeInfoStruct)
             return;
         }
     }
-    else if(gk_strTCubeTypeList.contains(m_pProductDefinitionWidget->GetCurrentSelectText()))
+    else if(gk_strTCubeTypeList.contains(m_pProduceDetailsDlg->GetDlgData().strCupTyle))
     {// 方杯
         if(sQRCodeInfoStruct.eTypeCup != TypeSCup10)
         {
@@ -252,7 +252,6 @@ void CDetectorPage::SlotEndTest()
             = m_pProduceDetailsDlg->GetDlgData().strCupTyle;
     m_sPrintDataStruct.strDonorFN
             = m_pDonorDetailsDlg->GetDlgData().strDonorFN;
-
     m_sPrintDataStruct.strDonorLN
             = m_pDonorDetailsDlg->GetDlgData().strDonorLN;
 
@@ -268,13 +267,14 @@ void CDetectorPage::SlotEndTest()
     m_sPrintDataStruct.strTestingSite = m_pDonorDetailsDlg->GetDlgData().strTestingSite;
 
     m_sPrintDataStruct.strTestReason = m_pDonorDetailsDlg->GetDlgData().strTestReason;
-    m_sPrintDataStruct.strProductID = m_pProduceDetailsDlg->GetDlgData().strProductID;
     m_sPrintDataStruct.strProductLot = m_pProduceDetailsDlg->GetDlgData().strProductLot;
     m_sPrintDataStruct.qExpirationDate = m_pProduceDetailsDlg->GetDlgData().qExpirationDate;
+    m_sPrintDataStruct.strProductID = m_pProduceDetailsDlg->GetDlgData().strProductID;
     m_sPrintDataStruct.bOxidantCheck = m_pDonorDetailsDlg->GetDlgData().bOxidantCheck;
-    m_sPrintDataStruct.bCreatinineCheck = m_pDonorDetailsDlg->GetDlgData().bCreatinineCheck;
-    m_sPrintDataStruct.bNitriteCheck = m_pDonorDetailsDlg->GetDlgData().bNitriteCheck;
     m_sPrintDataStruct.bPHCheck = m_pDonorDetailsDlg->GetDlgData().bPHCheck;
+    m_sPrintDataStruct.bNitriteCheck = m_pDonorDetailsDlg->GetDlgData().bNitriteCheck;
+    m_sPrintDataStruct.bCreatinineCheck = m_pDonorDetailsDlg->GetDlgData().bCreatinineCheck;
+
 
 
     m_pReadTestDeviceButton->setEnabled(true);
@@ -410,48 +410,14 @@ void CDetectorPage::_SlotStopTest()
 void CDetectorPage::_SlotClearData()
 {
     qDebug() << "clear data";
-    m_pTempValRButton->setChecked(false);
-    m_pTempNoValRButton->setChecked(true);
-    m_pLastNameWidget->SetLineText("");
-    m_pFirstNameWidget->SetLineText("");
-    m_pDonorIDWidget->SetLineText("");
-    m_pBirthDateWidget->SetDate(QDate::currentDate());
-    m_pEmailWidget->SetLineText("");
-    m_pAddressWidget->SetLineText("");
-    m_pTestTimeWidget->SetDateTime(QDateTime::currentDateTime());
-    m_pTestingSiteWidget->SetLineText("");
     //
-    //if(gk_iVersionConfig == PIS_VERSION)
-    {
-        m_pOxidantRButton->setChecked(false);
-        m_pOxidantNoRButton->setChecked(true);
-        m_pPHRButton->setChecked(false);
-        m_pPHNoRButton->setChecked(true);
-        m_pNitriteRButton->setChecked(false);
-        m_pNitriteNoRButton->setChecked(true);
-        m_pCreatinineRButton->setChecked(false);
-        m_pCreatinineNoRButton->setChecked(true);
-    }
-    //
-    m_pReasonForTestWidget->SetCurrentIndex(0);
-
-    //
-    m_pProductDefinitionWidget->SetCurrentIndex(0);
-    m_pProductLotWidget->SetLineText("");
-    m_pExpirationWidget->SetDate(QDate::currentDate());
-    m_pProductIDWidget->SetLineText("");
+    m_pDonorDetailsDlg->ClearData();
+    m_pProduceDetailsDlg->ClearData();
 }
 
 void CDetectorPage::_SlotOtherReasonChange(int iIndex)
 {
-    if(m_pReasonForTestWidget->GetCurrentSelectText() == "Other")
-    {
-        m_pOtherLineEdit->show();
-    }
-    else
-    {
-        m_pOtherLineEdit->hide();
-    }
+
 }
 /**
   * @brief 连接打印机打印
@@ -494,93 +460,47 @@ QList<TestResultData *> CDetectorPage::GetTestResultData()
 DetectorPageUserData CDetectorPage::GetUserData()
 {
     // 获取用户表格数据
-    m_sDetectorPageUserDataStruct.strDonorFirstName = m_pFirstNameWidget->GetLineText();
-    m_sDetectorPageUserDataStruct.strDonorLastName = m_pLastNameWidget->GetLineText();
-    m_sDetectorPageUserDataStruct.qTestDateTime = m_pTestTimeWidget->GetDateTime();
+    m_sDetectorPageUserDataStruct.strDonorFirstName
+            = m_pDonorDetailsDlg->GetDlgData().strDonorFN;
+    m_sDetectorPageUserDataStruct.strDonorLastName
+            = m_pDonorDetailsDlg->GetDlgData().strDonorLN;
+
+    m_sDetectorPageUserDataStruct.qTestDateTime
+            = QDateTime(m_pDonorDetailsDlg->GetDlgData().qTestDate, m_pDonorDetailsDlg->GetDlgData().qTestTime);
     qDebug() << "m_sDetectorPageUserDataStruct.qTestDateTime = " << m_sDetectorPageUserDataStruct.qTestDateTime;
-    m_sDetectorPageUserDataStruct.qBirthDate = m_pBirthDateWidget->GetDate();
-    m_sDetectorPageUserDataStruct.strDonorID = m_pDonorIDWidget->GetLineText();
-    m_sDetectorPageUserDataStruct.strTestSite = m_pTestingSiteWidget->GetLineText();
+    m_sDetectorPageUserDataStruct.qBirthDate = m_pDonorDetailsDlg->GetDlgData().qBirthDate;
+    m_sDetectorPageUserDataStruct.strDonorID = m_pDonorDetailsDlg->GetDlgData().strDonorID;
+    m_sDetectorPageUserDataStruct.strTestSite = m_pDonorDetailsDlg->GetDlgData().strTestingSite;
     //
-    if(m_pReasonForTestWidget->GetCurrentSelectText() == "Other")
-    {
-        m_sDetectorPageUserDataStruct.strOtherReasonComments = m_pOtherLineEdit->text();
-    }
-    else
-    {
-        m_sDetectorPageUserDataStruct.strOtherReasonComments = m_pReasonForTestWidget->GetCurrentSelectText();
-    }
+//    if(m_pReasonForTestWidget->GetCurrentSelectText() == "Other")
+//    {
+//        m_sDetectorPageUserDataStruct.strOtherReasonComments = m_pOtherLineEdit->text();
+//    }
+//    else
+//    {
+//        m_sDetectorPageUserDataStruct.strOtherReasonComments = m_pReasonForTestWidget->GetCurrentSelectText();
+//    }
 
     // PIS
     //if(gk_iVersionConfig == PIS_VERSION)
     {
-        if(m_pOxidantRButton->isChecked())
-        {
-            m_sDetectorPageUserDataStruct.bOxidant = "0";
-        }
-        else if(m_pOxidantNoRButton->isChecked())
-        {
-            m_sDetectorPageUserDataStruct.bOxidant = "1";
-        }
-        else
-        {
-            m_sDetectorPageUserDataStruct.bOxidant ="2";
-        }
 
-
-        //m_sDetectorPageUserDataStruct.bOxidant = m_pOxidantRButton->isChecked();
-        //m_sDetectorPageUserDataStruct.bSpecificGravity = m_pSpecificCBox->isChecked();
-        //m_sDetectorPageUserDataStruct.bPH = m_pPHRButton->isChecked();
-        if(m_pPHRButton->isChecked())
-        {
-            m_sDetectorPageUserDataStruct.bPH = "0";
-        }
-        else if(m_pPHNoRButton->isChecked())
-        {
-            m_sDetectorPageUserDataStruct.bPH = "1";
-        }
-        else
-        {
-            m_sDetectorPageUserDataStruct.bPH ="2";
-        }
-
-        //m_sDetectorPageUserDataStruct.bNitrite = m_pNitriteRButton->isChecked();
-        if(m_pNitriteRButton->isChecked())
-        {
-            m_sDetectorPageUserDataStruct.bNitrite = "0";
-        }
-        else if(m_pNitriteNoRButton->isChecked())
-        {
-            m_sDetectorPageUserDataStruct.bNitrite = "1";
-        }
-        else
-        {
-            m_sDetectorPageUserDataStruct.bNitrite ="2";
-        }
-        //m_sDetectorPageUserDataStruct.bCreatinine = m_pCreatinineRButton->isChecked();
-        if(m_pCreatinineRButton->isChecked())
-        {
-            m_sDetectorPageUserDataStruct.bCreatinine = "0";
-        }
-        else if(m_pCreatinineNoRButton->isChecked())
-        {
-            m_sDetectorPageUserDataStruct.bCreatinine = "1";
-        }
-        else
-        {
-            m_sDetectorPageUserDataStruct.bCreatinine ="2";
-        }
+        m_sDetectorPageUserDataStruct.bOxidant = m_pDonorDetailsDlg->GetDlgData().bOxidantCheck;
+        m_sDetectorPageUserDataStruct.bPH = m_pDonorDetailsDlg->GetDlgData().bPHCheck;
+        m_sDetectorPageUserDataStruct.bNitrite = m_pDonorDetailsDlg->GetDlgData().bNitriteCheck;
+        m_sDetectorPageUserDataStruct.bCreatinine = m_pDonorDetailsDlg->GetDlgData().bCreatinineCheck;
     }
 
-    m_sDetectorPageUserDataStruct.bTemperatureNormal = m_pTempValRButton->isChecked();
-    m_sDetectorPageUserDataStruct.strEmail = m_pEmailWidget->GetLineText();
-    m_sDetectorPageUserDataStruct.strAddress = m_pAddressWidget->GetLineText();
+    m_sDetectorPageUserDataStruct.bTemperatureNormal = m_pDonorDetailsDlg->GetDlgData().bTemperatureinRangeYesCheck;
+    m_sDetectorPageUserDataStruct.strEmail = m_pDonorDetailsDlg->GetDlgData().strEmail;
+    m_sDetectorPageUserDataStruct.strAddress = m_pDonorDetailsDlg->GetDlgData().strAddress;
 
     // product details
-    m_sDetectorPageUserDataStruct.strProductDefinition = m_pProductDefinitionWidget->GetCurrentSelectText();
-    m_sDetectorPageUserDataStruct.strProductLot = m_pProductLotWidget->GetLineText();
-    m_sDetectorPageUserDataStruct.strExpriationDate = m_pExpirationWidget->GetDate().toString("yyyy-MM-dd");
-    m_sDetectorPageUserDataStruct.strProductID = m_pProductIDWidget->GetLineText();
+    m_sDetectorPageUserDataStruct.strProductDefinition = m_pProduceDetailsDlg->GetDlgData().strCupTyle;
+    m_sDetectorPageUserDataStruct.strProductLot = m_pProduceDetailsDlg->GetDlgData().strProductLot;
+    m_sDetectorPageUserDataStruct.strExpriationDate
+            = m_pProduceDetailsDlg->GetDlgData().qExpirationDate.toString("yyyy-MM-dd");
+    m_sDetectorPageUserDataStruct.strProductID = m_pProduceDetailsDlg->GetDlgData().strProductID;
     //
     m_sDetectorPageUserDataStruct.iProgramsNumber = m_sQRCodeInfoStruct.iProgramCount;
     // username
@@ -597,10 +517,44 @@ void CDetectorPage::_LoadQss()
     LoadQss(this, ":/qss/DetectorPage/DetectorPage.qss");
 }
 
+void CDetectorPage::_InitTableWidget()
+{
+    m_pResultsTableWidget = new QTableWidget(this);
+    m_pResultsTableWidget->setFixedHeight(195);
+    m_pResultsTableWidget->setMinimumWidth(445);
+    m_pResultsTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    m_pResultsTableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
+    // 表单样式
+    m_pResultsTableWidget->setColumnCount(3);
+    //m_pResultsTableWidget->setRowCount(16);// 最大16个项目
+    // 虚线框
+    m_pResultsTableWidget->setFocusPolicy(Qt::NoFocus);
+    // 不显示行号
+    QHeaderView *pVerticalHeader = m_pResultsTableWidget->verticalHeader();
+    pVerticalHeader->setHidden(true);
+    pVerticalHeader->setHighlightSections(false);
+    QHeaderView *pHeaderView = m_pResultsTableWidget->horizontalHeader();
+    pHeaderView->setHighlightSections(false);
+//    pHeaderView->setDefaultSectionSize(120);
+    pHeaderView->resizeSection(0, 120);
+    pHeaderView->resizeSection(1, 190);
+  //  pHeaderView->resizeSection(0, 120);
+    pHeaderView->setDisabled(true);
+    // 充满表格
+    pHeaderView->setStretchLastSection(true);
+    // 设置表头内容
+    QStringList qstrHeaderList;
+    qstrHeaderList << tr("Program") << tr("Result") << tr("Cutoff Value");
+    m_pResultsTableWidget->setHorizontalHeaderLabels(qstrHeaderList);
+    // 显示格子线
+    m_pResultsTableWidget->setShowGrid(true);
+
+
+}
+
 void CDetectorPage::SetCupType(QStringList strCupTypeList)
 {
-    m_strCupTypeList = strCupTypeList;
-    m_pProductDefinitionWidget->SetCupType(strCupTypeList);
+    m_pProduceDetailsDlg->SetCupType(strCupTypeList);
 }
 
 void CDetectorPage::StopTest()
@@ -653,14 +607,9 @@ void CDetectorPage::PowerOffStates()
   */
 void CDetectorPage::_InitWidget()
 {
-    //
-    m_pDonorDetailsDlg = new CDonorDetailsDlg(this);
-    m_pProduceDetailsDlg = new CProduceDetailsDlg(this);
-    //
-    m_pDonorDetailsButton = new QPushButton(tr("Donor Details"), this);
-    connect(m_pDonorDetailsButton, &QPushButton::clicked, this, &CDetectorPage::_SlotOpenDonorDetailsDlg);
-    m_pProduceDetailsButton = new QPushButton(tr("Produce Details"), this);
-    connect(m_pProduceDetailsButton, &QPushButton::clicked, this, &CDetectorPage::_SlotOpenProduceDetailsDlg);
+    m_pCamaraLabel = new QLabel(this);
+    m_pCamaraLabel->setMinimumSize(438, 283);
+    m_pCamaraLabel->setObjectName("m_pCamaraLabel");
     //
     m_pReadTestDeviceButton = new QPushButton(tr("Read Test Device"));
     m_pReadTestDeviceButton->setFixedSize(135, 35);
@@ -671,6 +620,25 @@ void CDetectorPage::_InitWidget()
     m_pClearDataButton = new QPushButton(tr("Clear Data"));
     m_pClearDataButton->setFixedSize(100, 35);
     connect(m_pClearDataButton,SIGNAL(clicked(bool)), this, SLOT(_SlotClearData()));
+    //
+    m_pDonorDetailsDlg = new CDonorDetailsDlg(this);
+    m_pProduceDetailsDlg = new CProduceDetailsDlg(this);
+    //
+    m_pDonorDetailsButton = new QPushButton(tr("Donor Details"), this);
+    connect(m_pDonorDetailsButton, &QPushButton::clicked, this, &CDetectorPage::_SlotOpenDonorDetailsDlg);
+    m_pProduceDetailsButton = new QPushButton(tr("Produce Details"), this);
+    connect(m_pProduceDetailsButton, &QPushButton::clicked, this, &CDetectorPage::_SlotOpenProduceDetailsDlg);
+    // 表格
+    _InitTableWidget();
+    // 打印按钮
+    m_pPrintPriviewButton = new QPushButton(tr("Print Preview"));
+    m_pPrintPriviewButton->setFixedSize(135, 35);
+    connect(m_pPrintPriviewButton, SIGNAL(clicked(bool)), this, SLOT(_SlotPrintToPDF()));
+
+    //手动修改结果按钮
+    m_pManualSetButton = new QPushButton(tr("Manual Set"));
+    m_pManualSetButton->setFixedSize(135,35);
+    connect(m_pManualSetButton,SIGNAL(clicked(bool)),this,SLOT(_SlotManualSetData()));
 }
 /**
   * @brief 初始化布局
@@ -679,11 +647,9 @@ void CDetectorPage::_InitWidget()
   */
 void CDetectorPage::_InitLayout()
 {
-    QRect m_iWidgetRect = this->rect();
-    qDebug() << "main rddect " << m_iWidgetRect.width() << m_iWidgetRect.height();
-    // 左侧详细
+    // 左侧
     QVBoxLayout *pLeftLayout = new QVBoxLayout;
-
+    pLeftLayout->addWidget(m_pCamaraLabel);
     //
     QHBoxLayout *pLeftButtonLayout = new QHBoxLayout;
     pLeftButtonLayout->setMargin(0);
@@ -693,79 +659,24 @@ void CDetectorPage::_InitLayout()
     pLeftButtonLayout->addWidget(m_pStopTestButton);
     pLeftButtonLayout->addSpacing(10);
     pLeftButtonLayout->addWidget(m_pClearDataButton);
-//    pLeftButtonLayout->addStretch(1);
     pLeftLayout->addLayout(pLeftButtonLayout);
+    // 右侧
+    QVBoxLayout *pRightLayout = new QVBoxLayout;
+    QHBoxLayout *pRHeadLayout = new QHBoxLayout;
+    pRHeadLayout->addWidget(m_pDonorDetailsButton);
+    pRHeadLayout->addWidget(m_pProduceDetailsButton);
+    QHBoxLayout *pREndLayout = new QHBoxLayout;
+    pREndLayout->addWidget(m_pPrintPriviewButton);
+    pREndLayout->addWidget(m_pManualSetButton);
+    pRightLayout->addLayout(pRHeadLayout);
+    pRightLayout->addWidget(m_pResultsTableWidget);
+    pRightLayout->addLayout(pREndLayout);
     //
     QHBoxLayout *pTestLayout = new QHBoxLayout;
     pTestLayout->addLayout(pLeftLayout);
+    pTestLayout->addLayout(pRightLayout);
 
     this->setLayout(pTestLayout);
-}
-
-
-void CDetectorPage::SlotOxidantNoRButton(bool)
-{
-    if(m_pOxidantNoRButton->isChecked())
-    {
-        int iButtonType = QMessageBox::question(NULL, tr("Tip"), tr("Are you sure confirm Oxidant Non-Val!"),
-                                 QMessageBox::Cancel , QMessageBox::Ok);
-        if(iButtonType == QMessageBox::Cancel)
-        {
-            m_pOxidantRButton->setChecked(true);
-        }
-    }
-}
-
-void CDetectorPage::SlotPHNoRButton(bool)
-{
-    if(m_pPHNoRButton->isChecked())
-    {
-        int iButtonType = QMessageBox::question(NULL, tr("Tip"), tr("Are you sure confirm PH Non-Val!"),
-                                 QMessageBox::Cancel , QMessageBox::Ok);
-        if(iButtonType == QMessageBox::Cancel)
-        {
-            m_pPHRButton->setChecked(true);
-        }
-    }
-}
-
-void CDetectorPage::SlotNitriteNoRButton(bool)
-{
-    if(m_pNitriteNoRButton->isChecked())
-    {
-        int iButtonType = QMessageBox::question(NULL, tr("Tip"), tr("Are you sure confirm Nitrite Non-Val!"),
-                                 QMessageBox::Cancel , QMessageBox::Ok);
-        if(iButtonType == QMessageBox::Cancel)
-        {
-            m_pNitriteRButton->setChecked(true);
-        }
-    }
-}
-
-void CDetectorPage::SlotCreatinineNoRButton(bool)
-{    
-    if(m_pCreatinineNoRButton->isChecked())
-    {
-        int iButtonType = QMessageBox::question(NULL, tr("Tip"), tr("Are you sure confirm Creatinine Non-Val!"),
-                                 QMessageBox::Cancel , QMessageBox::Ok);
-        if(iButtonType == QMessageBox::Cancel)
-        {
-            m_pCreatinineRButton->setChecked(true);
-        }
-    }
-}
-
-void CDetectorPage::SlotTempNoValRButton(bool)
-{
-    if(m_pTempNoValRButton->isChecked())
-    {
-        int iButtonType = QMessageBox::question(NULL, tr("Tip"), tr("Are you sure confirm Temp Non-Val!"),
-                                 QMessageBox::Cancel , QMessageBox::Ok);
-        if(iButtonType == QMessageBox::Cancel)
-        {
-            m_pTempValRButton->setChecked(true);
-        }
-    }
 }
 
 void CDetectorPage::_SlotOpenDonorDetailsDlg()
@@ -784,63 +695,7 @@ void CDetectorPage::_SlotOpenProduceDetailsDlg()
   * @return 合法范围true，非法返回false
   */
 bool CDetectorPage::_GetValidData()
-{
-    // 是否勾选temperature
-    if(!m_pTempValRButton->isChecked())
-    {
-        QMessageBox::information(NULL, tr("Tip"), tr("Please confirm temperature is normal!"), QMessageBox::Ok , QMessageBox::Ok);
-        return false;
-    }
-    // DonorID
-    if(m_pDonorIDWidget->GetLineText().isEmpty())
-    {
-        QMessageBox::information(NULL, tr("Tip"), tr("Please input Donor ID!"), QMessageBox::Ok , QMessageBox::Ok);
-        return false;
-    }
-    // Email是否包含@
-//    if(!m_pEmailAddressWidget->GetLineText().contains(QChar('@')))
-//    {
-//        QMessageBox::information(NULL, tr("Tip"), tr("Please Input Valid Email Address!"), QMessageBox::Ok , QMessageBox::Ok);
-//        return false;
-//    }
-    // birth date
-    if(!m_pBirthDateWidget->GetDate().isValid())
-    {
-        QMessageBox::information(NULL, tr("Tip"), tr("Please Input Valid Birth Date!"), QMessageBox::Ok , QMessageBox::Ok);
-        return false;
-    }
-
-    // PIS
-    if(gk_iVersionConfig == PIS_VERSION)
-    {
-        if(!m_pOxidantRButton->isChecked() && !m_pOxidantNoRButton->isChecked())
-        {
-            QMessageBox::information(NULL, tr("Tip"), tr("Please confirm Oxidant!"),
-                                     QMessageBox::Ok , QMessageBox::Ok);
-            return false;
-        }
-
-        if(!m_pPHRButton->isChecked() && !m_pPHNoRButton->isChecked())
-        {
-            QMessageBox::information(NULL, tr("Tip"), tr("Please confirm PH!"),
-                                     QMessageBox::Ok , QMessageBox::Ok);
-            return false;
-        }
-
-        if(!m_pNitriteRButton->isChecked() && !m_pNitriteNoRButton->isChecked())
-        {
-            QMessageBox::information(NULL, tr("Tip"), tr("Please confirm Nitrite!"),
-                                     QMessageBox::Ok , QMessageBox::Ok);
-            return false;
-        }
-
-        if(!m_pCreatinineRButton->isChecked() && !m_pCreatinineNoRButton->isChecked())
-        {
-            QMessageBox::information(NULL, tr("Tip"), tr("Please confirm Creatinine!"),
-                                     QMessageBox::Ok , QMessageBox::Ok);
-            return false;
-        }
-    }
+{    
 
     return true;
 }
@@ -941,28 +796,28 @@ void CDetectorPage::_ReplaceCubeHtmlData(QString &strHtml)
     }
     else
     {
-        for(int i = 1; i < m_strReasonForTestList.count(); ++i)
-        {
-            strFindWord = strReasonFindWord.at(i);
-            if(strCurrentSelectText == m_strReasonForTestList.at(i))
-            {
-                strHtml = strHtml.replace(strHtml.indexOf(strFindWord), strFindWord.count(), "checked");
-                if(strCurrentSelectText == "Other")
-                {
-                    // other
-                    strFindWord = "${Other}";
-                    strHtml = strHtml.replace(strHtml.indexOf(strFindWord), strFindWord.count(), m_pOtherLineEdit->text());
-                }
-                else
-                {
-                    // other
-                    strFindWord = "${Other}";
-                    strHtml = strHtml.replace(strHtml.indexOf(strFindWord), strFindWord.count(), "");
-                }
+//        for(int i = 1; i < m_strReasonForTestList.count(); ++i)@#$
+//        {
+//            strFindWord = strReasonFindWord.at(i);
+//            if(strCurrentSelectText == m_strReasonForTestList.at(i))
+//            {
+//                strHtml = strHtml.replace(strHtml.indexOf(strFindWord), strFindWord.count(), "checked");
+//                if(strCurrentSelectText == "Other")
+//                {
+//                    // other
+//                    strFindWord = "${Other}";
+//                    strHtml = strHtml.replace(strHtml.indexOf(strFindWord), strFindWord.count(), m_pOtherLineEdit->text());
+//                }
+//                else
+//                {
+//                    // other
+//                    strFindWord = "${Other}";
+//                    strHtml = strHtml.replace(strHtml.indexOf(strFindWord), strFindWord.count(), "");
+//                }
 
-                break;
-            }
-        }
+//                break;
+//            }
+//        }
     }
 
 
@@ -1225,7 +1080,7 @@ void CDetectorPage::SlotReceiveProjectName(QString strCupType,QString strProject
     QStringList strProjectNameList = strProjectName.split(";");
     QVector<QStringList> qProjectRestlt;
 
-    m_pProductDefinitionWidget->SetCurrentText(strCupType);
+    m_pProduceDetailsDlg->SetCurrentType(strCupType);
     for(int i = 0;i < strProjectNameList.count();i++)
     {
 //        qDebug() << "Project = " << strProjectNameList.at(i);
