@@ -122,12 +122,12 @@ QTableWidget
 }
 QHeaderView::section
 {
-    background-color: #1484d9;
+    background-color: rgb(22, 31, 48);
     height:35px;
     color: white;
     font-size: 14px;
     font-family:"Arial";
-    font-weight:600;
+    font-weight:300;
 }
 QPushButton
 {
@@ -137,14 +137,14 @@ QPushButton
     border: 0px solid #0068b7;
     border-radius: 5px;
     color: white;
-    background-color: rgb(230, 139, 49);
+    background-color: rgb(30, 129, 255);
 }
 QPushButton:disabled {
     background-color:#D5D5D5;
     color: rgb(60, 60, 60);
 }
 QPushButton:enabled {
-    background-color: rgb(230, 139, 49);
+    background-color: rgb(30, 129, 255);
 }
 
 QPushButton:hover{

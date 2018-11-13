@@ -520,8 +520,7 @@ void CDetectorPage::_LoadQss()
 void CDetectorPage::_InitTableWidget()
 {
     m_pResultsTableWidget = new QTableWidget(this);
-    m_pResultsTableWidget->setFixedHeight(195);
-    m_pResultsTableWidget->setMinimumWidth(445);
+    m_pResultsTableWidget->setFixedSize(390, 390);
     m_pResultsTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
     m_pResultsTableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
     // 表单样式
@@ -536,8 +535,8 @@ void CDetectorPage::_InitTableWidget()
     QHeaderView *pHeaderView = m_pResultsTableWidget->horizontalHeader();
     pHeaderView->setHighlightSections(false);
 //    pHeaderView->setDefaultSectionSize(120);
-    pHeaderView->resizeSection(0, 120);
-    pHeaderView->resizeSection(1, 190);
+    pHeaderView->resizeSection(0, 115);
+    pHeaderView->resizeSection(1, 130);
   //  pHeaderView->resizeSection(0, 120);
     pHeaderView->setDisabled(true);
     // 充满表格
@@ -608,36 +607,38 @@ void CDetectorPage::PowerOffStates()
 void CDetectorPage::_InitWidget()
 {
     m_pCamaraLabel = new QLabel(this);
-    m_pCamaraLabel->setMinimumSize(438, 283);
+    m_pCamaraLabel->setFixedSize(440, 450);
     m_pCamaraLabel->setObjectName("m_pCamaraLabel");
     //
     m_pReadTestDeviceButton = new QPushButton(tr("Read Test Device"));
-    m_pReadTestDeviceButton->setFixedSize(135, 35);
+    m_pReadTestDeviceButton->setFixedSize(140, 35);
     connect(m_pReadTestDeviceButton,SIGNAL(clicked(bool)), this, SLOT(_SlotCheckReadTestDevice()));
     m_pStopTestButton = new QPushButton(tr("Stop Test"));
-    m_pStopTestButton->setFixedSize(100, 35);
+    m_pStopTestButton->setFixedSize(105, 35);
     connect(m_pStopTestButton, SIGNAL(clicked(bool)), this, SLOT(_SlotStopTest()));
     m_pClearDataButton = new QPushButton(tr("Clear Data"));
-    m_pClearDataButton->setFixedSize(100, 35);
+    m_pClearDataButton->setFixedSize(105, 35);
     connect(m_pClearDataButton,SIGNAL(clicked(bool)), this, SLOT(_SlotClearData()));
-    //
-    m_pDonorDetailsDlg = new CDonorDetailsDlg(this);
-    m_pProduceDetailsDlg = new CProduceDetailsDlg(this);
-    //
+    // 对话框
+    m_pDonorDetailsDlg = new CDonorDetailsDlg();
+    m_pProduceDetailsDlg = new CProduceDetailsDlg();
+    // 信息
     m_pDonorDetailsButton = new QPushButton(tr("Donor Details"), this);
+    m_pDonorDetailsButton->setFixedSize(160, 35);
     connect(m_pDonorDetailsButton, &QPushButton::clicked, this, &CDetectorPage::_SlotOpenDonorDetailsDlg);
     m_pProduceDetailsButton = new QPushButton(tr("Produce Details"), this);
+    m_pProduceDetailsButton->setFixedSize(160, 35);
     connect(m_pProduceDetailsButton, &QPushButton::clicked, this, &CDetectorPage::_SlotOpenProduceDetailsDlg);
     // 表格
     _InitTableWidget();
     // 打印按钮
     m_pPrintPriviewButton = new QPushButton(tr("Print Preview"));
-    m_pPrintPriviewButton->setFixedSize(135, 35);
+    m_pPrintPriviewButton->setFixedSize(105, 35);
     connect(m_pPrintPriviewButton, SIGNAL(clicked(bool)), this, SLOT(_SlotPrintToPDF()));
 
     //手动修改结果按钮
     m_pManualSetButton = new QPushButton(tr("Manual Set"));
-    m_pManualSetButton->setFixedSize(135,35);
+    m_pManualSetButton->setFixedSize(105,35);
     connect(m_pManualSetButton,SIGNAL(clicked(bool)),this,SLOT(_SlotManualSetData()));
 }
 /**

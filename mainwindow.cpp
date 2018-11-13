@@ -59,9 +59,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     GetQCameraInfo();
-
+    LoadQss(this, ":/qss/MainWindows.qss");
     _InitWidget();
     _InitLayout();
+
+
     //
     m_kiTitleHeight = 50;// title高度
     m_kiStatusBarHeight = 30;// 状态栏高度
