@@ -59,11 +59,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     GetQCameraInfo();
-    LoadQss(this, ":/qss/MainWindows.qss");
+    //LoadQss(this, ":/qss/MainWindows.qss");
     _InitWidget();
     _InitLayout();
-
-
     //
     m_kiTitleHeight = 50;// title高度
     m_kiStatusBarHeight = 30;// 状态栏高度
@@ -640,6 +638,7 @@ void MainWindow::_InitWidget()
     // 多标签
     m_pStackedWidget = new QTabWidget(this);
     m_pStackedWidget->setTabPosition(QTabWidget::West);
+    m_pStackedWidget->tabBar()->setStyle(new CCustomTabStyle);
     // 测试页
     m_pDetectorPage = new CDetectorPage(this);
     connect(m_pDetectorPage, &CDetectorPage::SignalStartTest, this, &MainWindow::SlotDetectorPageStartTest);

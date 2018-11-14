@@ -21,6 +21,8 @@
 #include <QLabel>
 #include <QCameraInfo>
 #include <QComboBox>
+#include <QPainter>
+#include <QProxyStyle>
 #include "AdjustLight/common.h"
 #include "AdjustLight/testing/ThreadTesting.h"
 #include <QSqlDatabase>
@@ -243,4 +245,25 @@ QString GetHtmlStream(QString strHtmlFilePath);
   * @return
   */
 QString GetHostMacAddress();
+/**
+  * @brief 自定义TabBar
+  * @param
+  * @return
+  */
+class CCustomTabStyle : public QProxyStyle
+{
+
+public :
+    explicit CCustomTabStyle();
+    virtual ~CCustomTabStyle();
+public:
+    QSize sizeFromContents(ContentsType type, const QStyleOption *option,
+        const QSize &size, const QWidget *widget) const;
+    void drawControl(ControlElement element, const QStyleOption *option,
+                     QPainter *painter, const QWidget *widget) const;
+
+};
+
+
+
 #endif // PUBLICFUNCTION_H

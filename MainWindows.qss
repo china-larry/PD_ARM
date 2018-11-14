@@ -13,31 +13,50 @@ QProgressBar
     color: green;
     border:1px solid #FFFFFF;
 }
-QTabWidget::QTabBar::tab {
-border-color: black;
-border-width: 3px;
-border-bottom:none;
-border-top-left-radius: 6px;
-border-top-right-radius: 6px;
-background:transparent;
-color:black;
-min-width:30ex;
-min-height:10ex;
+/*QTabWidget::pane
+{
+    border-top: 3px solid black;
+    border-left: 3px solid black;
+    left:5px;
+    right:5px;
+    bottom:5px;
 }
-QTabWidget::QTabBar::tab:!selected:hover{
+QTabWidget::tab-bar
+{
+    alignment:right;
+    top:30px;
+    left:5px;
+    right:5px;
+    border-width:100px;
+    border-height:100px;
+    subcontrol-position:left;
+}
+QTabBar::tab
+{
+    border-color: black;
+    border-width: 3px;
+    border-bottom:none;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    background:transparent;
+    color:black;
+    width:120px;
+    height:60px;
+}
+QTabBar::tab:!selected:hover{
 width:100px;
 height:24px;
 border:3px solid #C589C3;
-background:rgb(255, 255, 255, 100);
+background:rgb(0, 255, 255, 100);
 border-color: black;
 }
-QTabWidget::QTabBar::tab:selected{
+QTabBar::tab:selected{
 background:green;
 color:white;
 }
 
-QTabWidget::QTabBar::tab:!selected{
+QTabBar::tab:!selected{
 background:none;
 color:black;
 border:none;
-}
+}*/
