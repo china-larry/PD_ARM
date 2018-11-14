@@ -13,7 +13,8 @@ QProgressBar
     color: green;
     border:1px solid #FFFFFF;
 }
-/*QTabWidget::pane
+/*
+QTabWidget::pane
 {
     border-top: 3px solid black;
     border-left: 3px solid black;
@@ -23,14 +24,9 @@ QProgressBar
 }
 QTabWidget::tab-bar
 {
-    alignment:right;
-    top:30px;
-    left:5px;
-    right:5px;
-    border-width:100px;
-    border-height:100px;
-    subcontrol-position:left;
+    background-color: green;
 }
+
 QTabBar::tab
 {
     border-color: black;
@@ -43,6 +39,7 @@ QTabBar::tab
     width:120px;
     height:60px;
 }
+
 QTabBar::tab:!selected:hover{
 width:100px;
 height:24px;

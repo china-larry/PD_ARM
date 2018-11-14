@@ -587,8 +587,8 @@ QSize CCustomTabStyle::sizeFromContents(QStyle::ContentsType type, const QStyleO
     QSize s = QProxyStyle::sizeFromContents(type, option, size, widget);
             if (type == QStyle::CT_TabBarTab) {
                 s.transpose();
-                s.rwidth() = 90; // 设置每个tabBar中item的大小
-                s.rheight() = 44;
+                s.rwidth() = 140; // 设置每个tabBar中item的大小
+                s.rheight() = 95;
             }
             return s;
 }
@@ -603,9 +603,24 @@ void CCustomTabStyle::drawControl(QStyle::ControlElement element, const QStyleOp
 
             if (tab->state & QStyle::State_Selected)
             {
+                //线性渐变
+                QLinearGradient linearGradient(0, 0, allRect.width(), 0);
+                //创建了一个QLinearGradient对象实例，参数为起点和终点坐标，可作为颜色渐变的方向
+                //painter.setPen(Qt::NoPen);
+                linearGradient.setColorAt(0.0,0x1D80FF);
+                linearGradient.setColorAt(1.0,0x28C9FF);
+
                 painter->save();
-                painter->setPen(0x89cfff);
-                painter->setBrush(QBrush(0x89cfff));
+                painter->setPen(0x161F30);
+                painter->setBrush(QBrush(linearGradient));
+                painter->drawRect(allRect.adjusted(6, 6, -6, -6));
+                painter->restore();
+            }
+            else
+            {
+                painter->save();
+                painter->setPen(0x161F30);
+                painter->setBrush(QBrush(0x161F30));
                 painter->drawRect(allRect.adjusted(6, 6, -6, -6));
                 painter->restore();
             }
@@ -613,11 +628,11 @@ void CCustomTabStyle::drawControl(QStyle::ControlElement element, const QStyleOp
             option.setAlignment(Qt::AlignCenter);
             if (tab->state & QStyle::State_Selected)
             {
-                painter->setPen(0xf8fcff);
+                painter->setPen(0xFFFFFF);
             }
             else
             {
-                painter->setPen(0x5d5d5d);
+                painter->setPen(0xFFFFFF);
             }
 
             painter->drawText(allRect, tab->text, option);

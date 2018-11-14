@@ -667,7 +667,7 @@ void MainWindow::_InitWidget()
     m_pStackedWidget->addTab(m_pSettingPage, tr("Setting"));
     m_pStackedWidget->addTab(m_pCalibrationPage, tr("Calibration"));
     QLabel *pTmp = new QLabel("sd");
-    m_pStackedWidget->addTab(pTmp, "good");
+    m_pStackedWidget->addTab(pTmp, "");
     m_pStackedWidget->setTabEnabled(4,false);
 
     //
