@@ -59,7 +59,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     GetQCameraInfo();
-    LoadQss(this, ":/qss/MainWindows.qss");
+//    LoadQss(this, ":/qss/MainWindows.qss");
     _InitWidget();
     _InitLayout();
     //
@@ -529,7 +529,7 @@ void MainWindow::SlotDetectorPageStartTest(int iTestDelayTime)
     {
         m_pDetectorPageStatusBar->SetLineText(tr("Start Test"));
     }
-    m_pDetectorPageTitleWidget->SetDetectorPageButtonEnable(false);
+    //m_pDetectorPageTitleWidget->SetDetectorPageButtonEnable(false);
 }
 
 void MainWindow::SlotStartQRCode()
@@ -573,7 +573,7 @@ void MainWindow::SlotDetectorPageStopTest()
     m_pDetectorPageStatusBar->SetLineStopColor();
     m_pDetectorPageStatusBar->SetLineText(tr("Stop"));
     m_pDetectorPageStatusBar->SetProgressValue(0);
-    m_pDetectorPageTitleWidget->SetDetectorPageButtonEnable(true);
+    //m_pDetectorPageTitleWidget->SetDetectorPageButtonEnable(true);
 }
 // 流程测试结束
 void MainWindow::SlotDetectorPageEndTest()
@@ -585,7 +585,7 @@ void MainWindow::SlotDetectorPageEndTest()
     //
     m_pDetectorPageStatusBar->SetLineText(tr("Finish Test"));
     m_pDetectorPageStatusBar->SetProgressValue(100);
-    m_pDetectorPageTitleWidget->SetDetectorPageButtonEnable(true);
+    //m_pDetectorPageTitleWidget->SetDetectorPageButtonEnable(true);
     m_pHistoryPage->SetTestResultDataList(m_pTestResultDataList, m_pDetectorPage->GetTestPrintImagePath());
     m_pHistoryPage->SetTestUserData(m_sDetectorPageUserDataStruct);
     m_pHistoryPage->InsertToDatabase();
@@ -637,10 +637,11 @@ void MainWindow::_InitWidget()
     connect(m_pHistoryPageTitleWidget, SIGNAL(SignalReturnWindow()), this, SLOT(SlotGoHistoryPage()));
     // 多标签
     m_pStackedWidget = new QTabWidget(this);
+    m_pStackedWidget->setFixedSize(1024, 512);
     m_pStackedWidget->setTabPosition(QTabWidget::West);
-//    m_pStackedWidget->setStyleSheet("QTabWidget::tab-bar {background-color: green;}");
+    //m_pStackedWidget->setStyleSheet("QTabWidget {background-color: green;}");
     m_pStackedWidget->tabBar()->setStyle(new CCustomTabStyle);
-    m_pStackedWidget->tabBar()->setStyleSheet("QTabBar {background-color: green;}");
+    m_pStackedWidget->tabBar()->setStyleSheet("QTabBar {background-color: 0x161F30;}");
 
     // 测试页
     m_pDetectorPage = new CDetectorPage(this);
@@ -661,15 +662,18 @@ void MainWindow::_InitWidget()
     //connect(m_pSettingPage, &CSettingPage::SignalAutoConnectPis, this, &MainWindow::SlotAutoConnectPis);
     connect(m_pSettingPage, &CSettingPage::SignalAutoConnectPoct, this, &MainWindow::SlotAutoConnectPoct);
 
-    // 布局
+    // 布局    
     m_pStackedWidget->addTab(m_pDetectorPage, tr("HomePage"));
     m_pStackedWidget->addTab(m_pHistoryPage, tr("History"));
     m_pStackedWidget->addTab(m_pSettingPage, tr("Setting"));
     m_pStackedWidget->addTab(m_pCalibrationPage, tr("Calibration"));
-    QLabel *pTmp = new QLabel("sd");
-    m_pStackedWidget->addTab(pTmp, "good");
-    m_pStackedWidget->setTabEnabled(4,false);
-
+    // 添加两个无效的，便于背景色
+    QLabel *pTmp01 = new QLabel();
+    QLabel *pTmp02 = new QLabel();
+    m_pStackedWidget->addTab(pTmp01, "");
+    //m_pStackedWidget->setTabEnabled(4,false);
+    m_pStackedWidget->addTab(pTmp02, "");
+    //m_pStackedWidget->setTabEnabled(5,false);
     //
     m_pStackedWidget->setCurrentIndex(0);
     // 状态栏
@@ -682,12 +686,13 @@ void MainWindow::_InitLayout()
     m_pMainLayout = new QVBoxLayout;
     m_pMainLayout->setMargin(0);
     m_pMainLayout->addWidget(m_pDetectorPageTitleWidget);
-    //pMainLayout->addStretch(200);
     m_pMainLayout->addWidget(m_pStackedWidget);
+   // m_pMainLayout->addStretch(1);
     // 布局
     m_pCentralWidget = new QWidget();
     setCentralWidget(m_pCentralWidget);
     m_pCentralWidget->setLayout(m_pMainLayout);
+    centralWidget()->layout()->setContentsMargins(0, 0, 0, 0);
 }
 
 void MainWindow::_GoHistoryPageLayout()

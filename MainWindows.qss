@@ -1,12 +1,12 @@
 QLineEdit
 {
-    color: green; /* text color */
+    color: #323232; /* text color */
     font-family: "Arial";
-    font-size: 18px;
+    font-size: 16px;
     font-weight : bold;
     font-style:italic;
-    border: 1px solid #7f7f7f;
-    background-color: #f5f5f5;
+    border: 0px solid #7f7f7f;
+    background-color: #f0f0f0;
 }
 QProgressBar
 {

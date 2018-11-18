@@ -6,13 +6,13 @@ QLabel
 }
 QLineEdit
 {
-    color: #fff; /* text color */
+    color: #000; /* text color */
     font-family: "Arial";
     font-size: 14px;
     font-weight : 450;
-    border: 1px solid #005392;
+    border: 0px solid #005392;
     padding: 0 0px;
-    background-color: #005392;
+    background-color: #FFFFFF;
 /*    box-shadow:1px 1px 1px 1px #005392 inset;*/
 }
 QPushButton

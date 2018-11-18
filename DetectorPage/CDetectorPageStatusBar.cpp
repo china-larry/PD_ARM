@@ -16,7 +16,8 @@
 
 CDetectorPageStatusBar::CDetectorPageStatusBar(QWidget *parent) : QWidget(parent)
 {
-    this->setMinimumSize(990, 30);
+    this->setFixedSize(1024, 20);
+    //this->setMinimumSize(990, 30);
 
     _InitWidget();
     _InitLayout();
@@ -96,7 +97,7 @@ void CDetectorPageStatusBar::_InitWidget()
     m_pTestStatusBarLineEdit = new QLineEdit(this);
     m_pTestStatusBarLineEdit->setEnabled(false);
 
-    m_pTestStatusBarLineEdit->setFixedSize(600, 30);
+    m_pTestStatusBarLineEdit->setFixedSize(80, 15);
 
 
     m_pTestStatusBarLineEdit->setAlignment(Qt::AlignCenter);
@@ -104,12 +105,7 @@ void CDetectorPageStatusBar::_InitWidget()
     //
     m_pTestProgressBar = new QProgressBar(this);
 
-
-        m_pTestProgressBar->setMinimumSize(390, 30);
-
-
-
-
+    m_pTestProgressBar->setFixedSize(125, 15);
 
 
     m_pTestProgressBar->setTextVisible(false);
@@ -122,9 +118,8 @@ void CDetectorPageStatusBar::_InitLayout()
     LoadQss(this, ":/qss/MainWindows.qss");
     QHBoxLayout *pStatusLayout = new QHBoxLayout;
     pStatusLayout->setMargin(0);
+    pStatusLayout->addStretch(1);
     pStatusLayout->addWidget(m_pTestStatusBarLineEdit);
     pStatusLayout->addWidget(m_pTestProgressBar);
     this->setLayout(pStatusLayout);
-
-
 }

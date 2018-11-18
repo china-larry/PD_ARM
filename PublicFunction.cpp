@@ -587,8 +587,8 @@ QSize CCustomTabStyle::sizeFromContents(QStyle::ContentsType type, const QStyleO
     QSize s = QProxyStyle::sizeFromContents(type, option, size, widget);
             if (type == QStyle::CT_TabBarTab) {
                 s.transpose();
-                s.rwidth() = 140; // 设置每个tabBar中item的大小
-                s.rheight() = 95;
+                s.rwidth() = 132; // 设置每个tabBar中item的大小
+                s.rheight() = 85;
             }
             return s;
 }
@@ -611,9 +611,9 @@ void CCustomTabStyle::drawControl(QStyle::ControlElement element, const QStyleOp
                 linearGradient.setColorAt(1.0,0x28C9FF);
 
                 painter->save();
-                painter->setPen(0x161F30);
+                painter->setPen(QColor(255, 255, 255, 0));
                 painter->setBrush(QBrush(linearGradient));
-                painter->drawRect(allRect.adjusted(6, 6, -6, -6));
+                painter->drawRect(allRect);
                 painter->restore();
             }
             else
@@ -621,7 +621,7 @@ void CCustomTabStyle::drawControl(QStyle::ControlElement element, const QStyleOp
                 painter->save();
                 painter->setPen(0x161F30);
                 painter->setBrush(QBrush(0x161F30));
-                painter->drawRect(allRect.adjusted(6, 6, -6, -6));
+                painter->drawRect(allRect);
                 painter->restore();
             }
             QTextOption option;

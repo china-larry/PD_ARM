@@ -520,7 +520,7 @@ void CDetectorPage::_LoadQss()
 void CDetectorPage::_InitTableWidget()
 {
     m_pResultsTableWidget = new QTableWidget(this);
-    m_pResultsTableWidget->setFixedSize(390, 390);
+    m_pResultsTableWidget->setFixedSize(390, 350);
     m_pResultsTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
     m_pResultsTableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
     // 表单样式
@@ -607,7 +607,7 @@ void CDetectorPage::PowerOffStates()
 void CDetectorPage::_InitWidget()
 {
     m_pCamaraLabel = new QLabel(this);
-    m_pCamaraLabel->setFixedSize(440, 450);
+    m_pCamaraLabel->setFixedSize(440, 420);
     m_pCamaraLabel->setObjectName("m_pCamaraLabel");
     //
     m_pReadTestDeviceButton = new QPushButton(tr("Read Test Device"));
@@ -650,6 +650,7 @@ void CDetectorPage::_InitLayout()
 {
     // 左侧
     QVBoxLayout *pLeftLayout = new QVBoxLayout;
+    pLeftLayout->setMargin(0);
     pLeftLayout->addWidget(m_pCamaraLabel);
     //
     QHBoxLayout *pLeftButtonLayout = new QHBoxLayout;
@@ -683,6 +684,7 @@ void CDetectorPage::_InitLayout()
 void CDetectorPage::_SlotOpenDonorDetailsDlg()
 {
     m_pDonorDetailsDlg->ReSetTestTime();
+    m_pDonorDetailsDlg->show();
 }
 
 void CDetectorPage::_SlotOpenProduceDetailsDlg()

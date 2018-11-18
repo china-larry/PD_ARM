@@ -8,42 +8,6 @@ CDonorDetailsDlg::CDonorDetailsDlg(QWidget *parent) : QWidget(parent)
 
 void CDonorDetailsDlg::_SlotOkCheck()
 {
-//    if(!m_pOxidantRButton->isChecked())
-//    {
-//        int iButtonType = QMessageBox::question(NULL, tr("Tip"), tr("Are you sure confirm Oxidant Non-Val!"),
-//                                 QMessageBox::Cancel , QMessageBox::Ok);
-//        if(iButtonType == QMessageBox::Cancel)
-//        {
-//            m_pOxidantRButton->setChecked(true);
-//        }
-//    }
-//    if(!m_pPHRButton->isChecked())
-//    {
-//        int iButtonType = QMessageBox::question(NULL, tr("Tip"), tr("Are you sure confirm PH Non-Val!"),
-//                                 QMessageBox::Cancel , QMessageBox::Ok);
-//        if(iButtonType == QMessageBox::Cancel)
-//        {
-//            m_pPHRButton->setChecked(true);
-//        }
-//    }
-//    if(!m_pNitriteRButton->isChecked())
-//    {
-//        int iButtonType = QMessageBox::question(NULL, tr("Tip"), tr("Are you sure confirm Nitrite Non-Val!"),
-//                                 QMessageBox::Cancel , QMessageBox::Ok);
-//        if(iButtonType == QMessageBox::Cancel)
-//        {
-//            m_pNitriteRButton->setChecked(true);
-//        }
-//    }
-//    if(!m_pCreatinineRButton->isChecked())
-//    {
-//        int iButtonType = QMessageBox::question(NULL, tr("Tip"), tr("Are you sure confirm Creatinine Non-Val!"),
-//                                 QMessageBox::Cancel , QMessageBox::Ok);
-//        if(iButtonType == QMessageBox::Cancel)
-//        {
-//            m_pCreatinineRButton->setChecked(true);
-//        }
-//    }
     if(!m_pTempNoValRButton->isChecked())
     {
         int iButtonType = QMessageBox::question(NULL, tr("Tip"), tr("Please confirm temperature is normal!"),

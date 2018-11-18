@@ -33,5 +33,6 @@
         <file>ico/title/close02.jpg</file>
         <file>ico/title/mini.jpg</file>
         <file>ico/title/Return.jpg</file>
+        <file>ico/title/logo.png</file>
     </qresource>
 </RCC>
