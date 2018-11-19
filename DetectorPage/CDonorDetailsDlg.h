@@ -5,6 +5,7 @@
 #include <QButtonGroup>
 #include <QRadioButton>
 #include <QCheckBox>
+#include <QPushButton>
 #include "CommonDataWidget/CLabelLineEditWidget.h"
 #include "CommonDataWidget/CLabelDateWidget.h"
 #include "CommonDataWidget/CLabelDateTimeWidget.h"
@@ -18,7 +19,14 @@ struct SDonorDlgData
     QString strEmail;
     QString strAddress;
     QString strTestingSite;
-    QString strTestReason;
+    bool bPreEmployment;
+    bool bRandom;
+    bool bReasonableSuspicionCause;
+    bool bPostAccident;
+    bool bReturnToDuty;
+    bool bFollowUp;
+    bool bOtherReason;
+    QString strOtherReasonComments;
     QDate   qTestDate;
     QTime   qTestTime;
     bool   bTemperatureinRangeYesCheck;
@@ -74,10 +82,19 @@ private:
     QCheckBox *m_pPHRButton;
     QCheckBox *m_pNitriteRButton;
     QCheckBox *m_pCreatinineRButton;
-
     // reason of test
-    CLabelCommoBoxWidget *m_pReasonForTestWidget;
-    QStringList m_strReasonForTestList;
+    QLabel *m_pReasonfoTestLabel;
+    QCheckBox *m_pPreEmploymentCBox;
+    QCheckBox *m_pRandomCBox;
+    QCheckBox *m_pReasonableSuspicionCauseCBox;
+    QCheckBox *m_pPostAccidentCBox;
+    QCheckBox *m_pReturnToDutyCBox;
+    QCheckBox *m_pFollowUpCBox;
+    QCheckBox *m_pOtherReasonForTestCBox;
+    QLineEdit *m_pOtherReasonCommentsLineEdit;
+    // button
+    QPushButton *m_pOkButton;
+    QPushButton *m_pCancelButton;
     //////////////////////////////////////
     SDonorDlgData m_sDonorDlgData;
 };

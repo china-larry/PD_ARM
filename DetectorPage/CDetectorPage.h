@@ -49,20 +49,24 @@ struct SPrintData
     QString strTestingSite;
     bool    bUrineCheck;
     bool    bSalivaCheck;
-    QString strTestReason;
+    // reason
+    bool bPreEmployment;
+    bool bRandom;
+    bool bReasonableSuspicionCause;
+    bool bPostAccident;
+    bool bReturnToDuty;
+    bool bFollowUp;
+    bool bOtherReason;
+    QString strOtherReasonComments;
     QString strProductID;
     QString strProductLot;
     QDate  qExpirationDate;
     bool   bTemperatureinRangeYesCheck;
     bool   bTemperatureinRangeNoCheck;
     bool   bOxidantCheck;
-    bool   bOxidantNolCheck;
     bool   bPHCheck;
-    bool   bPHNolCheck;
     bool   bNitriteCheck;
-    bool   bNitriteNolCheck;
     bool   bCreatinineCheck;
-    bool   bCreatinineNolCheck;
 };
 //
 class CDetectorPage : public QWidget

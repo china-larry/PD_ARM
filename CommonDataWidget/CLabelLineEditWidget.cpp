@@ -107,6 +107,7 @@ void CHLabelLineEditWidget::_InitLayout()
 {
     QHBoxLayout *pLayout = new QHBoxLayout;
     pLayout->setMargin(0);
+    pLayout->addStretch(1);
     pLayout->addWidget(m_pLabel);
     pLayout->addWidget(m_pLineEdit);
     this->setLayout(pLayout);

@@ -266,7 +266,15 @@ void CDetectorPage::SlotEndTest()
     m_sPrintDataStruct.strAddress = m_pDonorDetailsDlg->GetDlgData().strAddress;
     m_sPrintDataStruct.strTestingSite = m_pDonorDetailsDlg->GetDlgData().strTestingSite;
 
-    m_sPrintDataStruct.strTestReason = m_pDonorDetailsDlg->GetDlgData().strTestReason;
+    m_sPrintDataStruct.bPreEmployment = m_pDonorDetailsDlg->GetDlgData().bPreEmployment;
+    m_sPrintDataStruct.bRandom = m_pDonorDetailsDlg->GetDlgData().bRandom;
+    m_sPrintDataStruct.bReasonableSuspicionCause = m_pDonorDetailsDlg->GetDlgData().bReasonableSuspicionCause;
+    m_sPrintDataStruct.bPostAccident = m_pDonorDetailsDlg->GetDlgData().bPostAccident;
+    m_sPrintDataStruct.bReturnToDuty = m_pDonorDetailsDlg->GetDlgData().bReturnToDuty;
+    m_sPrintDataStruct.bFollowUp = m_pDonorDetailsDlg->GetDlgData().bFollowUp;
+    m_sPrintDataStruct.bOtherReason = m_pDonorDetailsDlg->GetDlgData().bOtherReason;
+    m_sPrintDataStruct.strOtherReasonComments = m_pDonorDetailsDlg->GetDlgData().strOtherReasonComments;
+    //
     m_sPrintDataStruct.strProductLot = m_pProduceDetailsDlg->GetDlgData().strProductLot;
     m_sPrintDataStruct.qExpirationDate = m_pProduceDetailsDlg->GetDlgData().qExpirationDate;
     m_sPrintDataStruct.strProductID = m_pProduceDetailsDlg->GetDlgData().strProductID;
@@ -785,43 +793,31 @@ void CDetectorPage::_ReplaceCubeHtmlData(QString &strHtml)
         strHtml = strHtml.replace(strHtml.indexOf(strFindWord), strFindWord.count(), "checked");
     }
     // reason for test
-    QString strCurrentSelectText = m_sPrintDataStruct.strTestReason;
-    QStringList strReasonFindWord;
-    strReasonFindWord << "" << "${PreEmploymentCheck}" << "${RandomCheck}" << "${ScheduledCheck}"
-                      << "${InitialCheck}" << "${CourtHearingCheck}" << "${Post-accidentCheck}"
-                      << "${ReasonableCauseCheck}" << "${FollowUpCheck}" << "${OtherCheck}";
-
-    if(strCurrentSelectText == "")
-    {
-        // other
-        strFindWord = "${Other}";
-        strHtml = strHtml.replace(strHtml.indexOf(strFindWord), strFindWord.count(), "");
-    }
-    else
-    {
-//        for(int i = 1; i < m_strReasonForTestList.count(); ++i)@#$
-//        {
-//            strFindWord = strReasonFindWord.at(i);
-//            if(strCurrentSelectText == m_strReasonForTestList.at(i))
-//            {
-//                strHtml = strHtml.replace(strHtml.indexOf(strFindWord), strFindWord.count(), "checked");
-//                if(strCurrentSelectText == "Other")
-//                {
-//                    // other
-//                    strFindWord = "${Other}";
-//                    strHtml = strHtml.replace(strHtml.indexOf(strFindWord), strFindWord.count(), m_pOtherLineEdit->text());
-//                }
-//                else
-//                {
-//                    // other
-//                    strFindWord = "${Other}";
-//                    strHtml = strHtml.replace(strHtml.indexOf(strFindWord), strFindWord.count(), "");
-//                }
-
-//                break;
-//            }
-//        }
-    }
+    strFindWord = "${PreEmploymentCheck}";
+    strHtml = strHtml.replace(strHtml.indexOf(strFindWord),
+                              strFindWord.count(), m_sPrintDataStruct.bPreEmployment ? "checked" : "");
+    strFindWord = "${RandomCheck}";
+    strHtml = strHtml.replace(strHtml.indexOf(strFindWord),
+                              strFindWord.count(), m_sPrintDataStruct.bRandom ? "checked" : "");
+    strFindWord = "${ReasonableCheck}";
+    strHtml = strHtml.replace(strHtml.indexOf(strFindWord),
+                              strFindWord.count(), m_sPrintDataStruct.bReasonableSuspicionCause ? "checked" : "");
+    strFindWord = "${PostAccidentCheck}";
+    strHtml = strHtml.replace(strHtml.indexOf(strFindWord),
+                              strFindWord.count(), m_sPrintDataStruct.bPostAccident ? "checked" : "");
+    strFindWord = "${ReturnToDutyCheck}";
+    strHtml = strHtml.replace(strHtml.indexOf(strFindWord),
+                              strFindWord.count(), m_sPrintDataStruct.bReturnToDuty ? "checked" : "");
+    strFindWord = "${FollowUpCheck}";
+    strHtml = strHtml.replace(strHtml.indexOf(strFindWord),
+                              strFindWord.count(), m_sPrintDataStruct.bFollowUp ? "checked" : "");
+    strFindWord = "${OtherCheck}";
+    strHtml = strHtml.replace(strHtml.indexOf(strFindWord),
+                              strFindWord.count(), m_sPrintDataStruct.bOtherReason ? "checked" : "");
+    // other
+    strFindWord = "${Other}";
+    strHtml = strHtml.replace(strHtml.indexOf(strFindWord),
+                              strFindWord.count(), m_sPrintDataStruct.strOtherReasonComments);
 
 
     // ProductID
@@ -850,54 +846,21 @@ void CDetectorPage::_ReplaceCubeHtmlData(QString &strHtml)
         strHtml = strHtml.replace(strHtml.indexOf(strFindWord),
                                   strFindWord.count(), m_sPrintDataStruct.bOxidantCheck ? "checked" : "");
 
-        strFindWord = "${OxidantNolCheck}";
-        strHtml = strHtml.replace(strHtml.indexOf(strFindWord),
-                                  strFindWord.count(), m_sPrintDataStruct.bOxidantNolCheck ? "checked" : "");
-        if(m_sPrintDataStruct.bOxidantCheck == false && m_sPrintDataStruct.bOxidantNolCheck == false)
-        {
-            strFindWord = "${OxidantNoCheck}";
-            strHtml = strHtml.replace(strHtml.indexOf(strFindWord),strFindWord.count(), "checked");
-        }
-    //    strFindWord = "${SpecificGravityCheck}";
-    //    strHtml = strHtml.replace(strHtml.indexOf(strFindWord),
-    //                              strFindWord.count(), m_pSpecificCBox->isChecked() ? "checked" : "");
 
         strFindWord = "${PHCheck}";
         strHtml = strHtml.replace(strHtml.indexOf(strFindWord),
                                   strFindWord.count(), m_sPrintDataStruct.bPHCheck ? "checked" : "");
-        strFindWord = "${PHNolCheck}";
-        strHtml = strHtml.replace(strHtml.indexOf(strFindWord),
-                                  strFindWord.count(), m_sPrintDataStruct.bPHNolCheck ? "checked" : "");
-        if(m_sPrintDataStruct.bPHCheck == false && m_sPrintDataStruct.bPHNolCheck == false)
-        {
-            strFindWord = "${PHNoCheck}";
-            strHtml = strHtml.replace(strHtml.indexOf(strFindWord),strFindWord.count(),"checked");
-        }
 
 
         strFindWord = "${NitriteCheck}";
         strHtml = strHtml.replace(strHtml.indexOf(strFindWord),
                                   strFindWord.count(), m_sPrintDataStruct.bNitriteCheck ? "checked" : "");
-        strFindWord = "${NitriteNolCheck}";
-        strHtml = strHtml.replace(strHtml.indexOf(strFindWord),
-                                  strFindWord.count(), m_sPrintDataStruct.bNitriteNolCheck ? "checked" : "");
-        if(m_sPrintDataStruct.bNitriteCheck == false && m_sPrintDataStruct.bNitriteNolCheck == false)
-        {
-            strFindWord = "${NitriteNoCheck}";
-            strHtml = strHtml.replace(strHtml.indexOf(strFindWord),strFindWord.count(),"checked");
-        }
+
 
         strFindWord = "${CreatinineCheck}";
         strHtml = strHtml.replace(strHtml.indexOf(strFindWord),
                                   strFindWord.count(), m_sPrintDataStruct.bCreatinineCheck ? "checked" : "");
-        strFindWord = "${CreatinineNolCheck}";
-        strHtml = strHtml.replace(strHtml.indexOf(strFindWord),
-                                  strFindWord.count(), m_sPrintDataStruct.bCreatinineNolCheck ? "checked" : "");
-        if(m_sPrintDataStruct.bCreatinineCheck == false && m_sPrintDataStruct.bCreatinineNolCheck == false)
-        {
-            strFindWord = "${CreatinineNoCheck}";
-            strHtml = strHtml.replace(strHtml.indexOf(strFindWord),strFindWord.count(),"checked");
-        }
+
     }
 
     // 测试结果

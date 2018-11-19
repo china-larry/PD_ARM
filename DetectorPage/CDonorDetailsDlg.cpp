@@ -1,7 +1,12 @@
 #include "CDonorDetailsDlg.h"
 #include <QMessageBox>
+#include <QLayout>
+#include "PublicFunction.h"
 CDonorDetailsDlg::CDonorDetailsDlg(QWidget *parent) : QWidget(parent)
 {
+    this->setFixedSize(710, 540);
+    this->setWindowFlags(Qt::FramelessWindowHint);
+    LoadQss(this, ":/qss/DetectorPage/DetectorPage.qss");
     _InitWidget();
     _InitLayout();
 }
@@ -75,7 +80,14 @@ void CDonorDetailsDlg::_SlotOkCheck()
     m_sDonorDlgData.strEmail = m_pEmailWidget->GetLineText();
     m_sDonorDlgData.strAddress = m_pAddressWidget->GetLineText();
     m_sDonorDlgData.strTestingSite = m_pTestingSiteWidget->GetLineText();
-    m_sDonorDlgData.strTestReason = m_pReasonForTestWidget->GetCurrentSelectText();
+    m_sDonorDlgData.bPreEmployment = m_pPreEmploymentCBox->isChecked();
+    m_sDonorDlgData.bRandom = m_pRandomCBox->isChecked();
+    m_sDonorDlgData.bReasonableSuspicionCause = m_pReasonableSuspicionCauseCBox->isChecked();
+    m_sDonorDlgData.bPostAccident = m_pPostAccidentCBox->isChecked();
+    m_sDonorDlgData.bReturnToDuty = m_pReturnToDutyCBox->isChecked();
+    m_sDonorDlgData.bFollowUp = m_pFollowUpCBox->isChecked();
+    m_sDonorDlgData.bOtherReason = m_pOtherReasonForTestCBox->isChecked();
+    m_sDonorDlgData.strOtherReasonComments = m_pOtherReasonCommentsLineEdit->text();
     m_sDonorDlgData.qTestDate = m_pTestTimeWidget->GetDateTime().date();
     m_sDonorDlgData.qTestTime = m_pTestTimeWidget->GetDateTime().time();
     m_sDonorDlgData.bOxidantCheck = m_pOxidantRButton->isChecked();
@@ -119,7 +131,14 @@ void CDonorDetailsDlg::ClearData()
 
     }
     //
-    m_pReasonForTestWidget->SetCurrentIndex(0);
+    m_pPreEmploymentCBox->setChecked(false);
+    m_pRandomCBox->setChecked(false);
+    m_pReasonableSuspicionCauseCBox->setChecked(false);
+    m_pPostAccidentCBox->setChecked(false);
+    m_pReturnToDutyCBox->setChecked(false);
+    m_pFollowUpCBox->setChecked(false);
+    m_pOtherReasonForTestCBox->setChecked(false);
+    m_pOtherReasonCommentsLineEdit->setText("");
 }
 
 
@@ -127,6 +146,7 @@ void CDonorDetailsDlg::_InitWidget()
 {
     //
     m_pDonorDetailsLabel = new QLabel(tr("Donor Details"), this);
+    m_pDonorDetailsLabel->setObjectName("m_pDonorDetailsLabel");
     // donor name
     m_pTempInRangeLabel = new QLabel(tr("Temp. in Range: "), this);
     m_pTempInRangeLabel->setMargin(0);
@@ -158,16 +178,141 @@ void CDonorDetailsDlg::_InitWidget()
     m_pNitriteRButton = new QCheckBox(tr("Nitrite"), this);
     m_pCreatinineRButton = new QCheckBox(tr("Creatinine"), this);
     // reason of test
-    m_strReasonForTestList << "" << "Pre-employment" << "Random" << "Scheduled" << "Initial Intake"
-                     << "Court Hearing" << "Post-accident" << "Reasonable Cause" << "Follow-up" << "Other";
-    m_pReasonForTestWidget = new CLabelCommoBoxWidget("Reason for Test:", m_strReasonForTestList, this);
-//    connect(m_pReasonForTestWidget, &CLabelCommoBoxWidget::SignalCurrentSelectChange,
-//            this, &CDetectorPage::_SlotOtherReasonChange);
-
+    m_pReasonfoTestLabel = new QLabel(tr("Reason for Test:"), this);
+    m_pReasonfoTestLabel->setMargin(0);
+    m_pPreEmploymentCBox = new QCheckBox(tr("Pre Employment"), this);
+    m_pRandomCBox = new QCheckBox(tr("Random"), this);
+    m_pReasonableSuspicionCauseCBox = new QCheckBox(tr("Reasonable suspicion cause"), this);
+    m_pPostAccidentCBox = new QCheckBox(tr("PostAccident"), this);
+    m_pReturnToDutyCBox = new QCheckBox(tr("Return to Duty"), this);
+    m_pFollowUpCBox = new QCheckBox(tr("Follow Up"), this);
+    m_pOtherReasonForTestCBox = new QCheckBox(tr("Other: "), this);
+    m_pOtherReasonCommentsLineEdit = new QLineEdit(this);
+    m_pOtherReasonCommentsLineEdit->setObjectName("m_pOtherReasonCommentsLineEdit");
+    //
+    m_pOkButton = new QPushButton(tr("OK"), this);
+    m_pOkButton->setFixedSize(120, 35);
+    m_pCancelButton = new QPushButton(tr("Cancel"), this);
+    m_pCancelButton->setFixedSize(120, 35);
 }
 
 void CDonorDetailsDlg::_InitLayout()
 {
     // 布局
+    // 布局
+    QHBoxLayout *pDonorLayout = new QHBoxLayout;
+    pDonorLayout->addSpacing(9);
+    pDonorLayout->addWidget(m_pTempInRangeLabel);
+    pDonorLayout->addWidget(m_pTempValRButton);
+    pDonorLayout->addSpacing(25);
+    pDonorLayout->addWidget(m_pTempNoValRButton);
+    pDonorLayout->addSpacing(9);
+    //
+    QHBoxLayout *pLastLayout = new QHBoxLayout;
+    pLastLayout->addSpacing(14);
+    pLastLayout->addWidget(m_pFirstNameWidget);
+    pLastLayout->addStretch(5);
+    pLastLayout->addWidget(m_pLastNameWidget);
+    pLastLayout->addSpacing(9);
+    //
+    QHBoxLayout *pDateLayout = new QHBoxLayout;
+    pDateLayout->addSpacing(9);
+    pDateLayout->addWidget(m_pDonorIDWidget);
+    pDateLayout->addStretch(5);
+    pDateLayout->addWidget(m_pBirthDateWidget);
+    pDateLayout->addSpacing(9);
+    //
+    QHBoxLayout *pEmailLayout = new QHBoxLayout;
+    pEmailLayout->addSpacing(47);
+    pEmailLayout->addWidget(m_pEmailWidget);
+    pEmailLayout->addStretch(5);
+    pEmailLayout->addWidget(m_pAddressWidget);
+    pEmailLayout->addSpacing(9);
+    //
+    //
+    QHBoxLayout *pTestLayout = new QHBoxLayout;
+    pTestLayout->addSpacing(12);
+    pTestLayout->addWidget(m_pTestTimeWidget);
+    pTestLayout->addStretch(5);
+    pTestLayout->addWidget(m_pTestingSiteWidget);
+    pTestLayout->addSpacing(9);
+    // adulterants
+    QHBoxLayout *pAdulterantsLayout = NULL;
+    //QGridLayout *pOxidantLayout = NULL;
+    //if(gk_iVersionConfig == PIS_VERSION)
+   // {
+    pAdulterantsLayout = new QHBoxLayout;
+    //pOxidantLayout = new QGridLayout;
+    pAdulterantsLayout->addSpacing(9);
+    pAdulterantsLayout->addWidget(m_pAdulterantsLabel);
+    pAdulterantsLayout->addStretch(100);
+    //
+    QHBoxLayout *pOxidantLayout = new QHBoxLayout;
+    pOxidantLayout->addSpacing(9);
+    pOxidantLayout->addWidget(m_pOxidantRButton);
+    pOxidantLayout->addSpacing(1);
+    pOxidantLayout->addWidget(m_pPHRButton);
+    pOxidantLayout->addSpacing(1);
+    pOxidantLayout->addWidget(m_pNitriteRButton);
+    pOxidantLayout->addSpacing(1);
+    pOxidantLayout->addWidget(m_pCreatinineRButton);
+// reason
+    QHBoxLayout *pReasonLayout = new QHBoxLayout;
+    pReasonLayout->addSpacing(9);
+    pReasonLayout->addWidget(m_pReasonfoTestLabel);
+    pReasonLayout->addStretch(100);
+    //
+    QGridLayout *pPreLayout = new QGridLayout;
+    pPreLayout->setContentsMargins(9, 0, 0, 0);
+    pPreLayout->setHorizontalSpacing(56);
+    pPreLayout->addWidget(m_pPreEmploymentCBox, 0, 0, 1, 1);
+    pPreLayout->addWidget(m_pRandomCBox, 0, 1, 1, 1);
+    pPreLayout->addWidget(m_pReasonableSuspicionCauseCBox, 0, 2, 1, 1);
+    pPreLayout->addWidget(m_pPostAccidentCBox, 1, 0, 1, 1);
+    pPreLayout->addWidget(m_pReturnToDutyCBox, 1, 1, 1, 1);
+    pPreLayout->addWidget(m_pFollowUpCBox, 1, 2, 1, 1);
+    //
+    QHBoxLayout *pOtherLayout = new QHBoxLayout;
+    pOtherLayout->addSpacing(9);
+    pOtherLayout->addWidget(m_pOtherReasonForTestCBox);
+    pOtherLayout->addWidget(m_pOtherReasonCommentsLineEdit);
+    pOtherLayout->addStretch(100);
+    //
+    QHBoxLayout *pButtonLayout = new QHBoxLayout;
+    pButtonLayout->addStretch(100);
+    pButtonLayout->addWidget(m_pOkButton);
+    pButtonLayout->addSpacing(40);
+    pButtonLayout->addWidget(m_pCancelButton);
+    pButtonLayout->addStretch(100);
 
+    QVBoxLayout *pLayout = new QVBoxLayout;
+    pLayout->setMargin(18);
+    pLayout->addWidget(m_pDonorDetailsLabel);
+    pLayout->addSpacing(20);
+    pLayout->addLayout(pDonorLayout);
+    pLayout->addStretch(1);
+    pLayout->addLayout(pLastLayout);
+    pLayout->addStretch(1);
+    pLayout->addLayout(pDateLayout);
+    pLayout->addStretch(1);
+    pLayout->addLayout(pEmailLayout);
+    pLayout->addStretch(1);
+    pLayout->addLayout(pTestLayout);
+    pLayout->addStretch(1);
+    pLayout->addLayout(pAdulterantsLayout);
+    pLayout->addStretch(1);
+    pLayout->addLayout(pOxidantLayout);
+    pLayout->addStretch(1);
+    pLayout->addLayout(pReasonLayout);
+    pLayout->addStretch(1);
+    pLayout->addLayout(pPreLayout);
+    pLayout->addSpacing(3);
+    pLayout->addLayout(pOtherLayout);
+    pLayout->addSpacing(15);
+    pLayout->addLayout(pButtonLayout);
+    pLayout->addSpacing(5);
+
+
+
+        this->setLayout(pLayout);
 }
