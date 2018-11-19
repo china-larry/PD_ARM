@@ -2,25 +2,29 @@
 #include <QMessageBox>
 #include <QLayout>
 #include "PublicFunction.h"
-CDonorDetailsDlg::CDonorDetailsDlg(QWidget *parent) : QWidget(parent)
+CDonorDetailsDlg::CDonorDetailsDlg()
 {
     this->setFixedSize(710, 540);
     this->setWindowFlags(Qt::FramelessWindowHint);
     LoadQss(this, ":/qss/DetectorPage/DetectorPage.qss");
+    SetWidgetBackColor(this, QColor(255, 255, 255));
     _InitWidget();
     _InitLayout();
 }
 
 void CDonorDetailsDlg::_SlotOkCheck()
 {
-    if(!m_pTempNoValRButton->isChecked())
+    if(m_pTempNoValRButton->isChecked() || !m_pTempValRButton->isChecked())
     {
-        int iButtonType = QMessageBox::question(NULL, tr("Tip"), tr("Please confirm temperature is normal!"),
-                                 QMessageBox::Cancel , QMessageBox::Ok);
-        if(iButtonType == QMessageBox::Cancel)
-        {
-            m_pTempValRButton->setChecked(true);
-        }
+//        int iButtonType = QMessageBox::question(NULL, tr("Tip"), tr("Please confirm temperature is normal!"),
+//                                 QMessageBox::Cancel , QMessageBox::Ok);
+//        if(iButtonType == QMessageBox::Cancel)
+//        {
+//            m_pTempValRButton->setChecked(true);
+//        }
+        QMessageBox::question(NULL, tr("Tip"), tr("Please confirm temperature is normal!"),
+                                         QMessageBox::Cancel , QMessageBox::Ok);
+        return;
     }
     // DonorID
     if(m_pDonorIDWidget->GetLineText().isEmpty())
@@ -70,7 +74,6 @@ void CDonorDetailsDlg::_SlotOkCheck()
             return;
         }
     }
-
     m_sDonorDlgData.bTemperatureinRangeYesCheck = m_pTempValRButton->isChecked();
     m_sDonorDlgData.bTemperatureinRangeNoCheck = m_pTempNoValRButton->isChecked();
     m_sDonorDlgData.strDonorFN = m_pFirstNameWidget->GetLineText();
@@ -94,6 +97,13 @@ void CDonorDetailsDlg::_SlotOkCheck()
     m_sDonorDlgData.bPHCheck = m_pPHRButton->isChecked();
     m_sDonorDlgData.bNitriteCheck = m_pNitriteRButton->isChecked();
     m_sDonorDlgData.bCreatinineCheck = m_pCreatinineRButton->isChecked();
+    //
+    this->accept();
+}
+
+void CDonorDetailsDlg::_SlotCancelCheck()
+{
+
 }
 
 SDonorDlgData CDonorDetailsDlg::GetDlgData()
@@ -192,8 +202,10 @@ void CDonorDetailsDlg::_InitWidget()
     //
     m_pOkButton = new QPushButton(tr("OK"), this);
     m_pOkButton->setFixedSize(120, 35);
+    connect(m_pOkButton, &QPushButton::clicked, this, &CDonorDetailsDlg::_SlotOkCheck);
     m_pCancelButton = new QPushButton(tr("Cancel"), this);
     m_pCancelButton->setFixedSize(120, 35);
+    connect(m_pCancelButton, &QPushButton::clicked, this, &CDonorDetailsDlg::_SlotCancelCheck);
 }
 
 void CDonorDetailsDlg::_InitLayout()

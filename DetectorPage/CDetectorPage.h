@@ -147,7 +147,9 @@ private:
 private:    
     //////////////////////////////////////
     CDonorDetailsDlg *m_pDonorDetailsDlg;
+    SDonorDlgData m_sDonorDlgData;
     CProduceDetailsDlg *m_pProduceDetailsDlg;
+    SProductDlgData m_sProductDlgData;
     // push button
     QPushButton *m_pDonorDetailsButton;
     QPushButton *m_pProduceDetailsButton;

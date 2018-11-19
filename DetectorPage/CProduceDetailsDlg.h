@@ -2,6 +2,7 @@
 #define CPRODUCEDETAILSDLG_H
 
 #include <QWidget>
+#include <QDialog>
 
 #include "CommonDataWidget/CLabelLineEditWidget.h"
 #include "CommonDataWidget/CLabelDateWidget.h"
@@ -14,11 +15,11 @@ struct SProductDlgData
     QString strProductLot;
     QDate  qExpirationDate;
 };
-class CProduceDetailsDlg : public QWidget
+class CProduceDetailsDlg : public QDialog
 {
     Q_OBJECT
 public:
-    explicit CProduceDetailsDlg(QWidget *parent = nullptr);
+    explicit CProduceDetailsDlg();
 
 signals:
 

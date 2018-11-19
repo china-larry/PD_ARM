@@ -161,7 +161,7 @@ void CDetectorPage::SlotReceiveQRCodeInfo(QRCodeInfo sQRCodeInfoStruct)
             return;
         }
     }
-    else if(gk_strTCubeTypeList.contains(m_pProduceDetailsDlg->GetDlgData().strCupTyle))
+    else if(gk_strTCubeTypeList.contains(m_sProductDlgData.strCupTyle))
     {// 方杯
         if(sQRCodeInfoStruct.eTypeCup != TypeSCup10)
         {
@@ -244,44 +244,44 @@ void CDetectorPage::SlotEndTest()
     emit SignalEndTest();
 
     m_sPrintDataStruct.bTemperatureinRangeYesCheck
-            = m_pDonorDetailsDlg->GetDlgData().bTemperatureinRangeYesCheck;
+            = m_sDonorDlgData.bTemperatureinRangeYesCheck;
     m_sPrintDataStruct.bTemperatureinRangeNoCheck
-            = m_pDonorDetailsDlg->GetDlgData().bTemperatureinRangeNoCheck;
+            = m_sDonorDlgData.bTemperatureinRangeNoCheck;
 
     m_sPrintDataStruct.strCupTyle
-            = m_pProduceDetailsDlg->GetDlgData().strCupTyle;
+            = m_sProductDlgData.strCupTyle;
     m_sPrintDataStruct.strDonorFN
-            = m_pDonorDetailsDlg->GetDlgData().strDonorFN;
+            = m_sDonorDlgData.strDonorFN;
     m_sPrintDataStruct.strDonorLN
-            = m_pDonorDetailsDlg->GetDlgData().strDonorLN;
+            = m_sDonorDlgData.strDonorLN;
 
     m_sPrintDataStruct.strOperatorID = m_strUserName;
     qDebug() << "m_sDetectorPageUserDataStruct.qTestDateTime = " << m_sDetectorPageUserDataStruct.qTestDateTime;
-    m_sPrintDataStruct.qTestDate = m_pDonorDetailsDlg->GetDlgData().qTestDate;
+    m_sPrintDataStruct.qTestDate = m_sDonorDlgData.qTestDate;
     qDebug() << "m_sDetectorPageUserDataStruct.qTestDateTime.date() = " << m_sDetectorPageUserDataStruct.qTestDateTime.date();
-    m_sPrintDataStruct.qTestTime = m_pDonorDetailsDlg->GetDlgData().qTestTime;
+    m_sPrintDataStruct.qTestTime = m_sDonorDlgData.qTestTime;
     qDebug() << "m_sDetectorPageUserDataStruct.qTestDateTime.time() = " << m_sDetectorPageUserDataStruct.qTestDateTime.time();
-    m_sPrintDataStruct.strDonorID = m_pDonorDetailsDlg->GetDlgData().strDonorID;
-    m_sPrintDataStruct.strEmail = m_pDonorDetailsDlg->GetDlgData().strEmail;
-    m_sPrintDataStruct.strAddress = m_pDonorDetailsDlg->GetDlgData().strAddress;
-    m_sPrintDataStruct.strTestingSite = m_pDonorDetailsDlg->GetDlgData().strTestingSite;
+    m_sPrintDataStruct.strDonorID = m_sDonorDlgData.strDonorID;
+    m_sPrintDataStruct.strEmail = m_sDonorDlgData.strEmail;
+    m_sPrintDataStruct.strAddress = m_sDonorDlgData.strAddress;
+    m_sPrintDataStruct.strTestingSite = m_sDonorDlgData.strTestingSite;
 
-    m_sPrintDataStruct.bPreEmployment = m_pDonorDetailsDlg->GetDlgData().bPreEmployment;
-    m_sPrintDataStruct.bRandom = m_pDonorDetailsDlg->GetDlgData().bRandom;
-    m_sPrintDataStruct.bReasonableSuspicionCause = m_pDonorDetailsDlg->GetDlgData().bReasonableSuspicionCause;
-    m_sPrintDataStruct.bPostAccident = m_pDonorDetailsDlg->GetDlgData().bPostAccident;
-    m_sPrintDataStruct.bReturnToDuty = m_pDonorDetailsDlg->GetDlgData().bReturnToDuty;
-    m_sPrintDataStruct.bFollowUp = m_pDonorDetailsDlg->GetDlgData().bFollowUp;
-    m_sPrintDataStruct.bOtherReason = m_pDonorDetailsDlg->GetDlgData().bOtherReason;
-    m_sPrintDataStruct.strOtherReasonComments = m_pDonorDetailsDlg->GetDlgData().strOtherReasonComments;
+    m_sPrintDataStruct.bPreEmployment = m_sDonorDlgData.bPreEmployment;
+    m_sPrintDataStruct.bRandom = m_sDonorDlgData.bRandom;
+    m_sPrintDataStruct.bReasonableSuspicionCause = m_sDonorDlgData.bReasonableSuspicionCause;
+    m_sPrintDataStruct.bPostAccident = m_sDonorDlgData.bPostAccident;
+    m_sPrintDataStruct.bReturnToDuty = m_sDonorDlgData.bReturnToDuty;
+    m_sPrintDataStruct.bFollowUp = m_sDonorDlgData.bFollowUp;
+    m_sPrintDataStruct.bOtherReason = m_sDonorDlgData.bOtherReason;
+    m_sPrintDataStruct.strOtherReasonComments = m_sDonorDlgData.strOtherReasonComments;
     //
-    m_sPrintDataStruct.strProductLot = m_pProduceDetailsDlg->GetDlgData().strProductLot;
-    m_sPrintDataStruct.qExpirationDate = m_pProduceDetailsDlg->GetDlgData().qExpirationDate;
-    m_sPrintDataStruct.strProductID = m_pProduceDetailsDlg->GetDlgData().strProductID;
-    m_sPrintDataStruct.bOxidantCheck = m_pDonorDetailsDlg->GetDlgData().bOxidantCheck;
-    m_sPrintDataStruct.bPHCheck = m_pDonorDetailsDlg->GetDlgData().bPHCheck;
-    m_sPrintDataStruct.bNitriteCheck = m_pDonorDetailsDlg->GetDlgData().bNitriteCheck;
-    m_sPrintDataStruct.bCreatinineCheck = m_pDonorDetailsDlg->GetDlgData().bCreatinineCheck;
+    m_sPrintDataStruct.strProductLot = m_sProductDlgData.strProductLot;
+    m_sPrintDataStruct.qExpirationDate = m_sProductDlgData.qExpirationDate;
+    m_sPrintDataStruct.strProductID = m_sProductDlgData.strProductID;
+    m_sPrintDataStruct.bOxidantCheck = m_sDonorDlgData.bOxidantCheck;
+    m_sPrintDataStruct.bPHCheck = m_sDonorDlgData.bPHCheck;
+    m_sPrintDataStruct.bNitriteCheck = m_sDonorDlgData.bNitriteCheck;
+    m_sPrintDataStruct.bCreatinineCheck = m_sDonorDlgData.bCreatinineCheck;
 
 
 
@@ -469,16 +469,16 @@ DetectorPageUserData CDetectorPage::GetUserData()
 {
     // 获取用户表格数据
     m_sDetectorPageUserDataStruct.strDonorFirstName
-            = m_pDonorDetailsDlg->GetDlgData().strDonorFN;
+            = m_sDonorDlgData.strDonorFN;
     m_sDetectorPageUserDataStruct.strDonorLastName
-            = m_pDonorDetailsDlg->GetDlgData().strDonorLN;
+            = m_sDonorDlgData.strDonorLN;
 
     m_sDetectorPageUserDataStruct.qTestDateTime
-            = QDateTime(m_pDonorDetailsDlg->GetDlgData().qTestDate, m_pDonorDetailsDlg->GetDlgData().qTestTime);
+            = QDateTime(m_sDonorDlgData.qTestDate, m_sDonorDlgData.qTestTime);
     qDebug() << "m_sDetectorPageUserDataStruct.qTestDateTime = " << m_sDetectorPageUserDataStruct.qTestDateTime;
-    m_sDetectorPageUserDataStruct.qBirthDate = m_pDonorDetailsDlg->GetDlgData().qBirthDate;
-    m_sDetectorPageUserDataStruct.strDonorID = m_pDonorDetailsDlg->GetDlgData().strDonorID;
-    m_sDetectorPageUserDataStruct.strTestSite = m_pDonorDetailsDlg->GetDlgData().strTestingSite;
+    m_sDetectorPageUserDataStruct.qBirthDate = m_sDonorDlgData.qBirthDate;
+    m_sDetectorPageUserDataStruct.strDonorID = m_sDonorDlgData.strDonorID;
+    m_sDetectorPageUserDataStruct.strTestSite = m_sDonorDlgData.strTestingSite;
     //
 //    if(m_pReasonForTestWidget->GetCurrentSelectText() == "Other")
 //    {
@@ -493,22 +493,22 @@ DetectorPageUserData CDetectorPage::GetUserData()
     //if(gk_iVersionConfig == PIS_VERSION)
     {
 
-        m_sDetectorPageUserDataStruct.bOxidant = m_pDonorDetailsDlg->GetDlgData().bOxidantCheck;
-        m_sDetectorPageUserDataStruct.bPH = m_pDonorDetailsDlg->GetDlgData().bPHCheck;
-        m_sDetectorPageUserDataStruct.bNitrite = m_pDonorDetailsDlg->GetDlgData().bNitriteCheck;
-        m_sDetectorPageUserDataStruct.bCreatinine = m_pDonorDetailsDlg->GetDlgData().bCreatinineCheck;
+        m_sDetectorPageUserDataStruct.bOxidant = m_sDonorDlgData.bOxidantCheck;
+        m_sDetectorPageUserDataStruct.bPH = m_sDonorDlgData.bPHCheck;
+        m_sDetectorPageUserDataStruct.bNitrite = m_sDonorDlgData.bNitriteCheck;
+        m_sDetectorPageUserDataStruct.bCreatinine = m_sDonorDlgData.bCreatinineCheck;
     }
 
-    m_sDetectorPageUserDataStruct.bTemperatureNormal = m_pDonorDetailsDlg->GetDlgData().bTemperatureinRangeYesCheck;
-    m_sDetectorPageUserDataStruct.strEmail = m_pDonorDetailsDlg->GetDlgData().strEmail;
-    m_sDetectorPageUserDataStruct.strAddress = m_pDonorDetailsDlg->GetDlgData().strAddress;
+    m_sDetectorPageUserDataStruct.bTemperatureNormal = m_sDonorDlgData.bTemperatureinRangeYesCheck;
+    m_sDetectorPageUserDataStruct.strEmail = m_sDonorDlgData.strEmail;
+    m_sDetectorPageUserDataStruct.strAddress = m_sDonorDlgData.strAddress;
 
     // product details
-    m_sDetectorPageUserDataStruct.strProductDefinition = m_pProduceDetailsDlg->GetDlgData().strCupTyle;
-    m_sDetectorPageUserDataStruct.strProductLot = m_pProduceDetailsDlg->GetDlgData().strProductLot;
+    m_sDetectorPageUserDataStruct.strProductDefinition = m_sProductDlgData.strCupTyle;
+    m_sDetectorPageUserDataStruct.strProductLot = m_sProductDlgData.strProductLot;
     m_sDetectorPageUserDataStruct.strExpriationDate
-            = m_pProduceDetailsDlg->GetDlgData().qExpirationDate.toString("yyyy-MM-dd");
-    m_sDetectorPageUserDataStruct.strProductID = m_pProduceDetailsDlg->GetDlgData().strProductID;
+            = m_sProductDlgData.qExpirationDate.toString("yyyy-MM-dd");
+    m_sDetectorPageUserDataStruct.strProductID = m_sProductDlgData.strProductID;
     //
     m_sDetectorPageUserDataStruct.iProgramsNumber = m_sQRCodeInfoStruct.iProgramCount;
     // username
@@ -692,12 +692,21 @@ void CDetectorPage::_InitLayout()
 void CDetectorPage::_SlotOpenDonorDetailsDlg()
 {
     m_pDonorDetailsDlg->ReSetTestTime();
-    m_pDonorDetailsDlg->show();
+
+    if(m_pDonorDetailsDlg->exec() == QDialog::Accepted)
+    {
+        m_sDonorDlgData = m_pDonorDetailsDlg->GetDlgData();
+        qDebug() << "donor data copy";
+    }
 }
 
 void CDetectorPage::_SlotOpenProduceDetailsDlg()
 {
-
+    if(m_pProduceDetailsDlg->exec() == QDialog::Accepted)
+    {
+        m_sProductDlgData = m_pProduceDetailsDlg->GetDlgData();
+        qDebug() << "product data copy";
+    }
 }
 
 /**

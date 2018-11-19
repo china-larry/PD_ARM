@@ -1,6 +1,6 @@
 #include "CProduceDetailsDlg.h"
 
-CProduceDetailsDlg::CProduceDetailsDlg(QWidget *parent) : QWidget(parent)
+CProduceDetailsDlg::CProduceDetailsDlg()
 {
     _InitWidget();
     _InitLayout();

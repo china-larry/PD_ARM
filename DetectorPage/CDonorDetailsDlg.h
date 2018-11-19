@@ -6,6 +6,7 @@
 #include <QRadioButton>
 #include <QCheckBox>
 #include <QPushButton>
+#include <QDialog>
 #include "CommonDataWidget/CLabelLineEditWidget.h"
 #include "CommonDataWidget/CLabelDateWidget.h"
 #include "CommonDataWidget/CLabelDateTimeWidget.h"
@@ -36,17 +37,18 @@ struct SDonorDlgData
     bool   bNitriteCheck;
     bool   bCreatinineCheck;
 };
-class CDonorDetailsDlg : public QWidget
+class CDonorDetailsDlg : public QDialog
 {
     Q_OBJECT
 public:
-    explicit CDonorDetailsDlg(QWidget *parent = nullptr);
+    explicit CDonorDetailsDlg();
 
 signals:
 
 public slots:
 private slots:
     void _SlotOkCheck();
+    void _SlotCancelCheck();
 public:
     QString GetProductDefinitionText();
     // 数据
