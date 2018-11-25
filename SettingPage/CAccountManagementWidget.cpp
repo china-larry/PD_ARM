@@ -238,7 +238,7 @@ void CAccountManagementWidget::_SlotModifyUser()
 void CAccountManagementWidget::_InitWidget()
 {
     m_pUserTableWidget = new QTableWidget(this);
-    m_pUserTableWidget->setFixedSize(530, 280);
+    m_pUserTableWidget->setFixedSize(474, 280);
     m_pUserTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
     m_pUserTableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
     m_pUserTableWidget->setFocusPolicy(Qt::NoFocus);
@@ -271,7 +271,7 @@ void CAccountManagementWidget::_InitWidget()
     m_pDeleteButton = new QPushButton(tr("Delete"), this);
     connect(m_pDeleteButton, SIGNAL(clicked(bool)), this, SLOT(_SlotDeleteUser()));
     m_pDeleteButton->setFixedSize(130, 35);
-    m_pModifyButton = new QPushButton(tr("Modify"), this);
+    m_pModifyButton = new QPushButton(tr("Edit"), this);
     connect(m_pModifyButton, SIGNAL(clicked(bool)), this, SLOT(_SlotModifyUser()));
     m_pModifyButton->setFixedSize(130, 35);
 
@@ -522,23 +522,24 @@ void CUserAddWidget::_InitWidget()
 {
     this->setFixedSize(450, 300);
     this->setWindowFlags(Qt::CustomizeWindowHint | Qt::FramelessWindowHint);
-    m_pTitleLabel = new QLabel(tr("Add"), this);
+    SetWidgetBackColor(this, QColor(255, 255, 255));
+    m_pTitleLabel = new QLabel(tr("   Add"), this);
     m_pTitleLabel->setObjectName("m_pTitleLabel");
     m_pTitleLabel->setFixedSize(450, 40);
-    m_pTitleLabel->setAlignment(Qt::AlignCenter);
-    m_pUserNameLineEditWidget = new CLabelLineEditWidget(tr("Username"), "", this);
-    m_pUserNameLineEditWidget->SetLabelObjectName("LineLabel");
-    m_pUserNameLineEditWidget->SetLineEditFixSize(200, 25);
-    m_pPassWordLineEditWidget = new CLabelLineEditWidget(tr("Password"), "", this);
-    m_pPassWordLineEditWidget->SetLabelObjectName("LineLabel");
-    m_pPassWordLineEditWidget->SetLineEditFixSize(200, 25);
+    m_pTitleLabel->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+    m_pUserNameLineEditWidget = new CHLabelLineEditWidget(tr("Username"), "", this);
+//    m_pUserNameLineEditWidget->SetLabelObjectName("LineLabel");
+//    m_pUserNameLineEditWidget->SetLineEditFixSize(200, 25);
+    m_pPassWordLineEditWidget = new CHLabelLineEditWidget(tr("Password"), "", this);
+//    m_pPassWordLineEditWidget->SetLabelObjectName("LineLabel");
+//    m_pPassWordLineEditWidget->SetLineEditFixSize(200, 25);
     //
     m_pOkButton = new QPushButton(tr("OK"), this);
     connect(m_pOkButton, SIGNAL(clicked(bool)), this, SLOT(_SlotCheckOkButton()));
-    m_pOkButton->setFixedSize(130, 35);
+
     m_pCancleButton = new QPushButton(tr("Cancle"), this);
     connect(m_pCancleButton, SIGNAL(clicked(bool)), this, SLOT(_SlotCheckCancleButton()));
-    m_pCancleButton->setFixedSize(130, 35);
+
 }
 
 void CUserAddWidget::_InitLayout()
@@ -547,7 +548,10 @@ void CUserAddWidget::_InitLayout()
     LoadQss(this, ":/qss/SettingPage/SettingPageUserData.qss");
     QVBoxLayout *pLayout = new QVBoxLayout;
     pLayout->setMargin(0);
-    pLayout->addWidget(m_pTitleLabel);
+    QHBoxLayout *pTitleLayout = new QHBoxLayout;
+    pTitleLayout->addWidget(m_pTitleLabel);
+    pTitleLayout->addStretch(10);
+    pLayout->addLayout(pTitleLayout);
     pLayout->addSpacing(20);
     pLayout->addWidget(m_pUserNameLineEditWidget, 0, Qt::AlignHCenter);
     pLayout->addSpacing(20);
@@ -620,20 +624,15 @@ void CUserModifyWidget::_InitWidget()
 {
     this->setFixedSize(450, 350);
     this->setWindowFlags(Qt::CustomizeWindowHint | Qt::FramelessWindowHint);
-    m_pTitleLabel = new QLabel(tr("Modify"), this);
+    m_pTitleLabel = new QLabel(tr("   Modify"), this);
     m_pTitleLabel->setObjectName("m_pTitleLabel");
     m_pTitleLabel->setFixedSize(450, 40);
-    m_pTitleLabel->setAlignment(Qt::AlignCenter);
-    m_pUserNameLineEditWidget = new CLabelLineEditWidget(tr("Username"), "", this);
-    m_pUserNameLineEditWidget->SetLabelObjectName("LineLabel");
-    m_pUserNameLineEditWidget->SetLineEditFixSize(200, 25);
-    m_pUserNameLineEditWidget->setEnabled(false);
-    m_pOldPassWordLineEditWidget = new CLabelLineEditWidget(tr("Old Password"), "", this);
-    m_pOldPassWordLineEditWidget->SetLabelObjectName("LineLabel");
-    m_pOldPassWordLineEditWidget->SetLineEditFixSize(200, 25);
-    m_pPassWordLineEditWidget = new CLabelLineEditWidget(tr("New Password"), "", this);
-    m_pPassWordLineEditWidget->SetLabelObjectName("LineLabel");
-    m_pPassWordLineEditWidget->SetLineEditFixSize(200, 25);
+    m_pTitleLabel->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+    m_pUserNameLineEditWidget = new CHLabelLineEditWidget(tr("Username:"), "", this);
+    m_pUserNameLineEditWidget->SetLineEditEnable(false);
+    m_pOldPassWordLineEditWidget = new CHLabelLineEditWidget(tr("Old Password:"), "", this);
+    m_pPassWordLineEditWidget = new CHLabelLineEditWidget(tr("New Password:"), "", this);
+
     //
     m_pOkButton = new QPushButton(tr("OK"), this);
     connect(m_pOkButton, SIGNAL(clicked(bool)), this, SLOT(_SlotCheckOkButton()));
@@ -647,16 +646,21 @@ void CUserModifyWidget::_InitLayout()
 {
     // qss
     LoadQss(this, ":/qss/SettingPage/SettingPageUserData.qss");
+    QHBoxLayout *pHLaytout = new QHBoxLayout;
+    QVBoxLayout *pLineLayout = new QVBoxLayout;
+    pLineLayout->setMargin(0);
+    pLineLayout->addWidget(m_pTitleLabel);
+    pLineLayout->addSpacing(20);
+    pLineLayout->addWidget(m_pUserNameLineEditWidget);
+    pLineLayout->addSpacing(20);
+    pLineLayout->addWidget(m_pOldPassWordLineEditWidget);
+    pLineLayout->addSpacing(20);
+    pLineLayout->addWidget(m_pPassWordLineEditWidget);
+    pLineLayout->addStretch(20);
+    pHLaytout->addLayout(pLineLayout);
+    pHLaytout->addSpacing(80);
     QVBoxLayout *pLayout = new QVBoxLayout;
-    pLayout->setMargin(0);
-    pLayout->addWidget(m_pTitleLabel);
-    pLayout->addSpacing(20);
-    pLayout->addWidget(m_pUserNameLineEditWidget, 0, Qt::AlignHCenter);
-    pLayout->addSpacing(20);
-    pLayout->addWidget(m_pOldPassWordLineEditWidget, 0, Qt::AlignHCenter);
-    pLayout->addSpacing(20);
-    pLayout->addWidget(m_pPassWordLineEditWidget, 0, Qt::AlignHCenter);
-    pLayout->addStretch(20);
+    pLayout->addLayout(pHLaytout);
     //
     QHBoxLayout *pButtonLayout = new QHBoxLayout;
     pButtonLayout->addStretch(10);
@@ -697,10 +701,10 @@ void CUserDeleteWidget::_InitWidget()
 {
     this->setFixedSize(490, 230);
     this->setWindowFlags(Qt::CustomizeWindowHint | Qt::FramelessWindowHint);
-    m_pTitleLabel = new QLabel(tr("Modify"), this);
+    m_pTitleLabel = new QLabel(tr("   Delete"), this);
     m_pTitleLabel->setObjectName("m_pTitleLabel");
     m_pTitleLabel->setFixedSize(490, 40);
-    m_pTitleLabel->setAlignment(Qt::AlignCenter);
+    m_pTitleLabel->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
     //
     m_pSureLabel = new QLabel(tr("Are you sure to delete this?"), this);
     m_pSureLabel->setObjectName("LineLabel");

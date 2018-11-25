@@ -1,12 +1,47 @@
+QTableWidget
+{
+    border: 1px solid #0068b7;
+    border-radius: 3px;
+    selection-background-color: #60c8ff;
+}
+QHeaderView::section
+{
+    background-color: #161F30;
+    height:35px;
+    color: #e2e4ed;
+    font-size: 15px;
+    font-family:"Arial";
+ /*   font-weight:bold;*/
+}
+QTextEdit
+{
+    border: 1px solid #0068b7;
+    border-radius: 5px;
+    color: #3c3c3c;
+    background-color: #fff;
+    font-size: 16px;
+    font-family:"Arial";
+    padding: 0 0px;
+}
 QPushButton
 {
-    font-size: 17px;
+    min-width: 115px;
+    min-height: 35px;
+    font-size: 16px;
     font-family:"Arial";
     font-weight:bold;
     border: 0px solid #0068b7;
-    border-radius: 3px;
+    border-radius: 5px;
     color: white;
-    background-color: rgb(230, 139, 49);
+    background-color: rgb(30, 129, 255);
+}
+
+QPushButton:disabled {
+    background-color:#D5D5D5;
+    color: rgb(60, 60, 60);
+}
+QPushButton:enabled {
+    background-color: rgb(30, 129, 255);
 }
 
 QPushButton:hover{
@@ -16,13 +51,7 @@ QPushButton:hover{
 QPushButton:pressed{
         background: rgb(80, 80, 80);
 }
-/*
-QPushButton:checked{
-        background: green;
-}
-*/
-
-QLabel#LineLabel
+QLabel
 {
         font-family: "Arial";
         font-size: 18px;
@@ -31,12 +60,22 @@ QLabel#m_pTitleLabel
 {
         font-family: "Arial";
         font-size: 20px;
-        color: white;
+        color: #323232;
         background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0,
             stop: 0 #0069b9, stop: 1 #1b8ee6);
+        /*border-bottom: 3px solid qlineargradient(x1: 0, y1: 0, x2: 0.2, y2: 0,
+           stop: 0 #0069b9, stop: 0.2 #1b8ee6);*/
 }
 QLineEdit
 {
+    min-height: 25px;
+    min-width: 175px;
+    max-width:  180px;
+    color: #333; /* text color */
     font-family: "Arial";
-    font-size: 16px;
+    font-size: 17px;
+    border: 1px solid #a0a0a0;
+    padding: 0 0px;
 }
+
+

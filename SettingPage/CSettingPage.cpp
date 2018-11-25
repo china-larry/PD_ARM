@@ -19,10 +19,10 @@
 
 CSettingPage::CSettingPage(QWidget *parent) : QWidget(parent)
 {
-    _InitWidget();
-    _InitLayout();
     //应用样式 apply the qss style
     _LoadQss();
+    _InitWidget();
+    _InitLayout();    
 }
 
 
@@ -35,8 +35,8 @@ bool CSettingPage::GetAutoTestFalg()
 void CSettingPage::SetAccountHide()
 {
     qDebug() << "remov 1";
-    m_pSetTabWidget->removeTab(1);
     m_pSetTabWidget->removeTab(2);
+    m_pSetTabWidget->removeTab(3);
     this->update();
 }
 
@@ -96,17 +96,24 @@ void CSettingPage::_InitWidget()
     m_pTestModeWidget = new CTestModeWidget;
     SetWidgetBackColor(m_pTestModeWidget, QColor(240, 240, 240));
     connect(m_pTestModeWidget, &CTestModeWidget::SigConfirmTestMode, this, &CSettingPage::SignalTestMode);
-    m_pSetTabWidget = new QTabWidget(this);
-    SetWidgetBackColor(m_pSetTabWidget, QColor(240, 240, 240));
 
     m_pCUpdateSettingWidget = new CUpdateSettingWidget;
     SetWidgetBackColor(m_pCUpdateSettingWidget, QColor(240, 240, 240));
-
+    // tab
+    m_pSetTabWidget = new QTabWidget(this);
+    SetWidgetBackColor(m_pSetTabWidget, QColor(240, 240, 240));
+    /// 添加两个无效的，便于背景色
+    QLabel *pTmp01 = new QLabel();
+    QLabel *pTmp02 = new QLabel();
+    m_pSetTabWidget->addTab(pTmp01, "");
+    m_pSetTabWidget->setTabEnabled(0,false);
     m_pSetTabWidget->addTab(m_pSetupWindowsWidget, tr("Setup Window"));
     m_pSetTabWidget->addTab(m_pAccountManagementWidget, tr("Account Management"));
     m_pSetTabWidget->addTab(m_pTestModeWidget, tr("Test Mode"));
-
     m_pSetTabWidget->addTab(m_pCUpdateSettingWidget, tr("Upgrade"));
+    m_pSetTabWidget->addTab(pTmp02, "");
+    m_pSetTabWidget->setTabEnabled(5,false);
+    m_pSetTabWidget->setCurrentIndex(1);
 }
 
 void CSettingPage::_InitLayout()

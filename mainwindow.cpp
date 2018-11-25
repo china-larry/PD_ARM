@@ -671,9 +671,9 @@ void MainWindow::_InitWidget()
     QLabel *pTmp01 = new QLabel();
     QLabel *pTmp02 = new QLabel();
     m_pStackedWidget->addTab(pTmp01, "");
-    //m_pStackedWidget->setTabEnabled(4,false);
+    m_pStackedWidget->setTabEnabled(4,false);
     m_pStackedWidget->addTab(pTmp02, "");
-    //m_pStackedWidget->setTabEnabled(5,false);
+    m_pStackedWidget->setTabEnabled(5,false);
     //
     m_pStackedWidget->setCurrentIndex(0);
     // 状态栏

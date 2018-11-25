@@ -100,8 +100,8 @@ private:
 
 private:
     QLabel *m_pTitleLabel;
-    CLabelLineEditWidget *m_pUserNameLineEditWidget;
-    CLabelLineEditWidget *m_pPassWordLineEditWidget;
+    CHLabelLineEditWidget *m_pUserNameLineEditWidget;
+    CHLabelLineEditWidget *m_pPassWordLineEditWidget;
     QPushButton *m_pOkButton;
     QPushButton *m_pCancleButton;
     //
@@ -143,9 +143,9 @@ private:
     void _InitLayout();
 private:
     QLabel *m_pTitleLabel;
-    CLabelLineEditWidget *m_pUserNameLineEditWidget;
-    CLabelLineEditWidget *m_pOldPassWordLineEditWidget;
-    CLabelLineEditWidget *m_pPassWordLineEditWidget;
+    CHLabelLineEditWidget *m_pUserNameLineEditWidget;
+    CHLabelLineEditWidget *m_pOldPassWordLineEditWidget;
+    CHLabelLineEditWidget *m_pPassWordLineEditWidget;
     QPushButton *m_pOkButton;
     QPushButton *m_pCancleButton;
     //
