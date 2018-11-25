@@ -71,23 +71,20 @@ void CCalibrationPage::SetHiddenTab()
 void CCalibrationPage::_InitWidget()
 {
     // 测试代码
+    SetWidgetBackColor(this, QColor(240, 240, 240));
     m_pLabelTest = new QLabel;
     m_pStandardModelWidget = new CStandardModelWidget;
-    //SetWidgetBackColor(m_pStandardModelWidget, QColor(240, 240, 240));
+
     m_pOrdinaryModelWidget = new COrdinaryModelWidget;
-    //SetWidgetBackColor(m_pOrdinaryModelWidget, QColor(240, 240, 240));
+
     // 亮度调整
     m_pBrightnessTabWidget = new QTabWidget(this);
-    SetWidgetBackColor(m_pBrightnessTabWidget, QColor(240, 240, 240));
     m_pBrightnessTabWidget->addTab(m_pStandardModelWidget, tr("The Standard Model"));
     m_pBrightnessTabWidget->addTab(m_pOrdinaryModelWidget, tr("The Ordinary Model"));
     // 调整
     m_pCalibrationTabWidget = new QTabWidget(this);
-    SetWidgetBackColor(m_pCalibrationTabWidget, QColor(240, 240, 240));
-    m_pCalibrationTabWidget->setObjectName("m_pCalibrationTabWidget");
     m_pCalibrationTabWidget->setMinimumSize(900, 400);
     m_pCalibrationTabWidget->addTab(m_pBrightnessTabWidget, tr("Brightness Calibration"));
-    //m_pCalibratBionTabWidget->addTab(m_pLabelTest, tr("Location Calibration"));
     //
     m_pStandardMachineCalibrateDialog = new StandardMachineCalibrateDialog(this);
     m_pCalibrationTabWidget->addTab(m_pStandardMachineCalibrateDialog,tr("Standard Machine Calibration"));

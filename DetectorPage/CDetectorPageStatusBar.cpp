@@ -18,7 +18,7 @@ CDetectorPageStatusBar::CDetectorPageStatusBar(QWidget *parent) : QWidget(parent
 {
     this->setFixedSize(1024, 20);
     //this->setMinimumSize(990, 30);
-
+   // SetWidgetBackColor(this, QColor(240, 240, 240));
     _InitWidget();
     _InitLayout();
 //    this->setAutoFillBackground(true);  //自动填充背景

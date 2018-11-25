@@ -617,6 +617,7 @@ void MainWindow::SlotAutoConnectPoct(bool bAuto)
   */
 void MainWindow::_InitWidget()
 {
+//    SetWidgetBackColor(this, QColor(0x161F30));
     // 标题栏
     m_pDetectorPageTitleWidget = new CDetectorPageTitleWidget(this);
     m_pHistoryPageTitleWidget = new CHistoryPageTitleWidget(this);
@@ -687,7 +688,7 @@ void MainWindow::_InitLayout()
     m_pMainLayout->setMargin(0);
     m_pMainLayout->addWidget(m_pDetectorPageTitleWidget);
     m_pMainLayout->addWidget(m_pStackedWidget);
-   // m_pMainLayout->addStretch(1);
+
     // 布局
     m_pCentralWidget = new QWidget();
     setCentralWidget(m_pCentralWidget);
