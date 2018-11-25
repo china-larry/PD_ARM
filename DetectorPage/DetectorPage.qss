@@ -114,27 +114,28 @@ QCheckBox::indicator::checked {
 }
 QComboBox
 {
-    min-height: 25px;
+    min-height: 21px;
     min-width: 177px;
+    max-width: 180px;
     color: #333; /* text color */
     font-family: "Arial";
-    font-size: 16px;
+    font-size: 14px;
 }
 
 QTableWidget
 {
     border: 1px solid #0068b7;
     border-radius: 3px;
-    selection-background-color:#eeeeee;
+    selection-background-color: #60c8ff;
 }
 QHeaderView::section
 {
-    background-color: rgb(22, 31, 48);
+    background-color: #161F30;
     height:35px;
-    color: white;
-    font-size: 14px;
+    color: #e2e4ed;
+    font-size: 15px;
     font-family:"Arial";
-    font-weight:300;
+ /*   font-weight:bold;*/
 }
 QPushButton
 {

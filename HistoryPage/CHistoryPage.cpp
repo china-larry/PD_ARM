@@ -43,6 +43,7 @@ CHistoryPage::CHistoryPage(QWidget *parent) : QWidget(parent)
     m_iResultIndexCount = 7;
     m_iMaxTestResult = 16;
     //
+    _CreateQueryConditionGroup();
     _InitHistoryTableWidget();
     _InitTestDataWidget();
     _InitButtonWidget();
@@ -842,31 +843,14 @@ void CHistoryPage::_LoadQss()
   */
 void CHistoryPage::_CreateQueryConditionGroup()
 {  //
-    m_pDonorIDWidget = new CLabelLineEditWidget(tr("Donor ID"), "", this);
-    m_pDonorIDWidget->SetLabelObjectName("m_pDonorIDWidget");
-    m_pProductLotWidget = new CLabelLineEditWidget(tr("Product Lot"), "", this);
-    //
-    m_pBeginDataWidget = new CLabelDateWidget(tr("Begin Date"), QDate::currentDate(), this);
-    m_pEndDataWidget = new CLabelDateWidget(tr("End Date"), QDate::currentDate(), this);
+    m_pQueryConditionLabel = new QLabel(tr("Query Condition"), this);
+    m_pQueryConditionLabel->setObjectName("m_pQueryConditionLabel");
+    m_pDonorIDWidget = new CHLabelLineEditWidget(tr("Donor ID:"), "", this);
 
-    // subject
-    QHBoxLayout *pDonorLayout = new QHBoxLayout;
-    pDonorLayout->addSpacing(19);
-    pDonorLayout->addWidget(m_pDonorIDWidget);
-    pDonorLayout->addWidget(m_pProductLotWidget);
-    pDonorLayout->addWidget(m_pBeginDataWidget);
-    pDonorLayout->addWidget(m_pBeginToEndLabel);
-    pDonorLayout->addWidget(m_pEndDataWidget);
-    pDonorLayout->addSpacing(19);
+    m_pProductLotWidget = new CHLabelLineEditWidget(tr("Product Lot:"), "", this);
     //
-    QHBoxLayout *pDefinitionLayout = new QHBoxLayout;
-    pDefinitionLayout->addSpacing(19);
-    pDefinitionLayout->addWidget(m_pProductDefinitionWidget);
-    pDefinitionLayout->addStretch(50);
-    //
-    QVBoxLayout *pLayout = new QVBoxLayout;
-    pLayout->addLayout(pDonorLayout);
-    pLayout->addLayout(pDefinitionLayout);
+    m_pBeginDataWidget = new CLabelDateWidget(tr("Begin Date:"), QDate::currentDate(), this);
+    m_pEndDataWidget = new CLabelDateWidget(tr("End Date:"), QDate::currentDate(), this);
 }
 /**
   * @brief 初始化Table控件
@@ -892,9 +876,9 @@ void CHistoryPage::_InitHistoryTableWidget()
     QHeaderView *pHeaderView = m_pHistoryDataTableWidget->horizontalHeader();
     //pHeaderView->setDefaultSectionSize(110);
     pHeaderView->resizeSection(0, 0);
-    pHeaderView->resizeSection(1, 80);
-    pHeaderView->resizeSection(2, 70);
-    pHeaderView->resizeSection(3, 140);
+    pHeaderView->resizeSection(1, 115);
+    pHeaderView->resizeSection(2, 85);
+    pHeaderView->resizeSection(3, 170);
     pHeaderView->setHighlightSections(false);
     pHeaderView->setDisabled(true);
     // 充满表格
@@ -924,7 +908,7 @@ void CHistoryPage::_InitHistoryTableWidget()
 void CHistoryPage::_InitTestDataWidget()
 {
     m_pTestDataTextEdit = new QTextEdit(this);
-    m_pTestDataTextEdit->setFixedSize(335, 235);
+    m_pTestDataTextEdit->setFixedSize(335, 120);
     m_pTestDataTextEdit->setReadOnly(true);
 
     m_pCurrentTestDataTableWidget = new QTableWidget(this);
@@ -975,31 +959,45 @@ void CHistoryPage::_InitButtonWidget()
 
 void CHistoryPage::_InitLayout()
 {
-    QVBoxLayout *pLayout = new QVBoxLayout;
+    // condition
+    QHBoxLayout *pDonorLayout = new QHBoxLayout;
+    pDonorLayout->setMargin(5);
+    QGridLayout *pButtonGridLayout = new QGridLayout;
+    pButtonGridLayout->setMargin(5);
+    pButtonGridLayout->addWidget(m_pDonorIDWidget, 0, 0 , 1, 1);
+    pButtonGridLayout->addWidget(m_pProductLotWidget, 0, 1 , 1, 1);
+    pButtonGridLayout->addWidget(m_pBeginDataWidget, 1, 0 , 1, 1);
+    pButtonGridLayout->addWidget(m_pEndDataWidget, 1, 1 , 1, 1);
+    pDonorLayout->addLayout(pButtonGridLayout);
+    pDonorLayout->addSpacing(65);
+    pDonorLayout->addWidget(m_pQueryButton);
+    pDonorLayout->addSpacing(50);
 
+    // 整体布局
+    QVBoxLayout *pLayout = new QVBoxLayout;
+    pLayout->setMargin(2);
+    QHBoxLayout *pQueryLayout = new QHBoxLayout;
+    pQueryLayout->addSpacing(20);
+    pQueryLayout->addWidget(m_pQueryConditionLabel);
+    pQueryLayout->addStretch(100);
+    pLayout->addLayout(pQueryLayout);
+    pLayout->addLayout(pDonorLayout);
+    // 表格
     QHBoxLayout *pDataLayout = new QHBoxLayout;
     QVBoxLayout *pTestDataLayout = new QVBoxLayout;
     pTestDataLayout->setMargin(0);
     pTestDataLayout->addWidget(m_pCurrentTestDataTableWidget);
     pTestDataLayout->addWidget(m_pTestDataTextEdit);
-    // 第一行
     pDataLayout->addSpacing(18);
     pDataLayout->addWidget(m_pHistoryDataTableWidget);
     pDataLayout->addLayout(pTestDataLayout);
     pDataLayout->addSpacing(18);
     //
     pLayout->addLayout(pDataLayout);
-    // group
-    QHBoxLayout *pQueryLayout = new QHBoxLayout;
-    pQueryLayout->addSpacing(18);
 
-    pQueryLayout->addSpacing(18);
-    pLayout->addLayout(pQueryLayout);
-    //
+    // 按键
     QHBoxLayout *pButtonLayout = new QHBoxLayout;
     pButtonLayout->addStretch(10);
-    pButtonLayout->addWidget(m_pQueryButton);
-    pButtonLayout->addSpacing(10);
     pButtonLayout->addWidget(m_pSelectAllButton);
     pButtonLayout->addSpacing(10);
     pButtonLayout->addWidget(m_pDeselectAllButton);

@@ -166,8 +166,9 @@ private:
     // 当前选择行的测试结果
     QList<QStringList> m_qTestDataList;
     // query condition
-    CLabelLineEditWidget *m_pDonorIDWidget;
-    CLabelLineEditWidget *m_pProductLotWidget;
+    QLabel *m_pQueryConditionLabel;
+    CHLabelLineEditWidget *m_pDonorIDWidget;
+    CHLabelLineEditWidget *m_pProductLotWidget;
     CLabelDateWidget *m_pBeginDataWidget;
     QLabel *m_pBeginToEndLabel;// 中划线
     CLabelDateWidget *m_pEndDataWidget;
