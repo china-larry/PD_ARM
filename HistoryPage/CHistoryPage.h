@@ -108,7 +108,7 @@ public:
     // Main窗口设置测试结果
     void SetTestResultDataList(QList<TestResultData*> pTestResultDataList, QString strPrintImagePath);
     void SetTestUserData(DetectorPageUserData sDetectorPageUserDataStruct);
-    void SetCupType(QStringList strCupTypeList);
+
     // 切换到历史数据，显示当天测试数据
     void ShowCurrentDateTest();
     // 将测试页获取的数据插入数据库
@@ -128,7 +128,7 @@ public:
 
 private:
     void _LoadQss();
-    QGroupBox *_CreateQueryConditionGroup();
+    void _CreateQueryConditionGroup();
     void _InitHistoryTableWidget();
     void _InitTestDataWidget();// 测试明细数据
     void _InitButtonWidget();

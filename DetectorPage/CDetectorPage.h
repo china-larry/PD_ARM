@@ -37,7 +37,6 @@
 #include "DetectorPage/CProduceDetailsDlg.h"
 struct SPrintData
 {
-    QString strCupTyle;
     QString strDonorFN;
     QString strDonorLN;
     QString strOperatorID;
@@ -113,7 +112,6 @@ public:
     QList<TestResultData*> GetTestResultData();// 获得测试结果
     DetectorPageUserData GetUserData(); // 获得被测者信息
     QString GetTestPrintImagePath();// 获取需要打印的图片路径
-    void SetCupType(QStringList strCupTypeList);// 设置杯类型
     void StopTest();// 主动停止测试，关闭UI
     void SetAutoTest(bool bAutoTest);
     int GetAutoTestTimes();//

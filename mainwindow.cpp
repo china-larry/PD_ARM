@@ -744,16 +744,12 @@ void MainWindow::_ReadConfigFile()
         {
             QJsonObject qJsonObject = qJsonDoc.object();//取得最外层这个大对象
                 //这里放代码，对json数据进行取值
-            QJsonArray qCupArray = qJsonObject["cup_type"].toArray();
-            QStringList strCupList;
-            foreach(QJsonValue qJsonValue, qCupArray)
-            {
-                strCupList.push_back(qJsonValue.toString());
-            }
-            qDebug() << " cup type " << strCupList;
-            // 设置控件
-            m_pDetectorPage->SetCupType(strCupList);
-            m_pHistoryPage->SetCupType(strCupList);
+//            QJsonArray qCupArray = qJsonObject["cup_type"].toArray();
+//            QStringList strCupList;
+//            foreach(QJsonValue qJsonValue, qCupArray)
+//            {
+//                strCupList.push_back(qJsonValue.toString());
+//            }
         }
         else
         {

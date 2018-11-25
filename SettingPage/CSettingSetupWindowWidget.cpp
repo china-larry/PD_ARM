@@ -407,18 +407,8 @@ QGroupBox *CSettingSetupWindowWidget::_CreateServerGroup()
 
     pGroupBox->setLayout(pLayout);
 
-//    if(gk_iVersionConfig != PIS_VERSION)
-//    {
-//        m_pPisLabel->setVisible(false);
-//        m_pPisServerIPLabel->setVisible(false);
-//        m_pPisIP01LineEdit->setVisible(false);
-//        m_pPisIP02LineEdit->setVisible(false);
-//        m_pPisIP03LineEdit->setVisible(false);
-//        m_pPisIP04LineEdit->setVisible(false);
-//        m_pPisServerPortLabel->setVisible(false);
-//        m_pPisServerPortLineEdit->setVisible(false);
-//        m_pPisAutoConnectCBox->setVisible(false);
-//    }
+
+
     return pGroupBox;
 }
 
@@ -564,7 +554,7 @@ void CSettingSetupWindowWidget::_InitLayout()
 
     QGroupBox *qReportTitleGroup = _CreateReportTitleGroup();
     qReportTitleGroup->hide();
-    if(gk_iVersionConfig == WONDFO_VERSION)
+    if(gk_iVersionConfig == NORMAL_VERSION)
     {
         pGridLayout->addWidget(qReportTitleGroup,1,0,1,1);
         qReportTitleGroup->show();

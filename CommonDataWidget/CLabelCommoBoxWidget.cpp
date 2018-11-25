@@ -76,8 +76,9 @@ void CLabelCommoBoxWidget::AddItemText(QString strText)
 
 void CLabelCommoBoxWidget::_InitLayout()
 {
-    QVBoxLayout *pLayout = new QVBoxLayout;
+    QHBoxLayout *pLayout = new QHBoxLayout;
     pLayout->setMargin(0);
+    pLayout->addStretch(1);
     pLayout->addWidget(m_pLabel);
     pLayout->addWidget(m_pComboBox);
     this->setLayout(pLayout);

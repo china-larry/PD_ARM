@@ -43,8 +43,7 @@ void CDonorDetailsDlg::_SlotOkCheck()
         QMessageBox::information(NULL, tr("Tip"), tr("Please Input Valid Email Address!"), QMessageBox::Ok , QMessageBox::Ok);
         return;
     }
-    // PIS
-    //if(gk_iVersionConfig == PIS_VERSION)
+
     {
         if(!m_pOxidantRButton->isChecked())
         {
@@ -103,7 +102,7 @@ void CDonorDetailsDlg::_SlotOkCheck()
 
 void CDonorDetailsDlg::_SlotCancelCheck()
 {
-
+    this->reject();
 }
 
 SDonorDlgData CDonorDetailsDlg::GetDlgData()
@@ -129,7 +128,7 @@ void CDonorDetailsDlg::ClearData()
     m_pTestTimeWidget->SetDateTime(QDateTime::currentDateTime());
     m_pTestingSiteWidget->SetLineText("");
     //
-    //if(gk_iVersionConfig == PIS_VERSION)
+
     {
         m_pOxidantRButton->setChecked(false);
 
@@ -211,7 +210,6 @@ void CDonorDetailsDlg::_InitWidget()
 void CDonorDetailsDlg::_InitLayout()
 {
     // 布局
-    // 布局
     QHBoxLayout *pDonorLayout = new QHBoxLayout;
     pDonorLayout->addSpacing(9);
     pDonorLayout->addWidget(m_pTempInRangeLabel);
@@ -251,7 +249,6 @@ void CDonorDetailsDlg::_InitLayout()
     // adulterants
     QHBoxLayout *pAdulterantsLayout = NULL;
     //QGridLayout *pOxidantLayout = NULL;
-    //if(gk_iVersionConfig == PIS_VERSION)
    // {
     pAdulterantsLayout = new QHBoxLayout;
     //pOxidantLayout = new QGridLayout;

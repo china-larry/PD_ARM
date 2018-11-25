@@ -22,11 +22,11 @@ void CPrintPreviewTitleWidget::_InitWidget()
     // logo
     m_pLogoLabel = new QLabel(this);
     m_pLogoLabel->setFixedSize(172, 50);
-    if(gk_iVersionConfig == PIS_VERSION)
+    if(gk_iVersionConfig == ADMIN_VERSION)
     {
         m_pLogoLabel->setPixmap(QPixmap(":/image/ico/title/PIS_logo.png"));
     }
-    else if(gk_iVersionConfig == MD_VERSION)
+    else if(gk_iVersionConfig == OTHER_VERSION)
     {
         m_pLogoLabel->setPixmap(QPixmap(":/image/ico/title/MD_logo.png"));
     }

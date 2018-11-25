@@ -150,32 +150,7 @@ void CDetectorPage::SlotReceiveQRCodeInfo(QRCodeInfo sQRCodeInfoStruct)
 //        QMessageBox::information(NULL, tr("Tip"), tr("Expiry Date!"), QMessageBox::Ok , QMessageBox::Ok);
 
 //        return;
-//    }
-    // 检查杯型
-    if(gk_strTCupTypeList.contains(m_pProduceDetailsDlg->GetProductDefinitionText()))
-    {// 圆杯
-        if(sQRCodeInfoStruct.eTypeCup != TypeTCup)
-        {
-            _SlotStopTest();
-            QMessageBox::warning(NULL, "warning", tr("Please select the correct Product Definition"), QMessageBox::Ok, QMessageBox::Ok);
-            return;
-        }
-    }
-    else if(gk_strTCubeTypeList.contains(m_sProductDlgData.strCupTyle))
-    {// 方杯
-        if(sQRCodeInfoStruct.eTypeCup != TypeSCup10)
-        {
-            _SlotStopTest();
-             QMessageBox::warning(NULL, "warning", tr("Please select the correct Product Definition"), QMessageBox::Ok, QMessageBox::Ok);
-             return;
-        }
-    }
-    else
-    {
-        _SlotStopTest();
-         QMessageBox::warning(NULL, "warning", tr("Please select the correct Product Definition"), QMessageBox::Ok, QMessageBox::Ok);
-         return;
-    }
+//    }  
 
     // 更新控件
     if(m_sQRCodeInfoStruct.iProductLot.isEmpty() == false)
@@ -248,8 +223,6 @@ void CDetectorPage::SlotEndTest()
     m_sPrintDataStruct.bTemperatureinRangeNoCheck
             = m_sDonorDlgData.bTemperatureinRangeNoCheck;
 
-    m_sPrintDataStruct.strCupTyle
-            = m_sProductDlgData.strCupTyle;
     m_sPrintDataStruct.strDonorFN
             = m_sDonorDlgData.strDonorFN;
     m_sPrintDataStruct.strDonorLN
@@ -489,22 +462,17 @@ DetectorPageUserData CDetectorPage::GetUserData()
 //        m_sDetectorPageUserDataStruct.strOtherReasonComments = m_pReasonForTestWidget->GetCurrentSelectText();
 //    }
 
-    // PIS
-    //if(gk_iVersionConfig == PIS_VERSION)
-    {
-
         m_sDetectorPageUserDataStruct.bOxidant = m_sDonorDlgData.bOxidantCheck;
         m_sDetectorPageUserDataStruct.bPH = m_sDonorDlgData.bPHCheck;
         m_sDetectorPageUserDataStruct.bNitrite = m_sDonorDlgData.bNitriteCheck;
         m_sDetectorPageUserDataStruct.bCreatinine = m_sDonorDlgData.bCreatinineCheck;
-    }
+
 
     m_sDetectorPageUserDataStruct.bTemperatureNormal = m_sDonorDlgData.bTemperatureinRangeYesCheck;
     m_sDetectorPageUserDataStruct.strEmail = m_sDonorDlgData.strEmail;
     m_sDetectorPageUserDataStruct.strAddress = m_sDonorDlgData.strAddress;
 
     // product details
-    m_sDetectorPageUserDataStruct.strProductDefinition = m_sProductDlgData.strCupTyle;
     m_sDetectorPageUserDataStruct.strProductLot = m_sProductDlgData.strProductLot;
     m_sDetectorPageUserDataStruct.strExpriationDate
             = m_sProductDlgData.qExpirationDate.toString("yyyy-MM-dd");
@@ -557,11 +525,6 @@ void CDetectorPage::_InitTableWidget()
     m_pResultsTableWidget->setShowGrid(true);
 
 
-}
-
-void CDetectorPage::SetCupType(QStringList strCupTypeList)
-{
-    m_pProduceDetailsDlg->SetCupType(strCupTypeList);
 }
 
 void CDetectorPage::StopTest()
@@ -848,8 +811,7 @@ void CDetectorPage::_ReplaceCubeHtmlData(QString &strHtml)
     strFindWord = "${TemperatureinRangeNoCheck}";
     strHtml = strHtml.replace(strHtml.indexOf(strFindWord),
                               strFindWord.count(), m_sPrintDataStruct.bTemperatureinRangeNoCheck ? "checked" : "");
-    // PIS
-    //if(gk_iVersionConfig == PIS_VERSION)
+
     {
         strFindWord = "${OxidantCheck}";
         strHtml = strHtml.replace(strHtml.indexOf(strFindWord),
@@ -1055,7 +1017,6 @@ void CDetectorPage::SlotReceiveProjectName(QString strCupType,QString strProject
     QStringList strProjectNameList = strProjectName.split(";");
     QVector<QStringList> qProjectRestlt;
 
-    m_pProduceDetailsDlg->SetCurrentType(strCupType);
     for(int i = 0;i < strProjectNameList.count();i++)
     {
 //        qDebug() << "Project = " << strProjectNameList.at(i);

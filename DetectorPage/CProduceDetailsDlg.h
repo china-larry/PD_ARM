@@ -10,7 +10,6 @@
 #include "CommonDataWidget/CLabelCommoBoxWidget.h"
 struct SProductDlgData
 {
-    QString strCupTyle;
     QString strProductID;
     QString strProductLot;
     QDate  qExpirationDate;
@@ -26,14 +25,13 @@ signals:
 public slots:
 private slots:
     void _SlotOkCheck();
+    void _SlotCancelCheck();
 public:
-    QString GetProductDefinitionText();
+
 
     void SetProdectLotText(QString strLotText);
     void SetExpirationDate(QDate qDate);
     void SetProductID(QString strID);
-    void SetCupType(QStringList strCupTypeList);
-    void SetCurrentType(QString strCupType);
     // 数据
     SProductDlgData GetDlgData();
     void ClearData();// 清除所有data
@@ -42,14 +40,18 @@ private:
     void _InitWidget();
     void _InitLayout();
 private:
+    QLabel *m_pProductDetailsLabel;
     // Product Details
     QStringList m_strCupTypeList;// 杯类型数据
     CLabelCommoBoxWidget *m_pProductDefinitionWidget;
-    CLabelLineEditWidget *m_pProductLotWidget;
+    CHLabelLineEditWidget *m_pProductLotWidget;
     // expiration date
 //    CLabelLineEditWidget *m_pExpirationWidget;
     CLabelDateWidget *m_pExpirationWidget;
-    CLabelLineEditWidget *m_pProductIDWidget;
+    CHLabelLineEditWidget *m_pProductIDWidget;
+    // button
+    QPushButton *m_pOkButton;
+    QPushButton *m_pCancelButton;
     //
     SProductDlgData m_sProductDlgData;
 };

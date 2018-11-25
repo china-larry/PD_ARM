@@ -1,22 +1,29 @@
 #include "CProduceDetailsDlg.h"
-
+#include <QMessageBox>
+#include <QLayout>
+#include "PublicFunction.h"
 CProduceDetailsDlg::CProduceDetailsDlg()
 {
+    this->setFixedSize(485, 385);
+    this->setWindowFlags(Qt::FramelessWindowHint);
+    LoadQss(this, ":/qss/DetectorPage/DetectorPage.qss");
+    SetWidgetBackColor(this, QColor(255, 255, 255));
     _InitWidget();
     _InitLayout();
 }
 
 void CProduceDetailsDlg::_SlotOkCheck()
 {
-    m_sProductDlgData.strCupTyle = m_pProductDefinitionWidget->GetCurrentSelectText();
     m_sProductDlgData.strProductID = m_pProductIDWidget->GetLineText();
     m_sProductDlgData.strProductLot = m_pProductLotWidget->GetLineText();
     m_sProductDlgData.qExpirationDate = m_pExpirationWidget->GetDate();
+    //
+    this->accept();
 }
 
-QString CProduceDetailsDlg::GetProductDefinitionText()
+void CProduceDetailsDlg::_SlotCancelCheck()
 {
-    return m_pProductDefinitionWidget->GetCurrentSelectText();
+    this->reject();
 }
 
 void CProduceDetailsDlg::SetProdectLotText(QString strLotText)
@@ -34,17 +41,6 @@ void CProduceDetailsDlg::SetProductID(QString strID)
     m_pProductIDWidget->SetLineText(strID);
 }
 
-void CProduceDetailsDlg::SetCupType(QStringList strCupTypeList)
-{
-    m_strCupTypeList = strCupTypeList;
-    m_pProductDefinitionWidget->SetCupType(strCupTypeList);
-}
-
-void CProduceDetailsDlg::SetCurrentType(QString strCupType)
-{
-    m_pProductDefinitionWidget->SetCurrentText(strCupType);
-}
-
 SProductDlgData CProduceDetailsDlg::GetDlgData()
 {
     return m_sProductDlgData;
@@ -52,7 +48,6 @@ SProductDlgData CProduceDetailsDlg::GetDlgData()
 
 void CProduceDetailsDlg::ClearData()
 {
-    m_pProductDefinitionWidget->SetCurrentIndex(0);
     m_pProductLotWidget->SetLineText("");
     m_pExpirationWidget->SetDate(QDate::currentDate());
     m_pProductIDWidget->SetLineText("");
@@ -60,18 +55,54 @@ void CProduceDetailsDlg::ClearData()
 
 void CProduceDetailsDlg::_InitWidget()
 {
-    // 杯类型
-    m_pProductDefinitionWidget = new CLabelCommoBoxWidget(tr("Product Definition"), m_strCupTypeList, this);
-    m_pProductLotWidget = new CLabelLineEditWidget(tr("Product Lot"), "", this);
+    //
+    m_pProductDetailsLabel = new QLabel(tr("Product Details"), this);
+    m_pProductDetailsLabel->setObjectName("m_pDonorDetailsLabel");
+    m_pProductLotWidget = new CHLabelLineEditWidget(tr("Product Lot"), "", this);
     //m_pProductLotWidget->SetLineTextEnable(false);
     //
     m_pExpirationWidget = new CLabelDateWidget(tr("Expiration Date"), QDate::currentDate(), this);
     //m_pExpirationWidget->SetLineTextEnable(false);
-    m_pProductIDWidget = new CLabelLineEditWidget(tr("Product ID"), "", this);
+    m_pProductIDWidget = new CHLabelLineEditWidget(tr("Product ID"), "", this);
     //m_pProductIDWidget->SetLineTextEnable(false);
+    //
+    m_pOkButton = new QPushButton(tr("OK"), this);
+    m_pOkButton->setFixedSize(120, 35);
+    connect(m_pOkButton, &QPushButton::clicked, this, &CProduceDetailsDlg::_SlotOkCheck);
+    m_pCancelButton = new QPushButton(tr("Cancel"), this);
+    m_pCancelButton->setFixedSize(120, 35);
+    connect(m_pCancelButton, &QPushButton::clicked, this, &CProduceDetailsDlg::_SlotCancelCheck);
 }
 
 void CProduceDetailsDlg::_InitLayout()
 {
+    QHBoxLayout *pButtonLayout = new QHBoxLayout;
+    pButtonLayout->addStretch(100);
+    pButtonLayout->addWidget(m_pOkButton);
+    pButtonLayout->addSpacing(40);
+    pButtonLayout->addWidget(m_pCancelButton);
+    pButtonLayout->addStretch(100);
 
+    QVBoxLayout *pLayout = new QVBoxLayout;
+    pLayout->setMargin(28);
+    pLayout->addWidget(m_pProductDetailsLabel);
+    pLayout->addSpacing(30);
+
+    QHBoxLayout *pHLayout = new QHBoxLayout;
+    QVBoxLayout *pInfoLayout = new QVBoxLayout;
+    pInfoLayout->addWidget(m_pProductLotWidget);
+    pInfoLayout->addStretch(1);
+    pInfoLayout->addWidget(m_pExpirationWidget);
+    pInfoLayout->addStretch(1);
+    pInfoLayout->addWidget(m_pProductIDWidget);
+    pHLayout->addLayout(pInfoLayout);
+    pHLayout->addSpacing(80);
+
+
+    pLayout->addLayout(pHLayout);
+    pLayout->addSpacing(40);
+    pLayout->addLayout(pButtonLayout);
+    pLayout->addSpacing(5);
+
+    this->setLayout(pLayout);
 }

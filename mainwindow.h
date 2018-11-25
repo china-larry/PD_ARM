@@ -79,6 +79,7 @@ private:
     void _GoHistoryPageLayout();// 前往历史页面布局（标题栏显示）
     void _GoTestPageLayout();// 前往测试页面布局（标题栏显示）
     void _ReadConfigFile();// 读取配置文件
+    void _Ts();
 private:
     // UI
     Ui::MainWindow *ui;
