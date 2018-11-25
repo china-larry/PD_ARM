@@ -42,10 +42,6 @@ public slots:
 protected slots:
     void showEvent(QShowEvent *);
 private slots:
-//    void _PisIP01TextChange();
-//    void _PisIP02TextChange();
-//    void _PisIP03TextChange();
-//    void _PisIP04TextChange();
     //
     void _PoctIP01TextChange();
     void _PoctIP02TextChange();
@@ -54,13 +50,9 @@ private slots:
     void _SlotPoctServerPortLineEditChage();
     void _SlotOKButton();
     void _SlotCancel();
-//    void _SlotPisAutoConnectBox(bool IsCheck);
-//    void _SlotPoctAutoConnectBox(bool IsCheck);
+
 public:
-    //
-//    QString GetPisServer(); // 返回PIS服务器
-//    int GetPisPort();// 获取端口
-    QString GetPoctServer();// 返回POCT服务器
+    QString GetPoctServer();// 返回服务器
     int GetPoctPort();//
 private:
     QGroupBox *_CreateServerGroup();
@@ -78,16 +70,6 @@ private:
     void _SaveConfigDate();
 
 private:
-    // server
-//    QLabel *m_pPisLabel;
-//    QLabel *m_pPisServerIPLabel;
-//    QLabel *m_pPisServerPortLabel;
-//    QLineEdit *m_pPisIP01LineEdit;
-//    QLineEdit *m_pPisIP02LineEdit;
-//    QLineEdit *m_pPisIP03LineEdit;
-//    QLineEdit *m_pPisIP04LineEdit;
-//    QLineEdit *m_pPisServerPortLineEdit;
-//    QCheckBox *m_pPisAutoConnectCBox;
     //
     QLabel *m_pPoctLabel;
     QLabel *m_pPoctServerIPLabel;
@@ -102,6 +84,10 @@ private:
     QRadioButton *m_pEnglishRButton;
     QRadioButton *m_pSpainRButton;
     // about
+    QWidget *pPointWidget01;
+    QWidget *pPointWidget02;
+    QWidget *pPointWidget03;
+    QWidget *pPointWidget04;
     QLabel *m_pSoftwareReleaseLabel;
     QLabel *m_pSoftwareFullLabel;
     QLabel *m_pFirmewareLabel;

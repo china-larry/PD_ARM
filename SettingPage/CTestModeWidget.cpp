@@ -119,13 +119,13 @@ bool CTestModeWidget::GetAutoTestFlag()
 QGroupBox *CTestModeWidget::_CreateModeGroup()
 {
     QGroupBox *pGroupBox = new QGroupBox(this);
-    pGroupBox->setFixedSize(570, 251);
+    pGroupBox->setFixedSize(450, 251);
     //
     m_pStandardModeRButton = new QRadioButton(tr("Standard Mode"), this);
     m_pStandardModeRButton->setChecked(false);
     m_pIncubatingTimeLineEditWidget =
             new CHLabelLineEditWidget(tr("Incubating time "), "", this);
-    m_pIncubatingTimeLineEditWidget->SetLineEditFixSize(50, 20);
+    m_pIncubatingTimeLineEditWidget->SetLineEditFixSize(88, 30);
     m_pIncubatingTimeLineEditWidget->SetLineValidator(1, 30);
     m_pIncubatingTimeLineEditWidget->SetLineText("5");// 默认5分钟
     m_pMinutesLabel = new QLabel(tr("Minutes"));
@@ -138,23 +138,23 @@ QGroupBox *CTestModeWidget::_CreateModeGroup()
 
     // standard
     QHBoxLayout *pStandardLayout = new QHBoxLayout;
-    pStandardLayout->addSpacing(150);
+    pStandardLayout->addSpacing(80);
     pStandardLayout->addWidget(m_pStandardModeRButton);
     pStandardLayout->addStretch(100);
     // time
     QHBoxLayout *pTimeLayout = new QHBoxLayout;
-    pTimeLayout->addSpacing(180);
+    pTimeLayout->addSpacing(110);
     pTimeLayout->addWidget(m_pIncubatingTimeLineEditWidget);
     pTimeLayout->addWidget(m_pMinutesLabel);
     pTimeLayout->addStretch(100);
     // express
     QHBoxLayout *pExpressLayout = new QHBoxLayout;
-    pExpressLayout->addSpacing(150);
+    pExpressLayout->addSpacing(80);
     pExpressLayout->addWidget(m_pExpressModeRButton);
     pExpressLayout->addStretch(100);
     // auto
     QHBoxLayout *pAutoLayout = new QHBoxLayout;
-    pAutoLayout->addSpacing(150);
+    pAutoLayout->addSpacing(80);
     pAutoLayout->addWidget(m_pAutoRunTestCButton);
     pAutoLayout->addStretch(100);
 
@@ -177,7 +177,7 @@ QGroupBox *CTestModeWidget::_CreateModeGroup()
 
 void CTestModeWidget::_InitWiget()
 {
-    m_pConfirmButton = new QPushButton(tr("Confirm"), this);
+    m_pConfirmButton = new QPushButton(tr("OK"), this);
     connect(m_pConfirmButton, SIGNAL(clicked(bool)), this, SLOT(_SlotConfirm()));
     m_pConfirmButton->setFixedSize(130, 35);
     m_pCancelButton = new QPushButton(tr("Cancel"), this);

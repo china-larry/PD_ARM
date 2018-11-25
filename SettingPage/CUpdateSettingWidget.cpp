@@ -29,30 +29,67 @@ CUpdateSettingWidget::~CUpdateSettingWidget()
 
 void CUpdateSettingWidget::_InitWiget()
 {
-    QGroupBox *pGroupBox = new QGroupBox(tr("Device Serial Number"),this);
-    pGroupBox->setFixedSize(300,250);
+
+    QGroupBox *pDeviceGroupBox = new QGroupBox(tr("Device Serial Number"),this);
+    pDeviceGroupBox->setFixedSize(380,250);
+
+    m_pSetDevSerialNumberButton = new QPushButton(tr("Set SerNum"),this);
+    m_pSetDevSerialNumberButton->setFixedSize(188, 35);
+    connect(m_pSetDevSerialNumberButton,SIGNAL(clicked(bool)),this,SLOT(_SlotSetSerialNum()));
 
 
-    QGroupBox *pUpdateGroupBox = new QGroupBox(tr("Upgrade"),this);
-    pUpdateGroupBox->setFixedSize(300,250);
+
+    m_pReadDevSerialNumberButton = new QPushButton(tr("Read SerNum"),this);
+    m_pReadDevSerialNumberButton->setFixedSize(188, 35);
+    connect(m_pReadDevSerialNumberButton,SIGNAL(clicked(bool)),this,SLOT(_SlotReadSerialNum()));
+
+
+    m_pDevSerialNumberLabel = new QLabel(tr("SerialNo."),this);
+    m_pDevSerialNumberLabel->setFixedSize(75,35);
+    m_pDevSerialNumberLineEdit = new QLineEdit(tr("1234567890"),this);
+    m_pDevSerialNumberLineEdit->setFixedSize(188, 35);
+    QRegExp regx("[0-9]+$");
+    QValidator *validator = new QRegExpValidator(regx, m_pDevSerialNumberLineEdit );
+    m_pDevSerialNumberLineEdit->setValidator( validator );
+
+    QHBoxLayout *pHLayout = new QHBoxLayout;
+    pHLayout->addSpacing(4);
+    pHLayout->addWidget(m_pDevSerialNumberLabel);
+    pHLayout->addSpacing(1);
+    pHLayout->addWidget(m_pDevSerialNumberLineEdit);
+    pHLayout->addStretch(1);
+
+    QVBoxLayout *pLayout = new QVBoxLayout;
+
+    pLayout->addSpacing(40);
+    pLayout->addWidget(m_pSetDevSerialNumberButton,0,Qt::AlignCenter);
+    pLayout->addSpacing(20);
+    pLayout->addWidget(m_pReadDevSerialNumberButton,0,Qt::AlignCenter);
+    pLayout->addSpacing(20);
+    pLayout->addLayout(pHLayout);
+    pLayout->addStretch(1);
+    pDeviceGroupBox->setLayout(pLayout);
+    //////
+    QGroupBox *pUpdateGroupBox = new QGroupBox(tr("Upgrade                      "),this);
+    pUpdateGroupBox->setFixedSize(380,250);
 
     m_pUpdateButton = new QPushButton(tr("Upgrade"),this);
     connect(m_pUpdateButton, SIGNAL(clicked(bool)), this, SLOT(_SlotMachineUpdate()));
-    m_pUpdateButton->setFixedSize(200, 35);
+    m_pUpdateButton->setFixedSize(188, 35);
 
     m_pSetDevTestCountClearButton = new QPushButton(tr("Clear Test Count"),this);
     connect(m_pSetDevTestCountClearButton, SIGNAL(clicked(bool)), this, SLOT(_SLotClearTestCount()));
-    m_pSetDevTestCountClearButton->setFixedSize(200, 35);
+    m_pSetDevTestCountClearButton->setFixedSize(188, 35);
 
 
 
     QVBoxLayout *pUpdateLayout = new QVBoxLayout;
 
-    pUpdateLayout->addStretch(5);
+    pUpdateLayout->addSpacing(40);
     pUpdateLayout->addWidget(m_pUpdateButton,0,Qt::AlignCenter);
-    pUpdateLayout->addSpacing(30);
+    pUpdateLayout->addSpacing(20);
     pUpdateLayout->addWidget(m_pSetDevTestCountClearButton,0,Qt::AlignCenter);
-    pUpdateLayout->addSpacing(50);
+    pUpdateLayout->addStretch(1);
 
     pUpdateGroupBox->setLayout(pUpdateLayout);
 
@@ -66,43 +103,13 @@ void CUpdateSettingWidget::_InitWiget()
 //    m_pReadDevParamsButton->setFixedSize(200, 35);
 //    m_pReadDevParamsButton->setVisible(false);
 
-    m_pSetDevSerialNumberButton = new QPushButton(tr("Set SerNum"),this);
-    connect(m_pSetDevSerialNumberButton,SIGNAL(clicked(bool)),this,SLOT(_SlotSetSerialNum()));
-    m_pSetDevSerialNumberButton->setFixedSize(200, 35);
 
-
-    m_pReadDevSerialNumberButton = new QPushButton(tr("Read SerNum"),this);
-    connect(m_pReadDevSerialNumberButton,SIGNAL(clicked(bool)),this,SLOT(_SlotReadSerialNum()));
-    m_pReadDevSerialNumberButton->setFixedSize(200, 35);
-
-
-    m_pDevSerialNumberLabel = new QLabel(tr("SerialNo."),this);
-    m_pDevSerialNumberLabel->setFixedSize(60,35);
-    m_pDevSerialNumberLineEdit = new QLineEdit(tr("1234567890"),this);
-    m_pDevSerialNumberLineEdit->setFixedSize(100, 35);
-    QRegExp regx("[0-9]+$");
-    QValidator *validator = new QRegExpValidator(regx, m_pDevSerialNumberLineEdit );
-    m_pDevSerialNumberLineEdit->setValidator( validator );
-
-    QHBoxLayout *pHLayout = new QHBoxLayout;
-    pHLayout->addWidget(m_pDevSerialNumberLabel);
-    pHLayout->addWidget(m_pDevSerialNumberLineEdit);
-
-    QVBoxLayout *pLayout = new QVBoxLayout;
-
-    pLayout->addStretch(15);
-    pLayout->addWidget(m_pSetDevSerialNumberButton,0,Qt::AlignCenter);
-    pLayout->addSpacing(15);
-    pLayout->addWidget(m_pReadDevSerialNumberButton,0,Qt::AlignCenter);
-    pLayout->addSpacing(30);
-    pLayout->addLayout(pHLayout);
-    pGroupBox->setLayout(pLayout);
 
 
 
     QHBoxLayout *pAllHLayout = new QHBoxLayout;
     pAllHLayout->addSpacing(50);
-    pAllHLayout->addWidget(pGroupBox,0,Qt::AlignCenter);
+    pAllHLayout->addWidget(pDeviceGroupBox,0,Qt::AlignCenter);
     pAllHLayout->addSpacing(10);
     pAllHLayout->addWidget(pUpdateGroupBox,0,Qt::AlignCenter);
     pAllHLayout->addSpacing(50);

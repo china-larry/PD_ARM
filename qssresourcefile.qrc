@@ -32,5 +32,6 @@
         <file>ico/title/Return.jpg</file>
         <file>ico/title/logo.png</file>
         <file>ico/login/login_bg.png</file>
+        <file>ico/setting/circle.png</file>
     </qresource>
 </RCC>

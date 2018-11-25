@@ -51,38 +51,6 @@ void CSettingSetupWindowWidget::showEvent(QShowEvent *)
     CHidCmdThread::GetInstance()->AddCmdWithoutCmdData(ProtocolUtility::sm_kiCmdReadTestCount);
 }
 
-//void CSettingSetupWindowWidget::_PisIP01TextChange()
-//{
-//    if(m_pPisIP01LineEdit->text().toInt() > 25)
-//    {
-//        m_pPisIP02LineEdit->setFocus();
-//    }
-//}
-
-//void CSettingSetupWindowWidget::_PisIP02TextChange()
-//{
-//    if(m_pPisIP02LineEdit->text().toInt() > 25)
-//    {
-//        m_pPisIP03LineEdit->setFocus();
-//    }
-//}
-
-//void CSettingSetupWindowWidget::_PisIP03TextChange()
-//{
-//    if(m_pPisIP03LineEdit->text().toInt() > 25)
-//    {
-//        m_pPisIP04LineEdit->setFocus();
-//    }
-//}
-
-//void CSettingSetupWindowWidget::_PisIP04TextChange()
-//{
-//    if(m_pPisIP04LineEdit->text().toInt() > 25)
-//    {
-//        m_pPisServerPortLineEdit->setFocus();
-//    }
-//}
-
 void CSettingSetupWindowWidget::_PoctIP01TextChange()
 {
     if(m_pPoctIP01LineEdit->text().length() > 0)
@@ -190,17 +158,6 @@ void CSettingSetupWindowWidget::_SlotPoctServerPortLineEditChage()
 
 void CSettingSetupWindowWidget::_SlotOKButton()
 {
-    //connect(m_pOKButton, &QPushButton::clicked),this,
-    //connect(m_pOKButton, &QPushButton::clicked, this, &CSettingSetupWindowWidget::SignalAutoConnetPis);
-//    if(m_pPisAutoConnectCBox->isChecked())
-//    {
-//        emit SignalAutoConnetPis(true);
-//    }
-//    else
-//    {
-        //emit SignalAutoConnetPoct(true);
-//    }
-
     if(m_pPoctAutoConnectCBox->isChecked())
     {
         emit SignalAutoConnetPoct(true);
@@ -220,63 +177,27 @@ void CSettingSetupWindowWidget::_SlotCancel()
   */
 QGroupBox *CSettingSetupWindowWidget::_CreateServerGroup()
 {
-    QGroupBox *pGroupBox = new QGroupBox(tr("Server Configuration"), this);
-    pGroupBox->setFixedSize(515, 200);
-    // PIS
-//    m_pPisLabel = new QLabel(tr("PIS"), this);
-//    m_pPisLabel->setObjectName("PISTitle");
-//    m_pPisServerIPLabel = new QLabel(tr("PIS Server IP"), this);
-//    m_pPisServerPortLabel = new QLabel(tr("PIS Server Port"), this);
-//    //
-//    m_pPisIP01LineEdit = new QLineEdit(this);
-//    m_pPisIP01LineEdit->setMaximumSize(60, 21);
-//    m_pPisIP02LineEdit = new QLineEdit(this);
-//    m_pPisIP02LineEdit->setMaximumSize(60, 21);
-//    m_pPisIP03LineEdit = new QLineEdit(this);
-//    m_pPisIP03LineEdit->setMaximumSize(60, 21);
-//    m_pPisIP04LineEdit = new QLineEdit(this);
-//    m_pPisIP04LineEdit->setMaximumSize(60, 21);
-//    m_pPisServerPortLineEdit = new QLineEdit(this);
-//    m_pPisServerPortLineEdit->setFixedSize(120, 21);
-//    m_pPisAutoConnectCBox = new QCheckBox(tr("PIS Auto Connected"), this);
-//    connect(m_pPisAutoConnectCBox, &QCheckBox::clicked, this, &CSettingSetupWindowWidget::_SlotPisAutoConnectBox);
-//    m_pPisIP01LineEdit->setValidator(new QIntValidator(0, 255, this));
-//    m_pPisIP02LineEdit->setValidator(new QIntValidator(0, 255, this));
-//    m_pPisIP03LineEdit->setValidator(new QIntValidator(0, 255, this));
-//    m_pPisIP04LineEdit->setValidator(new QIntValidator(0, 255, this));
-//    m_pPisServerPortLineEdit->setValidator(new QIntValidator(0, 65535, this));
-//    //
-//    connect(m_pPisIP01LineEdit, &QLineEdit::textChanged, this, &CSettingSetupWindowWidget::_PisIP01TextChange);
-//    connect(m_pPisIP02LineEdit, &QLineEdit::textChanged, this, &CSettingSetupWindowWidget::_PisIP02TextChange);
-//    connect(m_pPisIP03LineEdit, &QLineEdit::textChanged, this, &CSettingSetupWindowWidget::_PisIP03TextChange);
-//    connect(m_pPisIP04LineEdit, &QLineEdit::textChanged, this, &CSettingSetupWindowWidget::_PisIP04TextChange);
+    QGroupBox *pGroupBox = new QGroupBox(tr("Server Configuration    "), this);
+    pGroupBox->setFixedSize(430, 190);
     //
-    // POCT
-    m_pPoctLabel = new QLabel(tr("POCT"), this);
-    m_pPoctLabel->setObjectName("PISTitle");
-    m_pPoctServerIPLabel = new QLabel(tr("POCT Server IP"), this);
-    m_pPoctServerPortLabel = new QLabel(tr("POCT Server Port"), this);
+    m_pPoctServerIPLabel = new QLabel(tr("Server IP:"), this);
+    m_pPoctServerPortLabel = new QLabel(tr("Server Port:"), this);
     //
     m_pPoctIP01LineEdit = new QLineEdit(this);
-    m_pPoctIP01LineEdit->setFixedSize(60, 21);
+    m_pPoctIP01LineEdit->setFixedSize(48, 30);
     m_pPoctIP02LineEdit = new QLineEdit(this);
-    m_pPoctIP02LineEdit->setFixedSize(60, 21);
+    m_pPoctIP02LineEdit->setFixedSize(48, 30);
     m_pPoctIP03LineEdit = new QLineEdit(this);
-    m_pPoctIP03LineEdit->setFixedSize(60, 21);
+    m_pPoctIP03LineEdit->setFixedSize(48, 30);
     m_pPoctIP04LineEdit = new QLineEdit(this);
-    m_pPoctIP04LineEdit->setFixedSize(60, 21);
+    m_pPoctIP04LineEdit->setFixedSize(48, 30);
     m_pPoctServerPortLineEdit = new QLineEdit(this);
-    m_pPoctServerPortLineEdit->setFixedSize(120, 21);
-    m_pPoctAutoConnectCBox = new QCheckBox(tr("POCT Auto Connected"), this);
+    m_pPoctServerPortLineEdit->setFixedSize(58, 36);
+    m_pPoctAutoConnectCBox = new QCheckBox(tr("Auto Connected"), this);
+    m_pPoctAutoConnectCBox->setFixedSize(190, 35);
     //connect(m_pPoctAutoConnectCBox, &QCheckBox::clicked, this, &CSettingSetupWindowWidget::_SlotPoctAutoConnectBox);
     m_pPoctAutoConnectCBox->setChecked(true);
     //
-
-//    QString ValidatorType = "[0-9]\d{1,2}";
-//    QRegExp regx(ValidatorType);
-//    QValidator *validator = new QRegExpValidator(regx, m_pPoctIP01LineEdit );
-//    m_pPoctIP01LineEdit->setValidator( validator );
-
     m_pPoctIP01LineEdit->setValidator(new QIntValidator(0, 65535, this));
     m_pPoctIP02LineEdit->setValidator(new QIntValidator(0, 65535, this));
     m_pPoctIP03LineEdit->setValidator(new QIntValidator(0, 65535, this));
@@ -287,9 +208,6 @@ QGroupBox *CSettingSetupWindowWidget::_CreateServerGroup()
     connect(m_pPoctIP03LineEdit, &QLineEdit::textChanged, this, &CSettingSetupWindowWidget::_PoctIP03TextChange);
     connect(m_pPoctIP04LineEdit, &QLineEdit::textChanged, this, &CSettingSetupWindowWidget::_PoctIP04TextChange);
     connect(m_pPoctServerPortLineEdit, &QLineEdit::textChanged, this, &CSettingSetupWindowWidget::_SlotPoctServerPortLineEditChage);
-
-
-
     // 方便测试
 //    m_pPoctIP01LineEdit->setText("192");
 //    m_pPoctIP02LineEdit->setText("168");
@@ -299,123 +217,48 @@ QGroupBox *CSettingSetupWindowWidget::_CreateServerGroup()
     //
     QVBoxLayout *pLayout = new QVBoxLayout;
     pLayout->setMargin(0);
-
-    // poct
-    QHBoxLayout *pPoctLayout = new QHBoxLayout;
-    pPoctLayout->addSpacing(15);
-    pPoctLayout->addWidget(m_pPoctLabel);
-    pPoctLayout->addStretch(100);
-
-    pLayout->addSpacing(40);
-    pLayout->addLayout(pPoctLayout);
-    pLayout->addSpacing(7);
-    // server ip
-    QHBoxLayout *pPoctServerIPLabelLayout = new QHBoxLayout;
-    pPoctServerIPLabelLayout->addSpacing(15);
-    pPoctServerIPLabelLayout->addWidget(m_pPoctServerIPLabel);
-    pPoctServerIPLabelLayout->addStretch(100);
     // ip edit
-    QHBoxLayout *pPoctServerEditLayout = new QHBoxLayout;
-    pPoctServerEditLayout->setMargin(0);
-    pPoctServerEditLayout->addSpacing(15);
-    pPoctServerEditLayout->addWidget(m_pPoctIP01LineEdit);
-    pPoctServerEditLayout->addSpacing(3);
-    pPoctServerEditLayout->addWidget(m_pPoctIP02LineEdit);
-    pPoctServerEditLayout->addSpacing(3);
-    pPoctServerEditLayout->addWidget(m_pPoctIP03LineEdit);
-    pPoctServerEditLayout->addSpacing(3);
-    pPoctServerEditLayout->addWidget(m_pPoctIP04LineEdit);
-    pPoctServerEditLayout->addStretch(10);
-
-    QVBoxLayout *pPoctServerIPLayout = new QVBoxLayout;
-    pPoctServerIPLayout->addLayout(pPoctServerIPLabelLayout);
-    pPoctServerIPLayout->addSpacing(5);
-    pPoctServerIPLayout->addLayout(pPoctServerEditLayout);
+    QHBoxLayout *pEditLayout = new QHBoxLayout;
+    pEditLayout->setMargin(0);
+    pEditLayout->addSpacing(28);
+    pEditLayout->addWidget(m_pPoctServerIPLabel);
+    pEditLayout->addSpacing(8);
+    pEditLayout->addWidget(m_pPoctIP01LineEdit);
+    pEditLayout->addSpacing(3);
+    pEditLayout->addWidget(m_pPoctIP02LineEdit);
+    pEditLayout->addSpacing(3);
+    pEditLayout->addWidget(m_pPoctIP03LineEdit);
+    pEditLayout->addSpacing(3);
+    pEditLayout->addWidget(m_pPoctIP04LineEdit);
+    pEditLayout->addStretch(10);
     // port
-    QVBoxLayout *pPoctServerPortLayout = new QVBoxLayout;
-    pPoctServerPortLayout->addWidget(m_pPoctServerPortLabel);
-    pPoctServerPortLayout->addWidget(m_pPoctServerPortLineEdit);
-    //
-    QHBoxLayout *pPoctServerLayout = new QHBoxLayout;
-    pPoctServerLayout->addLayout(pPoctServerIPLayout);
-    pPoctServerLayout->addSpacing(70);// ip 和port之间间距
-    pPoctServerLayout->addLayout(pPoctServerPortLayout);
-    pPoctServerLayout->addStretch(10);
-    pLayout->addLayout(pPoctServerLayout);
-    pLayout->addSpacing(5);
+    QHBoxLayout *pPortLayout = new QHBoxLayout;
+    pPortLayout->addSpacing(10);
+    pPortLayout->addWidget(m_pPoctServerPortLabel);
+    pPortLayout->addSpacing(8);
+    pPortLayout->addWidget(m_pPoctServerPortLineEdit);
+    pPortLayout->addStretch(1);
     // auto conn
-     QHBoxLayout *pPoctAutoConnectLayout = new QHBoxLayout;
-     pPoctAutoConnectLayout->addSpacing(15);
-    pPoctAutoConnectLayout->addWidget(m_pPoctAutoConnectCBox);
-    pPoctAutoConnectLayout->addStretch(100);
-    pLayout->addLayout(pPoctAutoConnectLayout);
-
+     QHBoxLayout *pAutoConnectLayout = new QHBoxLayout;
+     pAutoConnectLayout->addStretch(1);
+    pAutoConnectLayout->addWidget(m_pPoctAutoConnectCBox);
+    pAutoConnectLayout->addStretch(1);
     //
-    pLayout->addStretch(100);
-
-//    // pis
-//    QHBoxLayout *pPisLayout = new QHBoxLayout;
-//    pPisLayout->addSpacing(15);
-//    pPisLayout->addWidget(m_pPisLabel);
-//    pPisLayout->addStretch(100);
-
-//    pLayout->addLayout(pPisLayout);
-//    pLayout->addSpacing(7);
-//    // server ip
-//    QHBoxLayout *pPisServerIPLabelLayout = new QHBoxLayout;
-//    pPisServerIPLabelLayout->addSpacing(15);
-//    pPisServerIPLabelLayout->addWidget(m_pPisServerIPLabel);
-//    pPisServerIPLabelLayout->addStretch(100);
-//    // ip edit
-//    QHBoxLayout *pPisServerEditLayout = new QHBoxLayout;
-//    pPisServerEditLayout->setMargin(0);
-//    pPisServerEditLayout->addSpacing(15);
-//    pPisServerEditLayout->addWidget(m_pPisIP01LineEdit);
-//    pPisServerEditLayout->addSpacing(3);
-//    pPisServerEditLayout->addWidget(m_pPisIP02LineEdit);
-//    pPisServerEditLayout->addSpacing(3);
-//    pPisServerEditLayout->addWidget(m_pPisIP03LineEdit);
-//    pPisServerEditLayout->addSpacing(3);
-//    pPisServerEditLayout->addWidget(m_pPisIP04LineEdit);
-//    pPisServerEditLayout->addStretch(10);
-
-//    QVBoxLayout *pPisServerIPLayout = new QVBoxLayout;
-//    pPisServerIPLayout->addLayout(pPisServerIPLabelLayout);
-//    pPisServerIPLayout->addSpacing(5);
-//    pPisServerIPLayout->addLayout(pPisServerEditLayout);
-//    // port
-//    QVBoxLayout *pPisServerPortLayout = new QVBoxLayout;
-//    pPisServerPortLayout->addWidget(m_pPisServerPortLabel);
-//    pPisServerPortLayout->addWidget(m_pPisServerPortLineEdit);
-//    //
-//    QHBoxLayout *pPisServerLayout = new QHBoxLayout;
-//    pPisServerLayout->addLayout(pPisServerIPLayout);
-//    pPisServerLayout->addSpacing(70);// ip 和port之间间距
-//    pPisServerLayout->addLayout(pPisServerPortLayout);
-//    pPisServerLayout->addStretch(10);
-//    pLayout->addLayout(pPisServerLayout);
-//    pLayout->addSpacing(5);
-//    // auto conn
-//     QHBoxLayout *pPisAutoConnectLayout = new QHBoxLayout;
-//     pPisAutoConnectLayout->addSpacing(15);
-//    pPisAutoConnectLayout->addWidget(m_pPisAutoConnectCBox);
-//    pPisAutoConnectLayout->addStretch(100);
-//    pLayout->addLayout(pPisAutoConnectLayout);
-
-//    //
-//    pLayout->addSpacing(40);
+    pLayout->addSpacing(35);
+    pLayout->addLayout(pEditLayout);
+    pLayout->addLayout(pPortLayout);
+    pLayout->addLayout(pAutoConnectLayout);
+    pLayout->addSpacing(10);
 
     pGroupBox->setLayout(pLayout);
-
-
 
     return pGroupBox;
 }
 
 QGroupBox *CSettingSetupWindowWidget::_CreateReportTitleGroup()
 {
-    QGroupBox *pGroupBox = new QGroupBox(tr("Report Title"), this);
-    pGroupBox->setFixedSize(515, 216);
+    QGroupBox *pGroupBox = new QGroupBox(tr("Report Title               "), this);
+    pGroupBox->setFixedSize(430, 180);
     //
     m_pReportTitleDefaultButton = new QRadioButton(tr("Default"), this);
 
@@ -436,11 +279,11 @@ QGroupBox *CSettingSetupWindowWidget::_CreateReportTitleGroup()
     pLayout->addSpacing(100);
 
     QVBoxLayout *pVboxLayout = new QVBoxLayout;
-    pVboxLayout->addSpacing(50);
+    pVboxLayout->setMargin(30);
+    pVboxLayout->addSpacing(20);
     pVboxLayout->addWidget(m_pReportTitleDefaultButton);
     pVboxLayout->addSpacing(30);
     pVboxLayout->addLayout(pLayout);
-    pVboxLayout->addSpacing(40);
 
     pGroupBox->setLayout(pVboxLayout);
 
@@ -454,8 +297,8 @@ QGroupBox *CSettingSetupWindowWidget::_CreateReportTitleGroup()
   */
 QGroupBox *CSettingSetupWindowWidget::_CreateLanguageGroup()
 {
-    QGroupBox *pGroupBox = new QGroupBox(tr("Language"), this);
-    pGroupBox->setFixedSize(400, 200);
+    QGroupBox *pGroupBox = new QGroupBox(tr("Language                 "), this);
+    pGroupBox->setFixedSize(430, 130);
     //
     m_pEnglishRButton = new QRadioButton(tr("English"), this);
     m_pEnglishRButton->setChecked(true);
@@ -479,8 +322,21 @@ QGroupBox *CSettingSetupWindowWidget::_CreateLanguageGroup()
   */
 QGroupBox *CSettingSetupWindowWidget::_CreateAboutGroup()
 {
-    QGroupBox *pGroupBox = new QGroupBox(tr("About"), this);
-    pGroupBox->setFixedSize(400, 216);
+    QGroupBox *pGroupBox = new QGroupBox(tr("About                        "), this);
+    pGroupBox->setFixedSize(430, 236);
+    // point
+    pPointWidget01 = new QWidget(this);
+    pPointWidget01->setFixedSize(8, 8);
+    SetWidgetBackImage(pPointWidget01, ":/image/ico/setting/circle.png");
+    pPointWidget02 = new QWidget(this);
+    pPointWidget02->setFixedSize(8, 8);
+    SetWidgetBackImage(pPointWidget02, ":/image/ico/setting/circle.png");
+    pPointWidget03 = new QWidget(this);
+    pPointWidget03->setFixedSize(8, 8);
+    SetWidgetBackImage(pPointWidget03, ":/image/ico/setting/circle.png");
+    pPointWidget04 = new QWidget(this);
+    pPointWidget04->setFixedSize(8, 8);
+    SetWidgetBackImage(pPointWidget04, ":/image/ico/setting/circle.png");
     //
     m_pSoftwareReleaseLabel = new QLabel(tr("  Software Version:"), this);
     m_pSoftwareFullLabel = new QLabel(tr("  Software Full Version:"), this);
@@ -503,16 +359,21 @@ QGroupBox *CSettingSetupWindowWidget::_CreateAboutGroup()
     m_pUserTimesLabelValue->setObjectName("AboutGroupLabel");
 
     QGridLayout *pLayout = new QGridLayout;
+    pLayout->setMargin(35);
     //pLayout->addSpacing(15);
-    pLayout->addWidget(m_pSoftwareReleaseLabel,0,0,1,1);
-    pLayout->addWidget(m_pSoftwareFullLabel,1,0,1,1);
-    pLayout->addWidget(m_pFirmewareLabel,2,0,1,1);
-    pLayout->addWidget(m_pUserTimesLabel,3,0,1,1);
+    pLayout->addWidget(pPointWidget01,0,0,1,1);
+    pLayout->addWidget(m_pSoftwareReleaseLabel,0,1,1,1);
+    pLayout->addWidget(pPointWidget02,1,0,1,1);
+    pLayout->addWidget(m_pSoftwareFullLabel,1,1,1,1);
+    pLayout->addWidget(pPointWidget03,2,0,1,1);
+    pLayout->addWidget(m_pFirmewareLabel,2,1,1,1);
+    pLayout->addWidget(pPointWidget04,3,0,1,1);
+    pLayout->addWidget(m_pUserTimesLabel,3,1,1,1);
 
-    pLayout->addWidget(m_pSoftwareReleaseLabelValue,0,1,1,1);
-    pLayout->addWidget(m_pSoftwareFullLabelValue,1,1,1,1);
-    pLayout->addWidget(m_pFirmewareLabelValue,2,1,1,1);
-    pLayout->addWidget(m_pUserTimesLabelValue,3,1,1,1);
+    pLayout->addWidget(m_pSoftwareReleaseLabelValue,0,2,1,1);
+    pLayout->addWidget(m_pSoftwareFullLabelValue,1,2,1,1);
+    pLayout->addWidget(m_pFirmewareLabelValue,2,2,1,1);
+    pLayout->addWidget(m_pUserTimesLabelValue,3,2,1,1);
 
     pGroupBox->setLayout(pLayout);
     return pGroupBox;
@@ -539,30 +400,19 @@ void CSettingSetupWindowWidget::_InitLayout()
     // qss
     LoadQss(this, ":/qss/SettingPage/SettingPage.qss");
     //
-//    QVBoxLayout *pRLayout = new QVBoxLayout;
-//    pRLayout->addSpacing(40);
-//    pRLayout->addWidget(_CreateLanguageGroup());
-//    pRLayout->addSpacing(10);
-//    pRLayout->addWidget(_CreateAboutGroup());
-//   // pRLayout->addSpacing(35);
-//    QHBoxLayout *pHLayout = new QHBoxLayout;
-//    pHLayout->addWidget(_CreateServerGroup());
-//    pHLayout->addLayout(pRLayout);
-//    //
-    QGridLayout *pGridLayout = new QGridLayout;
-    pGridLayout->addWidget(_CreateServerGroup(), 0, 0, 1, 1);
-
-    QGroupBox *qReportTitleGroup = _CreateReportTitleGroup();
-    qReportTitleGroup->hide();
-    if(gk_iVersionConfig == NORMAL_VERSION)
-    {
-        pGridLayout->addWidget(qReportTitleGroup,1,0,1,1);
-        qReportTitleGroup->show();
-    }
-
-    pGridLayout->addWidget(_CreateLanguageGroup(), 0, 1, 1, 1);
-    pGridLayout->addWidget(_CreateAboutGroup(), 1, 1, 1, 1);
+    QVBoxLayout *pLeftLayout = new QVBoxLayout;
+    pLeftLayout->setMargin(1);
+    pLeftLayout->addWidget(_CreateServerGroup());
+    pLeftLayout->addWidget(_CreateReportTitleGroup());
+    QVBoxLayout *pRightLayout = new QVBoxLayout;
+    pRightLayout->setMargin(1);
+    pRightLayout->addWidget(_CreateLanguageGroup());
+    pRightLayout->addWidget(_CreateAboutGroup());
     //
+    QHBoxLayout *pGroupLayout = new QHBoxLayout;
+    pGroupLayout->addLayout(pLeftLayout);
+    pGroupLayout->addLayout(pRightLayout);
+    // button
     QHBoxLayout *pButtonLayout = new QHBoxLayout;
     pButtonLayout->addStretch(100);
     pButtonLayout->addWidget(m_pOKButton);
@@ -572,7 +422,7 @@ void CSettingSetupWindowWidget::_InitLayout()
 
     QVBoxLayout *pLayout = new QVBoxLayout;
     pLayout->addStretch(1);
-    pLayout->addLayout(pGridLayout);
+    pLayout->addLayout(pGroupLayout);
     pLayout->addStretch(1);
     pLayout->addLayout(pButtonLayout);
     pLayout->addSpacing(20);
@@ -760,17 +610,6 @@ void CSettingSetupWindowWidget::_SaveConfigDate()
     }
 }
 
-//QString CSettingSetupWindowWidget::GetPisServer()
-//{
-//    m_strPisServer = m_pPisIP01LineEdit->text() + "." + m_pPisIP02LineEdit->text() + "."
-//            + m_pPisIP03LineEdit->text() + "." + m_pPisIP04LineEdit->text();
-//    return m_strPisServer;
-//}
-
-//int CSettingSetupWindowWidget::GetPisPort()
-//{
-//    return m_pPisServerPortLineEdit->text().toInt();
-//}
 
 QString CSettingSetupWindowWidget::GetPoctServer()
 {
@@ -783,29 +622,3 @@ int CSettingSetupWindowWidget::GetPoctPort()
 {
     return m_pPoctServerPortLineEdit->text().toInt();
 }
-
-//void CSettingSetupWindowWidget::_SlotPisAutoConnectBox(bool IsCheck)
-//{
-//    qDebug() << "_SlotPisAutoConnectBox IsCheck = " << IsCheck;
-//    if(IsCheck)
-//    {
-//        m_pPoctAutoConnectCBox->setChecked(false);
-//    }
-//    else
-//    {
-//        m_pPoctAutoConnectCBox->setChecked(true);
-//    }
-//}
-
-//void CSettingSetupWindowWidget::_SlotPoctAutoConnectBox(bool IsCheck)
-//{
-//    qDebug() << "_SlotPoctAutoConnectBox = " << IsCheck;
-//    if(IsCheck)
-//    {
-//        m_pPisAutoConnectCBox->setChecked(false);
-//    }
-//    else
-//    {
-//        m_pPisAutoConnectCBox->setChecked(true);
-//    }
-//}
