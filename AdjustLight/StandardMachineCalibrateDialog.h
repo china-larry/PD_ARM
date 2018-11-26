@@ -36,7 +36,6 @@ struct StandardMachineCalibrateParams
     qint16  iRightGreenLightValueMin;   //右绿灯光最小值
     qint16  iRightGreenLightValueMax;   //右绿灯光最大值
     qint16  iRightGreenLightValueStep;  //右绿灯光步进亮度
-    qint16  iCapType;                   //杯型
     qint16  iSignalLightValueTestCount; //单个灯光测试次数
 };
 

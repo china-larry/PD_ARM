@@ -9,6 +9,7 @@
 #include "AdjustLight/CHidCmdThread.h"
 #include "AdjustLight/HidOpertaionUtility.h"
 #include "AdjustLight/ProtocolUtility.h"
+#include "PublicFunction.h"
 
 int MotorLocationCalibration::iUpWightLight = 0;
 bool MotorLocationCalibration::sm_bIsConfirm = false;
@@ -32,6 +33,7 @@ MotorLocationCalibration::MotorLocationCalibration(QWidget *parent) :
     bIsscal = false;
     qLabelVideoPreview.setMinimumSize(1024,768);
     //qLabelVideoPreview.setPixmap(qPixmap);
+    SetWidgetBackColor(ui->qVideoPreview, QColor(255, 255, 255));
     ui->qVideoPreview->installEventFilter(this);  //在窗体上为lineEdit1安装过滤器
 }
 

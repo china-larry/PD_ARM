@@ -69,8 +69,6 @@ StandardMachineCalibrateParams StandardMachineCalibrateDialog::_InitLightParas()
             ui->rightLightHighlineEdit->text().trimmed().toShort();
     sStandardMachineCalibrateParams.iRightGreenLightValueStep =
             ui->rightAdditionStepLineEdit->text().trimmed().toShort();
-    sStandardMachineCalibrateParams.iCapType =
-            ui->CapTypeComboBox->currentIndex();
     sStandardMachineCalibrateParams.iSignalLightValueTestCount =
             ui->testCountLineEdit->text().trimmed().toShort();
     return sStandardMachineCalibrateParams;
@@ -113,8 +111,6 @@ void StandardMachineCalibrateDialog::_SlotConfirm()
        return;
     }
     qTextOutStream.setDevice(&qFileName);
-
-    qTextOutStream << "iCapType," << sParams.iCapType << "\n";
 
     qFileName.close();
 
@@ -317,7 +313,7 @@ void StandardMachineCalibrateDialog::on_ConfirmButton_2_clicked()
     }
     qTextOutStream.setDevice(&qFileName);
 
-    qTextOutStream << "iCapType," << sParams.iCapType << "\n";
+//    qTextOutStream << "iCapType," << sParams.iCapType << "\n";
 
     qFileName.close();
 

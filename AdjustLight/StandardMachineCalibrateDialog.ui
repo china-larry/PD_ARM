@@ -6,498 +6,544 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>873</width>
-    <height>494</height>
+    <width>893</width>
+    <height>463</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0">
-    <widget class="QLabel" name="upperLabel1">
-     <property name="minimumSize">
-      <size>
-       <width>100</width>
-       <height>35</height>
-      </size>
+  <widget class="QPushButton" name="ConfirmButton">
+   <property name="geometry">
+    <rect>
+     <x>270</x>
+     <y>410</y>
+     <width>120</width>
+     <height>35</height>
+    </rect>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>120</width>
+     <height>35</height>
+    </size>
+   </property>
+   <property name="text">
+    <string>Confirm</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="StopButton">
+   <property name="geometry">
+    <rect>
+     <x>500</x>
+     <y>410</y>
+     <width>120</width>
+     <height>35</height>
+    </rect>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>120</width>
+     <height>35</height>
+    </size>
+   </property>
+   <property name="text">
+    <string>Stop</string>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>871</width>
+     <height>391</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Standard Machine Calibration    </string>
+   </property>
+   <widget class="QWidget" name="gridLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>30</y>
+      <width>831</width>
+      <height>341</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout">
+     <property name="leftMargin">
+      <number>10</number>
      </property>
-     <property name="text">
-      <string>上绿灯亮度范围：</string>
+     <property name="topMargin">
+      <number>0</number>
      </property>
-    </widget>
-   </item>
-   <item row="0" column="1">
-    <widget class="QLineEdit" name="upperLightLowlineEdit">
-     <property name="minimumSize">
-      <size>
-       <width>80</width>
-       <height>35</height>
-      </size>
+     <property name="rightMargin">
+      <number>40</number>
      </property>
-     <property name="text">
-      <string>0</string>
+     <property name="bottomMargin">
+      <number>10</number>
      </property>
-     <property name="readOnly">
-      <bool>true</bool>
+     <property name="horizontalSpacing">
+      <number>40</number>
      </property>
-    </widget>
-   </item>
-   <item row="0" column="2">
-    <widget class="QLabel" name="upperLabel2">
-     <property name="text">
-      <string>—</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="3">
-    <widget class="QLineEdit" name="upperLightHighlineEdit">
-     <property name="minimumSize">
-      <size>
-       <width>80</width>
-       <height>35</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>25000</string>
-     </property>
-     <property name="readOnly">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="4">
-    <widget class="QLabel" name="upperLabel3">
-     <property name="minimumSize">
-      <size>
-       <width>100</width>
-       <height>35</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>步进亮度：</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="5">
-    <widget class="QLineEdit" name="upperAdditionStepLineEdit">
-     <property name="minimumSize">
-      <size>
-       <width>80</width>
-       <height>35</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>1000</string>
-     </property>
-     <property name="readOnly">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0">
-    <widget class="QLabel" name="downLabel1">
-     <property name="minimumSize">
-      <size>
-       <width>100</width>
-       <height>35</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>下绿灯亮度范围：</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="1">
-    <widget class="QLineEdit" name="downLightLowlineEdit">
-     <property name="minimumSize">
-      <size>
-       <width>80</width>
-       <height>35</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>0</string>
-     </property>
-     <property name="readOnly">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="2">
-    <widget class="QLabel" name="downLabel2">
-     <property name="text">
-      <string>—</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="3">
-    <widget class="QLineEdit" name="downLightHighlineEdit">
-     <property name="minimumSize">
-      <size>
-       <width>80</width>
-       <height>35</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>25000</string>
-     </property>
-     <property name="readOnly">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="4">
-    <widget class="QLabel" name="downLabel3">
-     <property name="minimumSize">
-      <size>
-       <width>100</width>
-       <height>35</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>步进亮度：</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="5">
-    <widget class="QLineEdit" name="downAdditionStepLineEdit">
-     <property name="minimumSize">
-      <size>
-       <width>80</width>
-       <height>35</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>1000</string>
-     </property>
-     <property name="readOnly">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="0">
-    <widget class="QLabel" name="leftLabel1">
-     <property name="minimumSize">
-      <size>
-       <width>100</width>
-       <height>35</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>左绿灯亮度范围：</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="1">
-    <widget class="QLineEdit" name="leftLightLowlineEdit">
-     <property name="minimumSize">
-      <size>
-       <width>80</width>
-       <height>35</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>0</string>
-     </property>
-     <property name="readOnly">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="2">
-    <widget class="QLabel" name="leftLabel2">
-     <property name="text">
-      <string>—</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="3">
-    <widget class="QLineEdit" name="leftLightHighlineEdit">
-     <property name="minimumSize">
-      <size>
-       <width>80</width>
-       <height>35</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>25000</string>
-     </property>
-     <property name="readOnly">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="4">
-    <widget class="QLabel" name="leftLabel3">
-     <property name="minimumSize">
-      <size>
-       <width>100</width>
-       <height>35</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>步进亮度：</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="5">
-    <widget class="QLineEdit" name="leftAdditionStepLineEdit">
-     <property name="minimumSize">
-      <size>
-       <width>80</width>
-       <height>35</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>1000</string>
-     </property>
-     <property name="readOnly">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="0">
-    <widget class="QLabel" name="rightLabel1">
-     <property name="minimumSize">
-      <size>
-       <width>100</width>
-       <height>35</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>右绿灯亮度范围：</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="1">
-    <widget class="QLineEdit" name="rightLightLowlineEdit">
-     <property name="minimumSize">
-      <size>
-       <width>80</width>
-       <height>35</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>0</string>
-     </property>
-     <property name="readOnly">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="2">
-    <widget class="QLabel" name="rightLabel2">
-     <property name="text">
-      <string>—</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="3">
-    <widget class="QLineEdit" name="rightLightHighlineEdit">
-     <property name="minimumSize">
-      <size>
-       <width>80</width>
-       <height>35</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>25000</string>
-     </property>
-     <property name="readOnly">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="4">
-    <widget class="QLabel" name="rightLabel3">
-     <property name="minimumSize">
-      <size>
-       <width>100</width>
-       <height>35</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>步进亮度：</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="5">
-    <widget class="QLineEdit" name="rightAdditionStepLineEdit">
-     <property name="minimumSize">
-      <size>
-       <width>80</width>
-       <height>35</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>1000</string>
-     </property>
-     <property name="readOnly">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="0">
-    <widget class="QLabel" name="rightLabel1_2">
-     <property name="minimumSize">
-      <size>
-       <width>100</width>
-       <height>35</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>杯型：</string>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="1">
-    <widget class="QComboBox" name="CapTypeComboBox">
-     <property name="maximumSize">
-      <size>
-       <width>800</width>
-       <height>35</height>
-      </size>
-     </property>
-     <item>
-      <property name="text">
-       <string>T-Cup</string>
-      </property>
+     <item row="0" column="1">
+      <widget class="QLabel" name="upperLabel3">
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>35</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Step into the brightness</string>
+       </property>
+      </widget>
      </item>
-     <item>
-      <property name="text">
-       <string>Cube-Cup</string>
-      </property>
+     <item row="2" column="3">
+      <widget class="QLabel" name="testCountLabel">
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>35</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Test number</string>
+       </property>
+      </widget>
      </item>
-    </widget>
-   </item>
-   <item row="5" column="0">
-    <widget class="QLabel" name="testCountLabel">
-     <property name="minimumSize">
-      <size>
-       <width>100</width>
-       <height>35</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>单个亮度测试次数：</string>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="1">
-    <widget class="QLineEdit" name="testCountLineEdit">
-     <property name="minimumSize">
-      <size>
-       <width>80</width>
-       <height>35</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>10</string>
-     </property>
-     <property name="readOnly">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="4">
-    <widget class="QLabel" name="upperLabel1_2">
-     <property name="minimumSize">
-      <size>
-       <width>100</width>
-       <height>35</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>上绿灯亮度：</string>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="5">
-    <widget class="QLineEdit" name="testLightLineEdit">
-     <property name="minimumSize">
-      <size>
-       <width>80</width>
-       <height>35</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>18000</string>
-     </property>
-     <property name="readOnly">
-      <bool>false</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="6" column="0">
-    <widget class="QPushButton" name="ConfirmButton">
-     <property name="maximumSize">
-      <size>
-       <width>120</width>
-       <height>35</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>Confirm</string>
-     </property>
-    </widget>
-   </item>
-   <item row="6" column="1">
-    <widget class="QPushButton" name="StopButton">
-     <property name="maximumSize">
-      <size>
-       <width>120</width>
-       <height>35</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>Stop</string>
-     </property>
-    </widget>
-   </item>
-   <item row="6" column="3">
-    <widget class="QPushButton" name="ConfirmButton_2">
-     <property name="maximumSize">
-      <size>
-       <width>120</width>
-       <height>35</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>ConfirmZ</string>
-     </property>
-    </widget>
-   </item>
-   <item row="6" column="4">
-    <widget class="QLabel" name="upperLabel1_3">
-     <property name="minimumSize">
-      <size>
-       <width>100</width>
-       <height>35</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>Z值:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="6" column="5">
-    <widget class="QLineEdit" name="ZValuetLineEdit">
-     <property name="minimumSize">
-      <size>
-       <width>80</width>
-       <height>35</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>18000</string>
-     </property>
-     <property name="readOnly">
-      <bool>false</bool>
-     </property>
-    </widget>
-   </item>
-  </layout>
+     <item row="7" column="1">
+      <widget class="QLineEdit" name="rightAdditionStepLineEdit">
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>35</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>1000</string>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="leftLabel1">
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>35</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Left green light brightness range</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="3">
+      <widget class="QLineEdit" name="testCountLineEdit">
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>35</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>10</string>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="0">
+      <widget class="QLabel" name="rightLabel1">
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>35</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Right green light brightness range</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QLineEdit" name="downAdditionStepLineEdit">
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>35</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>1000</string>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="upperLabel1">
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>35</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Upper green light brightness range</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="upperAdditionStepLineEdit">
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>35</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>1000</string>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="3">
+      <widget class="QLabel" name="upperLabel1_2">
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>35</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Upper green light</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="1">
+      <widget class="QLabel" name="rightLabel3">
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>35</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Step into the brightness</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLabel" name="downLabel3">
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>35</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Step into the brightness</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="3">
+      <widget class="QLineEdit" name="testLightLineEdit">
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>35</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>18000</string>
+       </property>
+       <property name="readOnly">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="downLabel1">
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>35</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Ender green light brightness range</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QLineEdit" name="leftAdditionStepLineEdit">
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>35</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>1000</string>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="3">
+      <widget class="QLineEdit" name="ZValuetLineEdit">
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>35</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>18000</string>
+       </property>
+       <property name="readOnly">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QLabel" name="leftLabel3">
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>35</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Step into the brightness</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="3">
+      <widget class="QLabel" name="upperLabel1_3">
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>35</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Z-value</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QLineEdit" name="upperLightLowlineEdit">
+         <property name="minimumSize">
+          <size>
+           <width>80</width>
+           <height>35</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>0</string>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="upperLabel2">
+         <property name="text">
+          <string>—</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="upperLightHighlineEdit">
+         <property name="minimumSize">
+          <size>
+           <width>80</width>
+           <height>35</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>25000</string>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="5" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
+       <item>
+        <widget class="QLineEdit" name="rightLightLowlineEdit">
+         <property name="minimumSize">
+          <size>
+           <width>80</width>
+           <height>35</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>0</string>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="rightLabel2">
+         <property name="text">
+          <string>—</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="rightLightHighlineEdit">
+         <property name="minimumSize">
+          <size>
+           <width>80</width>
+           <height>35</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>25000</string>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="3" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QLineEdit" name="downLightLowlineEdit">
+         <property name="minimumSize">
+          <size>
+           <width>80</width>
+           <height>35</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>0</string>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="downLabel2">
+         <property name="text">
+          <string>—</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="downLightHighlineEdit">
+         <property name="minimumSize">
+          <size>
+           <width>80</width>
+           <height>35</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>25000</string>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="7" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <item>
+        <widget class="QLineEdit" name="leftLightLowlineEdit">
+         <property name="minimumSize">
+          <size>
+           <width>80</width>
+           <height>35</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>0</string>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="leftLabel2">
+         <property name="text">
+          <string>—</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="leftLightHighlineEdit">
+         <property name="minimumSize">
+          <size>
+           <width>80</width>
+           <height>35</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>25000</string>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="6" column="3">
+      <widget class="QPushButton" name="ConfirmButton_2">
+       <property name="maximumSize">
+        <size>
+         <width>120</width>
+         <height>35</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Confirm Z</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
  </widget>
  <resources/>
  <connections/>
