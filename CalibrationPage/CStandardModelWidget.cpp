@@ -146,8 +146,8 @@ void CStandardModelWidget::showEvent(QShowEvent */*event*/)
   */
 QGroupBox *CStandardModelWidget::_CreateBrightnessValueGroup()
 {
-    QGroupBox *pGroupBox = new QGroupBox(tr("Brightness Value"), this);
-    pGroupBox->setFixedSize(940, 116);
+    QGroupBox *pGroupBox = new QGroupBox(tr("Brightness Value              "), this);
+    pGroupBox->setFixedSize(850, 150);
     //
     m_pNo1LineEditWidget = new CHLabelLineEditWidget(tr("NO.1"), "", this);
     m_pNo1LineEditWidget->SetLineValidator(0, 65535);
@@ -181,16 +181,18 @@ QGroupBox *CStandardModelWidget::_CreateBrightnessValueGroup()
     m_pNo8LineEditWidget->SetLineValidator(0, 65535);
     connect(m_pNo8LineEditWidget->GetLineEdit(), &QLineEdit::textChanged, this, &CStandardModelWidget::_SlotNo8LineEditWidgetChage);
     //
-    m_pNo1LineEditWidget->SetLineEditFixSize(120, 20);
-    m_pNo2LineEditWidget->SetLineEditFixSize(120, 20);
-    m_pNo3LineEditWidget->SetLineEditFixSize(120, 20);
-    m_pNo4LineEditWidget->SetLineEditFixSize(120, 20);
-    m_pNo5LineEditWidget->SetLineEditFixSize(120, 20);
-    m_pNo6LineEditWidget->SetLineEditFixSize(120, 20);
-    m_pNo7LineEditWidget->SetLineEditFixSize(120, 20);
-    m_pNo8LineEditWidget->SetLineEditFixSize(120, 20);
+    int iLineWidth = 80;
+    int iLineHeight = 35;
+    m_pNo1LineEditWidget->SetLineEditFixSize(iLineWidth, iLineHeight);
+    m_pNo2LineEditWidget->SetLineEditFixSize(iLineWidth, iLineHeight);
+    m_pNo3LineEditWidget->SetLineEditFixSize(iLineWidth, iLineHeight);
+    m_pNo4LineEditWidget->SetLineEditFixSize(iLineWidth, iLineHeight);
+    m_pNo5LineEditWidget->SetLineEditFixSize(iLineWidth, iLineHeight);
+    m_pNo6LineEditWidget->SetLineEditFixSize(iLineWidth, iLineHeight);
+    m_pNo7LineEditWidget->SetLineEditFixSize(iLineWidth, iLineHeight);
+    m_pNo8LineEditWidget->SetLineEditFixSize(iLineWidth, iLineHeight);
     //
-    m_pConfirmButton = new QPushButton(tr("Confirm"));
+    m_pConfirmButton = new QPushButton(tr("OK"));
     connect(m_pConfirmButton, SIGNAL(clicked(bool)), this, SLOT(_SlotCheckConfirmButton()));
     m_pConfirmButton->setFixedSize(130, 35);
     //
@@ -207,6 +209,7 @@ QGroupBox *CStandardModelWidget::_CreateBrightnessValueGroup()
     pGridLayout->addWidget(m_pNo8LineEditWidget, 1, 3, 1, 1);
     //
     QHBoxLayout *pHBoxLayout = new QHBoxLayout;
+    pHBoxLayout->setMargin(20);
     pHBoxLayout->addLayout(pGridLayout);
     pHBoxLayout->addSpacing(30);
     pHBoxLayout->addWidget(m_pConfirmButton);
@@ -219,14 +222,21 @@ void CStandardModelWidget::_InitWidget()
 {
     m_pPhotoNameLabel = new  QLabel(tr("Photo"), this);
     m_pPhotoNameLabel->setObjectName("m_pPhotoNameLabel");
+    m_pPhotoNameLabel->setFixedSize(50, 35);
+
     m_pPhotoShowLabel = new QLabel(this);
-    m_pPhotoShowLabel->setFixedSize(416, 276);
+    m_pPhotoShowLabel->setFixedSize(280, 190);
     m_pPhotoShowLabel->setObjectName("m_pPhotoShowLabel");
     //
     m_pCurveValuesLabel = new QLabel(tr("Curve Values"), this);
     m_pCurveValuesLabel->setObjectName("m_pPhotoNameLabel");
+    m_pCurveValuesLabel->setFixedSize(115, 35);
+    m_pCurveValuesLabel->setWordWrap(true);
+//    m_pCurveValuesLabel->setAlignment(Qt::AlignTop);
+
+
     m_pCurveGraphicsView = new QGraphicsView(this);
-    m_pCurveGraphicsView->setFixedSize(432, 276);
+    m_pCurveGraphicsView->setFixedSize(390, 190);
 
     //
     m_pGraphicsScene = new QGraphicsScene(this);
@@ -252,16 +262,19 @@ void CStandardModelWidget::_InitWidget()
 void CStandardModelWidget::_InitLayout()
 {
     QVBoxLayout *pLayout = new QVBoxLayout;
+    pLayout->setMargin(5);
     pLayout->addWidget(_CreateBrightnessValueGroup(), 0, Qt::AlignHCenter);
-    pLayout->addStretch(1);
+    pLayout->addSpacing(5);
     //
-    QGridLayout *pGridLayout = new QGridLayout;
-    pGridLayout->setHorizontalSpacing(60);
-    pGridLayout->addWidget(m_pPhotoNameLabel, 0, 0, 1, 1);
-    pGridLayout->addWidget(m_pCurveValuesLabel, 0, 1, 1, 1);
-    pGridLayout->addWidget(m_pPhotoShowLabel, 1, 0, 1, 1);
-    pGridLayout->addWidget(m_pCurveGraphicsView, 1, 1, 1, 1);
-    pLayout->addLayout(pGridLayout);
+    QHBoxLayout *pShowLayout = new QHBoxLayout;
+    pShowLayout->setMargin(0);
+    pShowLayout->addStretch(1);
+    pShowLayout->addWidget(m_pPhotoNameLabel, 0, Qt::AlignTop);
+    pShowLayout->addWidget(m_pPhotoShowLabel);
+    pShowLayout->addWidget(m_pCurveValuesLabel, 0, Qt::AlignTop);
+    pShowLayout->addWidget(m_pCurveGraphicsView);
+    pShowLayout->addStretch(1);
+    pLayout->addLayout(pShowLayout);
     //
     QHBoxLayout *pHLayout = new QHBoxLayout;
     pHLayout->addStretch(100);

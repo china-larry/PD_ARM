@@ -64,9 +64,9 @@ QTabBar::tab:!selected
 
 QLabel
 {
-    color: #333; /* text color */
-    font-family: "Arial";
-    font-size: 15px;
+        color: #333; /* text color */
+        font-family: "Arial";
+        font-size: 18px;
 }
 QLabel#m_pPhotoNameLabel
 {

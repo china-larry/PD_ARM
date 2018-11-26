@@ -238,41 +238,41 @@ void COrdinaryModelWidget::SlotProgressFinish()
 QGroupBox *COrdinaryModelWidget::_CreateStandardGroup()
 {
     QGroupBox *pGroupBox = new QGroupBox(tr(" Standard Machine Intensity Parameter"), this);
-    pGroupBox->setFixedSize(445, 446);
+    pGroupBox->setFixedSize(890, 210);
     //
     m_pStandardBrightnessValueLabel = new QLabel(tr("Brightness Value"), this);
     m_pStandardGreenValueLabel = new QLabel(tr("Green Component Values"), this);
     //
 
-    m_pSNo1HLineEditWidget = new CHLabelLineEditWidget(tr("NO.1"), "", this);
+    m_pSNo1HLineEditWidget = new CLabelLineEditWidget(tr("NO.1"), "", this);
     m_pSNo1LineEditWidget = new QLineEdit(this);
     m_pSNo1LineEditWidget->setValidator(new QIntValidator(0, 65535, this)); //0, 65535
 
-    m_pSNo2HLineEditWidget = new CHLabelLineEditWidget(tr("NO.2"), "", this);
+    m_pSNo2HLineEditWidget = new CLabelLineEditWidget(tr("NO.2"), "", this);
     m_pSNo2LineEditWidget = new QLineEdit(this);
     m_pSNo2LineEditWidget->setValidator(new QIntValidator(0, 65535, this)); //0, 65535
 
-    m_pSNo3HLineEditWidget = new CHLabelLineEditWidget(tr("NO.3"), "", this);
+    m_pSNo3HLineEditWidget = new CLabelLineEditWidget(tr("NO.3"), "", this);
     m_pSNo3LineEditWidget = new QLineEdit(this);
     m_pSNo3LineEditWidget->setValidator(new QIntValidator(0, 65535, this)); //0, 65535
 
-    m_pSNo4HLineEditWidget = new CHLabelLineEditWidget(tr("NO.4"), "", this);
+    m_pSNo4HLineEditWidget = new CLabelLineEditWidget(tr("NO.4"), "", this);
     m_pSNo4LineEditWidget = new QLineEdit(this);
     m_pSNo4LineEditWidget->setValidator(new QIntValidator(0, 65535, this)); //0, 65535
 
-    m_pSNo5HLineEditWidget = new CHLabelLineEditWidget(tr("NO.5"), "", this);
+    m_pSNo5HLineEditWidget = new CLabelLineEditWidget(tr("NO.5"), "", this);
     m_pSNo5LineEditWidget = new QLineEdit(this);
     m_pSNo5LineEditWidget->setValidator(new QIntValidator(0, 65535, this)); //0, 65535
 
-    m_pSNo6HLineEditWidget = new CHLabelLineEditWidget(tr("NO.6"), "", this);
+    m_pSNo6HLineEditWidget = new CLabelLineEditWidget(tr("NO.6"), "", this);
     m_pSNo6LineEditWidget = new QLineEdit(this);
     m_pSNo6LineEditWidget->setValidator(new QIntValidator(0, 65535, this)); //0, 65535
 
-    m_pSNo7HLineEditWidget = new CHLabelLineEditWidget(tr("NO.7"), "", this);
+    m_pSNo7HLineEditWidget = new CLabelLineEditWidget(tr("NO.7"), "", this);
     m_pSNo7LineEditWidget = new QLineEdit(this);
     m_pSNo7LineEditWidget->setValidator(new QIntValidator(0, 65535, this)); //0, 65535
 
-    m_pSNo8HLineEditWidget = new CHLabelLineEditWidget(tr("NO.8"), "", this);
+    m_pSNo8HLineEditWidget = new CLabelLineEditWidget(tr("NO.8"), "", this);
     m_pSNo8LineEditWidget = new QLineEdit(this);
     m_pSNo8LineEditWidget->setValidator(new QIntValidator(0, 65535, this)); //0, 65535
 
@@ -375,35 +375,35 @@ QGroupBox *COrdinaryModelWidget::_CreateOridinaryGroup()
     m_pOridinaryBrightnessValueLabel = new QLabel(tr("Brightness Value"), this);
     m_pOridinaryGreenValueLabel = new QLabel(tr("Green Component Values"), this);
     //
-    m_pONo1HLineEditWidget = new CHLabelLineEditWidget(tr("NO.1"), "", this);
+    m_pONo1HLineEditWidget = new CLabelLineEditWidget(tr("NO.1"), "", this);
     m_pONo1HLineEditWidget->setEnabled(false);
     m_pONo1LineEditWidget = new QLineEdit(this);
     m_pONo1LineEditWidget->setEnabled(false);
-    m_pONo2HLineEditWidget = new CHLabelLineEditWidget(tr("NO.2"), "", this);
+    m_pONo2HLineEditWidget = new CLabelLineEditWidget(tr("NO.2"), "", this);
     m_pONo2HLineEditWidget->setEnabled(false);
     m_pONo2LineEditWidget = new QLineEdit(this);
     m_pONo2LineEditWidget->setEnabled(false);
-    m_pONo3HLineEditWidget = new CHLabelLineEditWidget(tr("NO.3"), "", this);
+    m_pONo3HLineEditWidget = new CLabelLineEditWidget(tr("NO.3"), "", this);
     m_pONo3HLineEditWidget->setEnabled(false);
     m_pONo3LineEditWidget = new QLineEdit(this);
     m_pONo3LineEditWidget->setEnabled(false);
-    m_pONo4HLineEditWidget = new CHLabelLineEditWidget(tr("NO.4"), "", this);
+    m_pONo4HLineEditWidget = new CLabelLineEditWidget(tr("NO.4"), "", this);
     m_pONo4HLineEditWidget->setEnabled(false);
     m_pONo4LineEditWidget = new QLineEdit(this);
     m_pONo4LineEditWidget->setEnabled(false);
-    m_pONo5HLineEditWidget = new CHLabelLineEditWidget(tr("NO.5"), "", this);
+    m_pONo5HLineEditWidget = new CLabelLineEditWidget(tr("NO.5"), "", this);
     m_pONo5HLineEditWidget->setEnabled(false);
     m_pONo5LineEditWidget = new QLineEdit(this);
     m_pONo5LineEditWidget->setEnabled(false);
-    m_pONo6HLineEditWidget = new CHLabelLineEditWidget(tr("NO.6"), "", this);
+    m_pONo6HLineEditWidget = new CLabelLineEditWidget(tr("NO.6"), "", this);
     m_pONo6HLineEditWidget->setEnabled(false);
     m_pONo6LineEditWidget = new QLineEdit(this);
     m_pONo6LineEditWidget->setEnabled(false);
-    m_pONo7HLineEditWidget = new CHLabelLineEditWidget(tr("NO.7"), "", this);
+    m_pONo7HLineEditWidget = new CLabelLineEditWidget(tr("NO.7"), "", this);
     m_pONo7HLineEditWidget->setEnabled(false);
     m_pONo7LineEditWidget = new QLineEdit(this);
     m_pONo7LineEditWidget->setEnabled(false);
-    m_pONo8HLineEditWidget = new CHLabelLineEditWidget(tr("NO.8"), "", this);
+    m_pONo8HLineEditWidget = new CLabelLineEditWidget(tr("NO.8"), "", this);
     m_pONo8HLineEditWidget->setEnabled(false);
     m_pONo8LineEditWidget = new QLineEdit(this);
     m_pONo8LineEditWidget->setEnabled(false);
