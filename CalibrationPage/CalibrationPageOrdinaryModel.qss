@@ -1,0 +1,106 @@
+QGroupBox
+{
+    border: 0px solid #0068b7;
+    border-radius: 4px;
+    background-color: #fff;
+    margin-top: 6px;
+    font-size: 18px;
+    font-family:"Arial";
+}
+QGroupBox::title
+{
+    subcontrol-origin: margin;
+    border: 0px solid #ffffff;
+    border-radius: 3px;
+    padding: 2 2px;
+    color: #000;
+    min-height: 32px;
+    min-width: 179px;
+    left: 10px;
+    subcontrol-origin:  margin;
+    subcontrol-position: top left;
+}
+QTabWidget
+{
+    border: 0px solid #0068b7;
+    border-bottom:none;
+    background-color: #F0F0F0;
+    color: #F0F0F0;
+/*    background:transparent;*/
+/*    margin-top: 16px;*/
+    font-size: 18px;
+    font-family:"Arial";
+}
+QTabWidget::tab-bar
+{
+    alignment: center;
+    background-color: #F0F0F0;
+    color: #F0F0F0;
+}
+QTabBar::tab
+{
+    border: 0px solid #0068b7;
+    min-width:118.4px;
+    color: #818282;
+    padding:10px;
+    background-color: #F0F0F0;
+}
+QTabWidget::pane
+{
+    border: 0px solid #0068b7;
+    background-color: #F0F0F0;
+}
+QTabBar::tab:!selected
+{
+/*    margin-top: 5px;*/
+}
+ QTabBar::tab:selected
+{
+    color: qlineargradient(x1: 0, y1: 0, x2: 0.9, y2: 0,
+    stop: 0 #0069b9, stop: 1 #1b8ee6);
+ /*   border-bottom: 3px solid qlineargradient(x1: 0, y1: 0, x2: 0.2, y2: 0,
+    stop: 0 #0069b9, stop: 0.2 #1b8ee6);*/
+}
+
+QLabel
+{
+        color: #333; /* text color */
+        font-family: "Arial";
+        font-size: 15px;
+        font-weight: bold;
+}
+QPushButton
+{
+
+    font-size: 14px;
+    font-family:"Arial";
+    font-weight:bold;
+    border: 0px solid #0068b7;
+    border-radius: 5px;
+    color: white;
+    background-color: rgb(30, 129, 255);
+}
+
+QPushButton:disabled {
+    background-color:#D5D5D5;
+    color: rgb(60, 60, 60);
+}
+QPushButton:enabled {
+    background-color: rgb(30, 129, 255);
+}
+
+QPushButton:hover{
+        background: rgb(85, 85, 85);
+}
+
+QPushButton:pressed{
+        background: rgb(80, 80, 80);
+}
+QLineEdit
+{
+    color: #333; /* text color */
+    font-family: "Arial";
+    font-size: 17px;
+    border: 1px solid #a0a0a0;
+    padding: 0 0px;
+}

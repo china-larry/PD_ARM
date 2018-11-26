@@ -99,6 +99,9 @@ private:
     // 普通机型接口类
     OrdinaryBrightmess *m_pOrdinaryBrightmess;
     CQprogress *cProgress;
+    //
+    int m_iLineWidth;
+    int m_iLineHeight;
 
 };
 

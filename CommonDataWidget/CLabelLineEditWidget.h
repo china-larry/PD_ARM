@@ -44,6 +44,7 @@ public:
     void SetLineValidator(int iMin, int iMax);// 设置输入范围
     void SetLineValidator(QString ValidatorType);
     QLineEdit *GetLineEdit();
+    void SetLineEditEnable(bool bEnable);
 protected:
     void _InitLayout();
 protected:
@@ -68,8 +69,7 @@ public:
 signals:
 
 public slots:
-public:
-    void SetLineEditEnable(bool bEnable);
+
 
 protected:
     void _InitLayout();

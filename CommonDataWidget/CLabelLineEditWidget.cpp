@@ -78,11 +78,15 @@ QLineEdit *CLabelLineEditWidget::GetLineEdit()
 {
     return m_pLineEdit;
 }
-
+void CLabelLineEditWidget::SetLineEditEnable(bool bEnable)
+{
+    m_pLineEdit->setEnabled(bEnable);
+}
 void CLabelLineEditWidget::_InitLayout()
 {
     QVBoxLayout *pLayout = new QVBoxLayout;
     pLayout->setMargin(0);
+    pLayout->addStretch(1);
     pLayout->addWidget(m_pLabel);
     pLayout->addWidget(m_pLineEdit);
     this->setLayout(pLayout);
@@ -98,10 +102,6 @@ CHLabelLineEditWidget::CHLabelLineEditWidget(QString strLabel, QString strLineTe
     }
 }
 
-void CHLabelLineEditWidget::SetLineEditEnable(bool bEnable)
-{
-    m_pLineEdit->setEnabled(bEnable);
-}
 
 void CHLabelLineEditWidget::_InitLayout()
 {

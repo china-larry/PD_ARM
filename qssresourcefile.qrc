@@ -9,6 +9,7 @@
         <file>MainWindows.qss</file>
         <file>SettingPage/SettingPageUserData.qss</file>
         <file>DetectorPage/ManualSetDialog.qss</file>
+        <file>CalibrationPage/CalibrationPageOrdinaryModel.qss</file>
     </qresource>
     <qresource prefix="/image">
         <file>ico/test/history_37.png</file>

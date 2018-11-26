@@ -20,6 +20,8 @@
 #include "AdjustLight/CHidCmdThread.h"
 COrdinaryModelWidget::COrdinaryModelWidget(QWidget *parent) : QWidget(parent)
 {
+    m_iLineWidth = 60;
+    m_iLineHeight = 35;
     m_pOrdinaryBrightmess = new OrdinaryBrightmess;
     connect(m_pOrdinaryBrightmess, SIGNAL(SignalImportValueToUI(BrightnessOrdinaryValue)),
             this, SLOT(SlotGetImportValue(BrightnessOrdinaryValue)));
@@ -238,10 +240,12 @@ void COrdinaryModelWidget::SlotProgressFinish()
 QGroupBox *COrdinaryModelWidget::_CreateStandardGroup()
 {
     QGroupBox *pGroupBox = new QGroupBox(tr(" Standard Machine Intensity Parameter"), this);
-    pGroupBox->setFixedSize(890, 210);
+    pGroupBox->setFixedSize(870, 180);
     //
-    m_pStandardBrightnessValueLabel = new QLabel(tr("Brightness Value"), this);
+    m_pStandardBrightnessValueLabel = new QLabel(tr("            Brightness Values"), this);
+    m_pStandardBrightnessValueLabel->setFixedSize(170, 35);
     m_pStandardGreenValueLabel = new QLabel(tr("Green Component Values"), this);
+    m_pStandardGreenValueLabel->setFixedSize(170, 35);
     //
 
     m_pSNo1HLineEditWidget = new CLabelLineEditWidget(tr("NO.1"), "", this);
@@ -294,70 +298,73 @@ QGroupBox *COrdinaryModelWidget::_CreateStandardGroup()
     m_pSNo7LineEditWidget->setEnabled(false);
     m_pSNo8LineEditWidget->setEnabled(false);
     //
-    m_pSNo1HLineEditWidget->SetLineEditFixSize(120, 21);
-    m_pSNo1LineEditWidget->setFixedSize(120, 21);
-    m_pSNo2HLineEditWidget->SetLineEditFixSize(120, 21);
-    m_pSNo2LineEditWidget->setFixedSize(120, 21);
-    m_pSNo3HLineEditWidget->SetLineEditFixSize(120, 21);
-    m_pSNo3LineEditWidget->setFixedSize(120, 21);
-    m_pSNo4HLineEditWidget->SetLineEditFixSize(120, 21);
-    m_pSNo4LineEditWidget->setFixedSize(120, 20);
-    m_pSNo5HLineEditWidget->SetLineEditFixSize(120, 21);
-    m_pSNo5LineEditWidget->setFixedSize(120, 21);
-    m_pSNo6HLineEditWidget->SetLineEditFixSize(120, 21);
-    m_pSNo6LineEditWidget->setFixedSize(120, 21);
-    m_pSNo7HLineEditWidget->SetLineEditFixSize(120, 21);
-    m_pSNo7LineEditWidget->setFixedSize(120, 20);
-    m_pSNo8HLineEditWidget->SetLineEditFixSize(120, 21);
-    m_pSNo8LineEditWidget->setFixedSize(120, 21);
+
+    m_pSNo1HLineEditWidget->SetLineEditFixSize(m_iLineWidth, m_iLineHeight);
+    m_pSNo1LineEditWidget->setFixedSize(m_iLineWidth, m_iLineHeight);
+    m_pSNo2HLineEditWidget->SetLineEditFixSize(m_iLineWidth, m_iLineHeight);
+    m_pSNo2LineEditWidget->setFixedSize(m_iLineWidth, m_iLineHeight);
+    m_pSNo3HLineEditWidget->SetLineEditFixSize(m_iLineWidth, m_iLineHeight);
+    m_pSNo3LineEditWidget->setFixedSize(m_iLineWidth, m_iLineHeight);
+    m_pSNo4HLineEditWidget->SetLineEditFixSize(m_iLineWidth, m_iLineHeight);
+    m_pSNo4LineEditWidget->setFixedSize(m_iLineWidth, m_iLineHeight);
+    m_pSNo5HLineEditWidget->SetLineEditFixSize(m_iLineWidth, m_iLineHeight);
+    m_pSNo5LineEditWidget->setFixedSize(m_iLineWidth, m_iLineHeight);
+    m_pSNo6HLineEditWidget->SetLineEditFixSize(m_iLineWidth, m_iLineHeight);
+    m_pSNo6LineEditWidget->setFixedSize(m_iLineWidth, m_iLineHeight);
+    m_pSNo7HLineEditWidget->SetLineEditFixSize(m_iLineWidth, m_iLineHeight);
+    m_pSNo7LineEditWidget->setFixedSize(m_iLineWidth, m_iLineHeight);
+    m_pSNo8HLineEditWidget->SetLineEditFixSize(m_iLineWidth, m_iLineHeight);
+    m_pSNo8LineEditWidget->setFixedSize(m_iLineWidth, m_iLineHeight);
     //
     m_pImportButton = new QPushButton(tr("Import"), this);
     connect(m_pImportButton, SIGNAL(clicked(bool)), m_pOrdinaryBrightmess, SLOT(SlotOrdinaryImport()));
-    m_pImportButton->setFixedSize(130, 35);
+    m_pImportButton->setFixedSize(120, 35);
     m_pCalibrationButton = new QPushButton(tr("Calibration"), this);
     //connect(m_pCalibrationButton, SIGNAL(clicked(bool)), m_pOrdinaryBrightmess, SLOT(SlotOrdinaryCalibration()));
     connect(m_pCalibrationButton, SIGNAL(clicked(bool)),this,SLOT(SlotCalibrationButton()));
-    m_pCalibrationButton->setFixedSize(130, 35);
+    m_pCalibrationButton->setFixedSize(120, 35);
      //
-    QHBoxLayout *pLabelLayout = new QHBoxLayout;
-    pLabelLayout->addSpacing(110);
+    QVBoxLayout *pLabelLayout = new QVBoxLayout;
+    pLabelLayout->addStretch(1);
     pLabelLayout->addWidget(m_pStandardBrightnessValueLabel);
-    pLabelLayout->addSpacing(20);
+//    pLabelLayout->addSpacing(1);
     pLabelLayout->addWidget(m_pStandardGreenValueLabel);
-    pLabelLayout->addStretch(100);
+//    pLabelLayout->addSpacing(2);
     //
     QGridLayout *pNoLayout = new QGridLayout;
-    pNoLayout->setContentsMargins(40, 0, 40, 0);
-    pNoLayout->setVerticalSpacing(17);
-    pNoLayout->setHorizontalSpacing(35);
+    //pNoLayout->setContentsMargins(40, 0, 40, 0);
+    //pNoLayout->setVerticalSpacing(17);
+    //pNoLayout->setHorizontalSpacing(10);
     pNoLayout->addWidget(m_pSNo1HLineEditWidget, 0, 0, 1, 1);
-    pNoLayout->addWidget(m_pSNo1LineEditWidget, 0, 1, 1, 1);
-    pNoLayout->addWidget(m_pSNo2HLineEditWidget, 1, 0, 1, 1);
+    pNoLayout->addWidget(m_pSNo1LineEditWidget, 1, 0, 1, 1);
+    pNoLayout->addWidget(m_pSNo2HLineEditWidget, 0, 1, 1, 1);
     pNoLayout->addWidget(m_pSNo2LineEditWidget, 1, 1, 1, 1);
-    pNoLayout->addWidget(m_pSNo3HLineEditWidget, 2, 0, 1, 1);
-    pNoLayout->addWidget(m_pSNo3LineEditWidget, 2, 1, 1, 1);
-    pNoLayout->addWidget(m_pSNo4HLineEditWidget, 3, 0, 1, 1);
-    pNoLayout->addWidget(m_pSNo4LineEditWidget, 3, 1, 1, 1);
-    pNoLayout->addWidget(m_pSNo5HLineEditWidget, 4, 0, 1, 1);
-    pNoLayout->addWidget(m_pSNo5LineEditWidget, 4, 1, 1, 1);
-    pNoLayout->addWidget(m_pSNo6HLineEditWidget, 5, 0, 1, 1);
-    pNoLayout->addWidget(m_pSNo6LineEditWidget, 5, 1, 1, 1);
-    pNoLayout->addWidget(m_pSNo7HLineEditWidget, 6, 0, 1, 1);
-    pNoLayout->addWidget(m_pSNo7LineEditWidget, 6, 1, 1, 1);
-    pNoLayout->addWidget(m_pSNo8HLineEditWidget, 7, 0, 1, 1);
-    pNoLayout->addWidget(m_pSNo8LineEditWidget, 7, 1, 1, 1);
+    pNoLayout->addWidget(m_pSNo3HLineEditWidget, 0, 2, 1, 1);
+    pNoLayout->addWidget(m_pSNo3LineEditWidget, 1, 2, 1, 1);
+    pNoLayout->addWidget(m_pSNo4HLineEditWidget, 0, 3, 1, 1);
+    pNoLayout->addWidget(m_pSNo4LineEditWidget, 1, 3, 1, 1);
+    pNoLayout->addWidget(m_pSNo5HLineEditWidget, 0, 4, 1, 1);
+    pNoLayout->addWidget(m_pSNo5LineEditWidget, 1, 4, 1, 1);
+    pNoLayout->addWidget(m_pSNo6HLineEditWidget, 0, 5, 1, 1);
+    pNoLayout->addWidget(m_pSNo6LineEditWidget, 1, 5, 1, 1);
+    pNoLayout->addWidget(m_pSNo7HLineEditWidget, 0, 6, 1, 1);
+    pNoLayout->addWidget(m_pSNo7LineEditWidget, 1, 6, 1, 1);
+    pNoLayout->addWidget(m_pSNo8HLineEditWidget, 0, 7, 1, 1);
+    pNoLayout->addWidget(m_pSNo8LineEditWidget, 1, 7, 1, 1);
     //
-    QHBoxLayout *pButtonLayout = new QHBoxLayout;    
+    QVBoxLayout *pButtonLayout = new QVBoxLayout;
+    pButtonLayout->addSpacing(150);
     pButtonLayout->addWidget(m_pImportButton);
     pButtonLayout->addWidget(m_pCalibrationButton);
     //
-    QVBoxLayout *pLayout = new QVBoxLayout;
-    pLayout->addSpacing(20);
-    pLayout->addLayout(pLabelLayout);
-    pLayout->addLayout(pNoLayout);
+    QHBoxLayout *pLayout = new QHBoxLayout;
+    pLayout->setContentsMargins(0, 20, 0, 30);
     pLayout->addStretch(1);
+    pLayout->addLayout(pLabelLayout);
+    pLayout->addLayout(pNoLayout);    
+    pLayout->addSpacing(5);
     pLayout->addLayout(pButtonLayout);
-    pLayout->addSpacing(10);
+    pLayout->addStretch(1);
 
     pGroupBox->setLayout(pLayout);
     return pGroupBox;
@@ -370,10 +377,12 @@ QGroupBox *COrdinaryModelWidget::_CreateStandardGroup()
 QGroupBox *COrdinaryModelWidget::_CreateOridinaryGroup()
 {
     QGroupBox *pGroupBox = new QGroupBox(tr(" Oridinary Machine Intensity Parameter"), this);
-    pGroupBox->setFixedSize(445, 446);
+    pGroupBox->setFixedSize(870, 180);
     //
-    m_pOridinaryBrightnessValueLabel = new QLabel(tr("Brightness Value"), this);
+    m_pOridinaryBrightnessValueLabel = new QLabel(tr("            Brightness Values"), this);
+    m_pOridinaryBrightnessValueLabel->setFixedSize(170, 35);
     m_pOridinaryGreenValueLabel = new QLabel(tr("Green Component Values"), this);
+    m_pOridinaryGreenValueLabel->setFixedSize(170, 35);
     //
     m_pONo1HLineEditWidget = new CLabelLineEditWidget(tr("NO.1"), "", this);
     m_pONo1HLineEditWidget->setEnabled(false);
@@ -408,70 +417,71 @@ QGroupBox *COrdinaryModelWidget::_CreateOridinaryGroup()
     m_pONo8LineEditWidget = new QLineEdit(this);
     m_pONo8LineEditWidget->setEnabled(false);
     //
-    m_pONo1HLineEditWidget->SetLineEditFixSize(120, 21);
-    m_pONo1LineEditWidget->setFixedSize(120, 21);
-    m_pONo2HLineEditWidget->SetLineEditFixSize(120, 21);
-    m_pONo2LineEditWidget->setFixedSize(120, 21);
-    m_pONo3HLineEditWidget->SetLineEditFixSize(120, 21);
-    m_pONo3LineEditWidget->setFixedSize(120, 21);
-    m_pONo4HLineEditWidget->SetLineEditFixSize(120, 21);
-    m_pONo4LineEditWidget->setFixedSize(120, 21);
-    m_pONo5HLineEditWidget->SetLineEditFixSize(120, 21);
-    m_pONo5LineEditWidget->setFixedSize(120, 21);
-    m_pONo6HLineEditWidget->SetLineEditFixSize(120, 21);
-    m_pONo6LineEditWidget->setFixedSize(120, 21);
-    m_pONo7HLineEditWidget->SetLineEditFixSize(120, 21);
-    m_pONo7LineEditWidget->setFixedSize(120, 21);
-    m_pONo8HLineEditWidget->SetLineEditFixSize(120, 21);
-    m_pONo8LineEditWidget->setFixedSize(120, 21);
+    m_pONo1HLineEditWidget->SetLineEditFixSize(m_iLineWidth, m_iLineHeight);
+    m_pONo1LineEditWidget->setFixedSize(m_iLineWidth, m_iLineHeight);
+    m_pONo2HLineEditWidget->SetLineEditFixSize(m_iLineWidth, m_iLineHeight);
+    m_pONo2LineEditWidget->setFixedSize(m_iLineWidth, m_iLineHeight);
+    m_pONo3HLineEditWidget->SetLineEditFixSize(m_iLineWidth, m_iLineHeight);
+    m_pONo3LineEditWidget->setFixedSize(m_iLineWidth, m_iLineHeight);
+    m_pONo4HLineEditWidget->SetLineEditFixSize(m_iLineWidth, m_iLineHeight);
+    m_pONo4LineEditWidget->setFixedSize(m_iLineWidth, m_iLineHeight);
+    m_pONo5HLineEditWidget->SetLineEditFixSize(m_iLineWidth, m_iLineHeight);
+    m_pONo5LineEditWidget->setFixedSize(m_iLineWidth, m_iLineHeight);
+    m_pONo6HLineEditWidget->SetLineEditFixSize(m_iLineWidth, m_iLineHeight);
+    m_pONo6LineEditWidget->setFixedSize(m_iLineWidth, m_iLineHeight);
+    m_pONo7HLineEditWidget->SetLineEditFixSize(m_iLineWidth, m_iLineHeight);
+    m_pONo7LineEditWidget->setFixedSize(m_iLineWidth, m_iLineHeight);
+    m_pONo8HLineEditWidget->SetLineEditFixSize(m_iLineWidth, m_iLineHeight);
+    m_pONo8LineEditWidget->setFixedSize(m_iLineWidth, m_iLineHeight);
     //
     m_pSaveButton = new QPushButton(tr("Save"), this);
     //connect(m_pSaveButton, SIGNAL(clicked(bool)), m_pOrdinaryBrightmess, SLOT(SlotOrdinarySave()));
     connect(m_pSaveButton, SIGNAL(clicked(bool)),this,SLOT(SlotSaveDeviceParamsData()));
-    m_pSaveButton->setFixedSize(130, 35);
+    m_pSaveButton->setFixedSize(120, 35);
     m_pReadButton = new QPushButton(tr("Read"), this);
     connect(m_pReadButton, SIGNAL(clicked(bool)), m_pOrdinaryBrightmess, SLOT(SlotOrdinaryRead()));
-    m_pReadButton->setFixedSize(130, 35);
+    m_pReadButton->setFixedSize(120, 35);
      //
-    QHBoxLayout *pLabelLayout = new QHBoxLayout;
-    pLabelLayout->addSpacing(110);
+    QVBoxLayout *pLabelLayout = new QVBoxLayout;
+    pLabelLayout->addStretch(1);
     pLabelLayout->addWidget(m_pOridinaryBrightnessValueLabel);
-    pLabelLayout->addSpacing(20);
     pLabelLayout->addWidget(m_pOridinaryGreenValueLabel);
-    pLabelLayout->addStretch(100);
+
     //
     QGridLayout *pNoLayout = new QGridLayout;
-    pNoLayout->setContentsMargins(40, 0, 40, 0);
-    pNoLayout->setVerticalSpacing(17);
-    pNoLayout->setHorizontalSpacing(35);
+//    pNoLayout->setContentsMargins(40, 0, 40, 0);
+//    pNoLayout->setVerticalSpacing(17);
+//    pNoLayout->setHorizontalSpacing(10);
     pNoLayout->addWidget(m_pONo1HLineEditWidget, 0, 0, 1, 1);
-    pNoLayout->addWidget(m_pONo1LineEditWidget, 0, 1, 1, 1);
-    pNoLayout->addWidget(m_pONo2HLineEditWidget, 1, 0, 1, 1);
+    pNoLayout->addWidget(m_pONo1LineEditWidget, 1, 0, 1, 1);
+    pNoLayout->addWidget(m_pONo2HLineEditWidget, 0, 1, 1, 1);
     pNoLayout->addWidget(m_pONo2LineEditWidget, 1, 1, 1, 1);
-    pNoLayout->addWidget(m_pONo3HLineEditWidget, 2, 0, 1, 1);
-    pNoLayout->addWidget(m_pONo3LineEditWidget, 2, 1, 1, 1);
-    pNoLayout->addWidget(m_pONo4HLineEditWidget, 3, 0, 1, 1);
-    pNoLayout->addWidget(m_pONo4LineEditWidget, 3, 1, 1, 1);
-    pNoLayout->addWidget(m_pONo5HLineEditWidget, 4, 0, 1, 1);
-    pNoLayout->addWidget(m_pONo5LineEditWidget, 4, 1, 1, 1);
-    pNoLayout->addWidget(m_pONo6HLineEditWidget, 5, 0, 1, 1);
-    pNoLayout->addWidget(m_pONo6LineEditWidget, 5, 1, 1, 1);
-    pNoLayout->addWidget(m_pONo7HLineEditWidget, 6, 0, 1, 1);
-    pNoLayout->addWidget(m_pONo7LineEditWidget, 6, 1, 1, 1);
-    pNoLayout->addWidget(m_pONo8HLineEditWidget, 7, 0, 1, 1);
-    pNoLayout->addWidget(m_pONo8LineEditWidget, 7, 1, 1, 1);
+    pNoLayout->addWidget(m_pONo3HLineEditWidget, 0, 2, 1, 1);
+    pNoLayout->addWidget(m_pONo3LineEditWidget, 1, 2, 1, 1);
+    pNoLayout->addWidget(m_pONo4HLineEditWidget, 0, 3, 1, 1);
+    pNoLayout->addWidget(m_pONo4LineEditWidget, 1, 3, 1, 1);
+    pNoLayout->addWidget(m_pONo5HLineEditWidget, 0, 4, 1, 1);
+    pNoLayout->addWidget(m_pONo5LineEditWidget, 1, 4, 1, 1);
+    pNoLayout->addWidget(m_pONo6HLineEditWidget, 0, 5, 1, 1);
+    pNoLayout->addWidget(m_pONo6LineEditWidget, 1, 5, 1, 1);
+    pNoLayout->addWidget(m_pONo7HLineEditWidget, 0, 6, 1, 1);
+    pNoLayout->addWidget(m_pONo7LineEditWidget, 1, 6, 1, 1);
+    pNoLayout->addWidget(m_pONo8HLineEditWidget, 0, 7, 1, 1);
+    pNoLayout->addWidget(m_pONo8LineEditWidget, 1, 7, 1, 1);
     //
-    QHBoxLayout *pButtonLayout = new QHBoxLayout;
+    QVBoxLayout *pButtonLayout = new QVBoxLayout;
+    pButtonLayout->addStretch(1);
     pButtonLayout->addWidget(m_pSaveButton);
     pButtonLayout->addWidget(m_pReadButton);
     //
-    QVBoxLayout *pLayout = new QVBoxLayout;
-    pLayout->addSpacing(20);
+    QHBoxLayout *pLayout = new QHBoxLayout;
+    pLayout->setContentsMargins(0, 20, 0, 30);
+    pLayout->addStretch(1);
     pLayout->addLayout(pLabelLayout);
     pLayout->addLayout(pNoLayout);
-    pLayout->addStretch(1);
+    pLayout->addSpacing(5);
     pLayout->addLayout(pButtonLayout);
-    pLayout->addSpacing(10);
+    pLayout->addStretch(1);
 
 
     pGroupBox->setLayout(pLayout);
@@ -481,9 +491,10 @@ QGroupBox *COrdinaryModelWidget::_CreateOridinaryGroup()
 void COrdinaryModelWidget::_InitLayout()
 {
     // qss
-    LoadQss(this, ":/qss/CalibrationPage/CalibrationPage.qss");
-    QHBoxLayout *pLayout = new QHBoxLayout;
+    LoadQss(this, ":/qss/CalibrationPage/CalibrationPageOrdinaryModel.qss");
+    QVBoxLayout *pLayout = new QVBoxLayout;
     pLayout->addWidget(_CreateStandardGroup());
+    pLayout->addSpacing(5);
     pLayout->addWidget(_CreateOridinaryGroup());
     this->setLayout(pLayout);
 }
