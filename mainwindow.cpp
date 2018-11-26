@@ -39,6 +39,7 @@
 #include "AdjustLight/HidOpertaionUtility.h"
 #include "AdjustLight/VideoThread.h"
 #include "PublicConfig.h"
+#include "PublicFunction.h"
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -48,7 +49,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //this->setWindowOpacity(1); //窗口整体透明度，0-1 从全透明到不透明
     //this->setAttribute(Qt::WA_TranslucentBackground); //设置背景透明，允许鼠标穿透
     //切换背景1
-    ui->centralWidget->setStyleSheet("#centralWidget{background-color: green;}"); //图片放到资源文件里面
+    //ui->centralWidget->setStyleSheet("#centralWidget{background-color: green;}"); //图片放到资源文件里面
 
     QDesktopWidget* desktopWidget = QApplication::desktop();
     QRect screenRect = desktopWidget->screenGeometry();
@@ -56,15 +57,15 @@ MainWindow::MainWindow(QWidget *parent) :
     int iActScreenH = screenRect.height();
 
     this->setMinimumSize(1024, 600);
-
+    SetWidgetBackColor(this, QColor(0x16, 0x1F, 0x30));
 
     GetQCameraInfo();
 //    LoadQss(this, ":/qss/MainWindows.qss");
     _InitWidget();
-    _InitLayout();
+    //_InitLayout();
     //
-    m_kiTitleHeight = 50;// title高度
-    m_kiStatusBarHeight = 30;// 状态栏高度
+    m_kiTitleHeight = 35;// title高度
+    m_kiStatusBarHeight = 35;// 状态栏高度
     m_iProgramCount = 0;
     // 读取配置文件
     _ReadConfigFile();
@@ -152,7 +153,7 @@ void MainWindow::resizeEvent(QResizeEvent *)
 {
     // 固定位置
     m_iWidgetRect = this->rect();
-    // 标题栏
+//    // 标题栏
     m_pDetectorPageTitleWidget->setGeometry(0, 0, m_iWidgetRect.width(), m_kiTitleHeight);
     m_pHistoryPageTitleWidget->setGeometry(0, 0, m_iWidgetRect.width(), m_kiTitleHeight);
     // 多标签
@@ -160,7 +161,7 @@ void MainWindow::resizeEvent(QResizeEvent *)
                                   m_iWidgetRect.height() - m_kiTitleHeight - m_kiStatusBarHeight);
     // 状态栏
     m_pDetectorPageStatusBar->setGeometry(0, m_iWidgetRect.height() - m_kiStatusBarHeight,
-                                          m_iWidgetRect.width()-20, m_kiStatusBarHeight);
+                                          m_iWidgetRect.width(), m_kiStatusBarHeight);
 }
 
 void MainWindow::mousePressEvent(QMouseEvent *event)
@@ -638,9 +639,11 @@ void MainWindow::_InitWidget()
     connect(m_pHistoryPageTitleWidget, SIGNAL(SignalReturnWindow()), this, SLOT(SlotGoHistoryPage()));
     // 多标签
     m_pStackedWidget = new QTabWidget(this);
-    m_pStackedWidget->setFixedSize(1024, 512);
+    m_pStackedWidget->setMinimumSize(1026, 490);
+
     m_pStackedWidget->setTabPosition(QTabWidget::West);
-    //m_pStackedWidget->setStyleSheet("QTabWidget {background-color: green;}");
+    m_pStackedWidget->setElideMode(Qt::ElideNone);
+    //m_pStackedWidget->setStyleSheet("QTabWidget::pane{border-width: 3px; border-style: solid; border-color: rgb(230, 230, 230); border-top: 5px solid #bbbbbb;}");
     m_pStackedWidget->tabBar()->setStyle(new CCustomTabStyle);
     m_pStackedWidget->tabBar()->setStyleSheet("QTabBar {background-color: 0x161F30;}");
 
@@ -688,12 +691,12 @@ void MainWindow::_InitLayout()
     m_pMainLayout->setMargin(0);
     m_pMainLayout->addWidget(m_pDetectorPageTitleWidget);
     m_pMainLayout->addWidget(m_pStackedWidget);
+    m_pMainLayout->addWidget(m_pDetectorPageStatusBar);
 
     // 布局
     m_pCentralWidget = new QWidget();
     setCentralWidget(m_pCentralWidget);
     m_pCentralWidget->setLayout(m_pMainLayout);
-    centralWidget()->layout()->setContentsMargins(0, 0, 0, 0);
 }
 
 void MainWindow::_GoHistoryPageLayout()
