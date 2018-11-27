@@ -25,6 +25,7 @@
 
 CLoginInWidget::CLoginInWidget(QWidget *parent) : QWidget(parent)
 {
+    m_bSeePassWord = false;
     //
     this->setFixedSize(1024, 600);
     this->setWindowFlags(Qt::CustomizeWindowHint | Qt::FramelessWindowHint);
@@ -141,7 +142,18 @@ void CLoginInWidget::_SlotCheckCloseButton()
 
 void CLoginInWidget::_SlotCheckHideButton()
 {
-
+    if(m_bSeePassWord)
+    {
+        m_bSeePassWord = false;
+        SetButtonBackImage(m_pPasswordHidButton, ":/image/ico/login/no_see.png");// 默认不可见
+        m_pPasswordLineEdit->setEchoMode(QLineEdit::Password);
+    }
+    else
+    {
+        m_bSeePassWord = true;
+        SetButtonBackImage(m_pPasswordHidButton, ":/image/ico/login/see.png");// 默认不可见
+        m_pPasswordLineEdit->setEchoMode(QLineEdit::Normal);
+    }
 }
 
 void CLoginInWidget::_SlotCheckLoginButton()
@@ -204,17 +216,6 @@ int CLoginInWidget::GetUserPower()
 void CLoginInWidget::_InitWidget()
 {
     //
-    m_pMinButton = new QPushButton(this);
-    m_pMinButton->setFixedSize(60, 50);
-    SetButtonBackImage(m_pMinButton, ":/image/ico/login/login_zoomout_pressed.jpg");
-    connect(m_pMinButton, SIGNAL(clicked(bool)), this, SLOT(_SlotCheckMinButton()));
-
-    //
-    m_pCloseButton = new QPushButton(this);
-    m_pCloseButton->setFixedSize(60, 50);
-    SetButtonBackImage(m_pCloseButton, ":/image/ico/login/login_close_pressed.jpg");
-    connect(m_pCloseButton, SIGNAL(clicked(bool)), this, SLOT(_SlotCheckCloseButton()));
-    //
 //    m_pLoginLabel = new QLabel("Login", this);
 //    m_pLoginLabel->setObjectName("m_pLoginLabel");
     // user
@@ -230,8 +231,10 @@ void CLoginInWidget::_InitWidget()
     m_pPasswordLineEdit->setEchoMode(QLineEdit::Password);
     m_pPasswordLineEdit->setFixedSize(280, 35);
     connect(m_pPasswordLineEdit, &QLineEdit::textChanged, this, &CLoginInWidget::_SlotPasswordChange);
-    m_pPasswordHidButton = new QPushButton("Hide", this);
+    m_pPasswordHidButton = new QPushButton("", this);
     m_pPasswordHidButton->setFixedSize(60, 35);
+    SetButtonBackImage(m_pPasswordHidButton, ":/image/ico/login/no_see.png");// 默认不可见
+    m_pPasswordHidButton->setObjectName("m_pPasswordHidButton");
     connect(m_pPasswordHidButton, &QPushButton::clicked, this, &CLoginInWidget::_SlotCheckHideButton);
     //
     m_pLoginButton = new QPushButton("Login", this);
@@ -248,11 +251,6 @@ void CLoginInWidget::_InitWidget()
 void CLoginInWidget::_InitLayout()
 {
     int iLeftSize = 625;
-    QHBoxLayout *pTitleLayout = new QHBoxLayout;
-    pTitleLayout->setMargin(0);
-    pTitleLayout->addStretch(100);
-    pTitleLayout->addWidget(m_pMinButton);
-    pTitleLayout->addWidget(m_pCloseButton);
     // username
     QHBoxLayout *pUserNameLableHLayout = new QHBoxLayout;
     pUserNameLableHLayout->addSpacing(iLeftSize);
@@ -285,7 +283,6 @@ void CLoginInWidget::_InitLayout()
 
     QVBoxLayout *pVLayout = new QVBoxLayout;
     pVLayout->setMargin(0);
-    pVLayout->addLayout(pTitleLayout);
     pVLayout->addStretch(100);
     pVLayout->addLayout(pUserNameLableHLayout);
     pVLayout->addSpacing(10);

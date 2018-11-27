@@ -30,7 +30,7 @@ CDetectorPageTitleWidget::CDetectorPageTitleWidget(QWidget *parent) : QWidget(pa
 
 void CDetectorPageTitleWidget::SetUserName(QString strUserName)
 {
-//    m_pOperatorIDLineEdit->setText("Operator ID: " + strUserName);
+    m_pUserNameLabel->setText(" " + strUserName);
 }
 
 /**
@@ -41,25 +41,15 @@ void CDetectorPageTitleWidget::SetUserName(QString strUserName)
 void CDetectorPageTitleWidget::_InitWidget()
 {
     // logo
-//    m_pLogoLabel = new QLabel(this);
-//    m_pLogoLabel->setFixedSize(172, 40);
-//    if(gk_iVersionConfig == ADMIN_VERSION)
-//    {
-//        m_pLogoLabel->setPixmap(QPixmap(":/image/ico/title/PIS_logo.png"));
-//    }
-//    else if(gk_iVersionConfig == OTHER_VERSION)
-//    {
-//        m_pLogoLabel->setPixmap(QPixmap(":/image/ico/title/MD_logo.png"));
-//    }
-//    else
-//    {
-//        m_pLogoLabel->setPixmap(QPixmap(":/image/ico/title/logo.png"));
-//    }
-
-//    // Operator ID
-//    m_pOperatorIDLineEdit = new  QLineEdit("Operator ID:", this);
-//    m_pOperatorIDLineEdit->setFixedSize(182, 30);
-//    m_pOperatorIDLineEdit->setEnabled(false);
+    m_pLogoLabel = new QLabel("LOGO", this);
+    m_pLogoLabel->setFixedSize(120, 35);
+    //
+    m_pUserMapLabel = new QLabel(this);
+    m_pUserMapLabel->setFixedSize(28, 28);
+    SetWidgetBackImage(m_pUserMapLabel, ":/image/ico/login/user.png");
+    //
+    m_pUserNameLabel = new QLabel(this);
+    m_pUserNameLabel->setFixedSize(200, 35);
 }
 /**
   * @brief 布局
@@ -68,13 +58,14 @@ void CDetectorPageTitleWidget::_InitWidget()
   */
 void CDetectorPageTitleWidget::_InitLayout()
 {
-//    LoadQss(this, ":/qss/DetectorPage/MainTitle.qss");
-//    m_pLayout = new QHBoxLayout;
-//    m_pLayout->setMargin(0);
-//    m_pLayout->addWidget(m_pLogoLabel);
-//    m_pLayout->addSpacing(2);
-//    m_pLayout->addWidget(m_pOperatorIDLineEdit);
-//    m_pLayout->addStretch(1);
-//    this->setLayout(m_pLayout);
+    LoadQss(this, ":/qss/DetectorPage/MainTitle.qss");
+    QHBoxLayout *m_pLayout = new QHBoxLayout;
+    m_pLayout->setMargin(0);
+    m_pLayout->addWidget(m_pLogoLabel);
+    m_pLayout->addSpacing(2);
+    m_pLayout->addWidget(m_pUserMapLabel);
+    m_pLayout->addWidget(m_pUserNameLabel);
+    m_pLayout->addStretch(1);
+    this->setLayout(m_pLayout);
 }
 

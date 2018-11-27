@@ -39,7 +39,9 @@ private:
 
 private:
     //
-//    QLabel *m_pLogoLabel;
+    QLabel *m_pLogoLabel;
+    QLabel *m_pUserMapLabel;
+    QLabel *m_pUserNameLabel;
 //    QLineEdit *m_pOperatorIDLineEdit;
 
 };

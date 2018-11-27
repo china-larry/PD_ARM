@@ -19,7 +19,6 @@
 #include <QTabWidget>
 #include <QCameraInfo>
 #include "DetectorPage/CDetectorPageTitleWidget.h"
-#include "HistoryPage/CHistoryPageTitleWidget.h"
 #include "DetectorPage/CDetectorPageStatusBar.h"
 #include "DetectorPage/CDetectorPage.h"
 #include "HistoryPage/CHistoryPage.h"
@@ -47,14 +46,6 @@ public:
 public slots:
     // 标题栏
     void SlotReceiveLogin(int iUserPower, QString strUserName);// 登陆界面跳转
-    void SlotGoDetectorPage();// 标题栏发送来的跳转测试界面
-    void SlotGoCalibrationPage();// 前往校准页面
-    void SlotGoHistoryPage();// 前往历史页面
-    void SlotGoSettingPage();// 前往设置页面
-    void SlotMinWindow();// 最小化
-    void SlotMaxWindow();// 最大化
-    void SlotCloseWindow();// 关闭
-    void SlotCheckHistoryItem();// 前往历史页
     // 测试开始，更改状态栏
     void SlotDetectorPageStartTest(int iTestDelayTime);
     // 开始获取二维码
@@ -72,6 +63,8 @@ public slots:
     // 自动连接服务器
     //void SlotAutoConnectPis(bool bAuto);
     void SlotAutoConnectPoct(bool bAuto);
+private slots:
+    void _SlotTabPageChange(int iIndex);
 
 private:
     void _InitWidget();
@@ -87,7 +80,6 @@ private:
     QWidget *m_pCentralWidget;// 布局
     // Title
     CDetectorPageTitleWidget *m_pDetectorPageTitleWidget;
-    CHistoryPageTitleWidget *m_pHistoryPageTitleWidget;
     bool m_bShowMaxFlag;
     // 多标签 切换控件
     QTabWidget *m_pStackedWidget;

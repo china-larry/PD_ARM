@@ -34,6 +34,7 @@ CDetectorPage::CDetectorPage(QWidget *parent) : QWidget(parent)
 {
     //应用样式 apply the qss style
     _LoadQss();
+
     // 初始化接收lib库
     _InitThreadTesting();
     // 初始化控件
@@ -496,7 +497,7 @@ void CDetectorPage::_LoadQss()
 void CDetectorPage::_InitTableWidget()
 {
     m_pResultsTableWidget = new QTableWidget(this);
-    m_pResultsTableWidget->setFixedSize(390, 350);
+    m_pResultsTableWidget->setFixedSize(390, 360);
     m_pResultsTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
     m_pResultsTableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
     // 表单样式
@@ -610,6 +611,7 @@ void CDetectorPage::_InitWidget()
     //手动修改结果按钮
     m_pManualSetButton = new QPushButton(tr("Manual Set"));
     m_pManualSetButton->setFixedSize(105,35);
+    m_pManualSetButton->hide();
     connect(m_pManualSetButton,SIGNAL(clicked(bool)),this,SLOT(_SlotManualSetData()));
 }
 /**

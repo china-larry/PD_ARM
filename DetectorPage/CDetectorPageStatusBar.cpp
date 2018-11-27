@@ -18,6 +18,7 @@ CDetectorPageStatusBar::CDetectorPageStatusBar(QWidget *parent) : QWidget(parent
 {
     this->setFixedSize(1024, 35);
     //this->setMinimumSize(990, 30);
+   // SetWidgetBackColor(this, QColor(255, 255, 255));
     SetWidgetBackColor(this, QColor(240, 240, 240));
     _InitWidget();
     _InitLayout();
@@ -94,6 +95,10 @@ void CDetectorPageStatusBar::SetStopDelayTimer()
   */
 void CDetectorPageStatusBar::_InitWidget()
 {
+    m_pBackColorLabel = new QLabel(this);
+    m_pBackColorLabel->setFixedSize(131, 35);
+    SetWidgetBackColor(m_pBackColorLabel, QColor(0x16, 0x1F, 0x30));
+    //
     m_pTestStatusBarLineEdit = new QLineEdit(this);
     m_pTestStatusBarLineEdit->setEnabled(false);
 
@@ -118,6 +123,7 @@ void CDetectorPageStatusBar::_InitLayout()
     LoadQss(this, ":/qss/MainWindows.qss");
     QHBoxLayout *pStatusLayout = new QHBoxLayout;
     pStatusLayout->setMargin(0);
+    pStatusLayout->addWidget(m_pBackColorLabel);
     pStatusLayout->addStretch(1);
     pStatusLayout->addWidget(m_pTestStatusBarLineEdit);
     pStatusLayout->addWidget(m_pTestProgressBar);

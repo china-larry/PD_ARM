@@ -41,6 +41,7 @@ private:
 
 
 private:
+    QLabel *m_pBackColorLabel;
     QLineEdit *m_pTestStatusBarLineEdit;
     QProgressBar *m_pTestProgressBar;
     QTimer *m_pTimer;

@@ -2,7 +2,7 @@ QLabel
 {
         color: #333; /* text color */
         font-family: "Arial";
-        font-size: 14px;
+        font-size: 17px;
 }
 QLineEdit
 {

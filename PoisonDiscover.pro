@@ -61,7 +61,6 @@ SOURCES += \
     DetectorPage/CDetectorPageTitleWidget.cpp \
     DetectorPage/manualsetdialog.cpp \
     HistoryPage/CHistoryPage.cpp \
-    HistoryPage/CHistoryPageTitleWidget.cpp \
     HistoryPage/TcpSocketThread.cpp \
     CalibrationPage/CCalibrationPage.cpp \
     CalibrationPage/COrdinaryModelWidget.cpp \
@@ -111,7 +110,6 @@ HEADERS += \
     DetectorPage/CDetectorPageTitleWidget.h \
     DetectorPage/manualsetdialog.h \
     HistoryPage/CHistoryPage.h \
-    HistoryPage/CHistoryPageTitleWidget.h \
     HistoryPage/TcpSocketThread.h \
     CalibrationPage/CCalibrationPage.h \
     CalibrationPage/COrdinaryModelWidget.h \

@@ -155,7 +155,6 @@ void MainWindow::resizeEvent(QResizeEvent *)
     m_iWidgetRect = this->rect();
 //    // 标题栏
     m_pDetectorPageTitleWidget->setGeometry(0, 0, m_iWidgetRect.width(), m_kiTitleHeight);
-    m_pHistoryPageTitleWidget->setGeometry(0, 0, m_iWidgetRect.width(), m_kiTitleHeight);
     // 多标签
     m_pStackedWidget->setGeometry(0, m_kiTitleHeight, m_iWidgetRect.width(),
                                   m_iWidgetRect.height() - m_kiTitleHeight - m_kiStatusBarHeight);
@@ -168,12 +167,6 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
 {
     if( event->button() == Qt::LeftButton &&
                 m_pDetectorPageTitleWidget->rect().contains(event->globalPos() - this->frameGeometry().topLeft()))
-    {
-        m_qPressPoint = event->globalPos();
-        m_bLeftButtonCheck = true;
-    }
-    if( event->button() == Qt::LeftButton &&
-                m_pHistoryPageTitleWidget->rect().contains(event->globalPos() - this->frameGeometry().topLeft()))
     {
         m_qPressPoint = event->globalPos();
         m_bLeftButtonCheck = true;
@@ -437,7 +430,6 @@ void MainWindow::SlotReceiveLogin(int iUserPower, QString strUserName)
     m_pDetectorPage->SetUserName(strUserName);
     m_pHistoryPage->SetUserName(strUserName);
     m_pDetectorPageTitleWidget->SetUserName(strUserName);
-    m_pHistoryPageTitleWidget->SetUserName(strUserName);
     qDebug() << " user power" <<iUserPower;
     if(iUserPower < 2)
     {
@@ -445,81 +437,14 @@ void MainWindow::SlotReceiveLogin(int iUserPower, QString strUserName)
     }
     if(iUserPower <  1)
     {
-        qDebug() << " user pow33333er";
+        qDebug() << " user power1";
         m_pSettingPage->SetAccountHide();
-        m_pHistoryPageTitleWidget->SetCalibrationButtonHide(true);
+        m_pStackedWidget->removeTab(3);
     }
     else
     {
         // do nothing
     }
-}
-// 前往设置页
-void MainWindow::SlotGoSettingPage()
-{
-    m_pStackedWidget->setCurrentIndex(3);
-    m_pDetectorPageStatusBar->hide();
-}
-// 前往历史数据页
-void MainWindow::SlotGoHistoryPage()
-{
-    m_pStackedWidget->setCurrentIndex(2);
-    m_pHistoryPage->ShowCurrentDateTest();// 显示当天测试结果数据
-    //
-    m_pDetectorPageStatusBar->hide();
-    m_pDetectorPageTitleWidget->hide();
-    m_pHistoryPageTitleWidget->show();
-    _GoHistoryPageLayout();
-}
-// 前往测试页
-void MainWindow::SlotGoDetectorPage()
-{
-    m_pStackedWidget->setCurrentIndex(0);
-    //
-    m_pDetectorPageStatusBar->show();
-    m_pDetectorPageTitleWidget->show();
-    m_pHistoryPageTitleWidget->hide();
-    _GoTestPageLayout();
-}
-// 前往校准页面
-void MainWindow::SlotGoCalibrationPage()
-{
-    m_pStackedWidget->setCurrentIndex(1);
-    m_pDetectorPageStatusBar->hide();
-}
-// 最小化
-void MainWindow::SlotMinWindow()
-{
-    this->showMinimized();
-}
-
-void MainWindow::SlotMaxWindow()
-{
-    qDebug() << "show full";
-    if(m_bShowMaxFlag)
-    {
-        this->showMaximized();
-    }
-    else
-    {
-        this->showNormal();
-    }
-    m_bShowMaxFlag = !m_bShowMaxFlag;
-}
-// 关闭
-void MainWindow::SlotCloseWindow()
-{
-    qDebug() << "SlotCloseWindow";
-    this->close();
-
-    QApplication::exit(0);
-
-    qDebug() << "SlotCloseWindow123";
-}
-// 前往历史数据页面
-void MainWindow::SlotCheckHistoryItem()
-{
-    m_pStackedWidget->setCurrentIndex(2);
 }
 // 状态栏显示开始
 void MainWindow::SlotDetectorPageStartTest(int iTestDelayTime)
@@ -609,7 +534,26 @@ void MainWindow::SlotAutoConnectPoct(bool bAuto)
 {
     qDebug() << " auto conn " << bAuto;
     m_pHistoryPage->AutoConnectPoctServer(m_pSettingPage->GetPoctServerIP(),
-                                             m_pSettingPage->GetPoctPort(), bAuto);
+                                          m_pSettingPage->GetPoctPort(), bAuto);
+}
+
+void MainWindow::_SlotTabPageChange(int iIndex)
+{
+    switch (iIndex) {
+    case 0:
+        // 是否自动测试
+        m_pDetectorPage->SetAutoTest(m_pSettingPage->GetAutoTestFalg());
+        break;
+    case 1:
+        m_pHistoryPage->ShowCurrentDateTest();// 显示当天测试结果数据
+        break;
+    case 2:
+        break;
+    case 3:
+        break;
+    default:
+        break;
+    }
 }
 /**
   * @brief 初始化控件
@@ -621,22 +565,6 @@ void MainWindow::_InitWidget()
 //    SetWidgetBackColor(this, QColor(0x161F30));
     // 标题栏
     m_pDetectorPageTitleWidget = new CDetectorPageTitleWidget(this);
-    m_pHistoryPageTitleWidget = new CHistoryPageTitleWidget(this);
-    m_pHistoryPageTitleWidget->hide();
-//    QRect rect = this->rect();
-//    m_pDetectorPageTitleWidget->setGeometry(0, 0, rect.width(), m_ciTitleHeight);
-    connect(m_pDetectorPageTitleWidget, SIGNAL(SignalGoHistoryPage()), this, SLOT(SlotGoHistoryPage()));
-    connect(m_pDetectorPageTitleWidget, SIGNAL(SignalMinWindow()), this, SLOT(SlotMinWindow()));
-    connect(m_pDetectorPageTitleWidget, SIGNAL(SignalMaxWindow()), this, SLOT(SlotMaxWindow()));
-    connect(m_pDetectorPageTitleWidget, SIGNAL(SignalCloseWindow()), this, SLOT(SlotCloseWindow()));
-    // history
-    connect(m_pHistoryPageTitleWidget, SIGNAL(SignalGoDetectorPage()), this, SLOT(SlotGoDetectorPage()));
-    connect(m_pHistoryPageTitleWidget, SIGNAL(SignalCheckHistoryItem()), this, SLOT(SlotCheckHistoryItem()));
-    connect(m_pHistoryPageTitleWidget, SIGNAL(SignalGoCalibrationPage()), this, SLOT(SlotGoCalibrationPage()));
-    connect(m_pHistoryPageTitleWidget, SIGNAL(SignalGoSettingPage()), this, SLOT(SlotGoSettingPage()));
-    connect(m_pHistoryPageTitleWidget, SIGNAL(SignalMinWindow()), this, SLOT(SlotMinWindow()));
-    connect(m_pHistoryPageTitleWidget, SIGNAL(SignalMaxWindow()), this, SLOT(SlotMaxWindow()));
-    connect(m_pHistoryPageTitleWidget, SIGNAL(SignalReturnWindow()), this, SLOT(SlotGoHistoryPage()));
     // 多标签
     m_pStackedWidget = new QTabWidget(this);
     m_pStackedWidget->setMinimumSize(1026, 490);
@@ -646,6 +574,7 @@ void MainWindow::_InitWidget()
     //m_pStackedWidget->setStyleSheet("QTabWidget::pane{border-width: 3px; border-style: solid; border-color: rgb(230, 230, 230); border-top: 5px solid #bbbbbb;}");
     m_pStackedWidget->tabBar()->setStyle(new CCustomTabStyle);
     m_pStackedWidget->tabBar()->setStyleSheet("QTabBar {background-color: 0x161F30;}");
+    connect(m_pStackedWidget, &QTabWidget::currentChanged, this, &MainWindow::_SlotTabPageChange);
 
     // 测试页
     m_pDetectorPage = new CDetectorPage(this);
@@ -667,7 +596,7 @@ void MainWindow::_InitWidget()
     connect(m_pSettingPage, &CSettingPage::SignalAutoConnectPoct, this, &MainWindow::SlotAutoConnectPoct);
 
     // 布局    
-    m_pStackedWidget->addTab(m_pDetectorPage, tr("HomePage"));
+    m_pStackedWidget->addTab(m_pDetectorPage, QIcon("C:/user.png"), tr("HomePage"));
     m_pStackedWidget->addTab(m_pHistoryPage, tr("History"));
     m_pStackedWidget->addTab(m_pSettingPage, tr("Setting"));
     m_pStackedWidget->addTab(m_pCalibrationPage, tr("Calibration"));
@@ -699,32 +628,7 @@ void MainWindow::_InitLayout()
     m_pCentralWidget->setLayout(m_pMainLayout);
 }
 
-void MainWindow::_GoHistoryPageLayout()
-{
-    m_pMainLayout->removeWidget(m_pDetectorPageTitleWidget);
-    m_pMainLayout->removeWidget(m_pStackedWidget);
-    //
-    m_pMainLayout->addWidget(m_pHistoryPageTitleWidget);
-    m_pMainLayout->addWidget(m_pStackedWidget);
-       // 布局
-//    QWidget *pWidget = new QWidget();
-//    setCentralWidget(pWidget);
-    m_pCentralWidget->setLayout(m_pMainLayout);
-}
 
-void MainWindow::_GoTestPageLayout()
-{
-    // 是否自动测试
-    m_pDetectorPage->SetAutoTest(m_pSettingPage->GetAutoTestFalg());
-    //
-    m_pMainLayout->removeWidget(m_pHistoryPageTitleWidget);
-    m_pMainLayout->removeWidget(m_pStackedWidget);
-    //
-    m_pMainLayout->addWidget(m_pDetectorPageTitleWidget);
-    m_pMainLayout->addWidget(m_pStackedWidget);
-       // 布局
-    m_pCentralWidget->setLayout(m_pMainLayout);
-}
 /**
   * @brief 读取配置文件
   * @param

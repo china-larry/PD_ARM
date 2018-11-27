@@ -632,10 +632,12 @@ void CCustomTabStyle::drawControl(QStyle::ControlElement element, const QStyleOp
             }
             else
             {
-                painter->setPen(0xFFFFFF);
+                painter->setPen(0x818282);
             }
+            painter->setFont(QFont("Arial", 13));
 
-            painter->drawText(allRect, tab->text, option);
+            painter->drawText(QRect(allRect.x(), allRect.y() + 25, allRect.width(), allRect.height() ), tab->text, option);
+            painter->drawPixmap(QRect(allRect.x() + 48, allRect.y() + 15, 30, 30), tab->icon.pixmap(30, 30));
             return;
         }
 

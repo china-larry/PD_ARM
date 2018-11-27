@@ -47,10 +47,6 @@ private:
     void _InitLayout();
     int _CheckUserPower();// 用户名和权限验证
 private:
-    //
-    QPushButton *m_pMinButton;
-    QPushButton *m_pCloseButton;
-    //
 //    QLabel *m_pLoginLabel;
     // user
     QLabel *m_pUserNameLabel;
@@ -59,6 +55,7 @@ private:
     QLabel *m_pPasswordLabel;
     QLineEdit *m_pPasswordLineEdit;
     QPushButton *m_pPasswordHidButton;
+    bool m_bSeePassWord;// false不可见，true可见
     //
     QPushButton *m_pLoginButton;
 
