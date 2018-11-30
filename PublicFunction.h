@@ -23,7 +23,7 @@
 #include <QComboBox>
 #include <QPainter>
 #include <QProxyStyle>
-#include "AdjustLight/common.h"
+#include "AdjustLight/Common.h"
 #include "AdjustLight/testing/ThreadTesting.h"
 #include <QSqlDatabase>
 #include "CommonDataWidget/CLabelCommoBoxWidget.h"
@@ -48,11 +48,11 @@ struct DetectorPageUserData
     // operator
     QString strOperator;// 操作者身份
     // adulterants
-    QString bOxidant = "2";
-    QString bSpecificGravity = "2";
-    QString bPH = "2";
-    QString bNitrite = "2";
-    QString bCreatinine = "2";
+    QString bOxidant;
+    QString bSpecificGravity;
+    QString bPH;
+    QString bNitrite;
+    QString bCreatinine;
     // reason
     bool bPreEmployment;
     bool bRandom;
@@ -66,7 +66,7 @@ struct DetectorPageUserData
     QString strAddress;
     // product details
     bool bTemperatureNormal;
-    QString strProductDefinition =  "FiveFace";
+    QString strProductDefinition;
     QString strExpriationDate;
     QString strProductLot;
     QString strProductID;

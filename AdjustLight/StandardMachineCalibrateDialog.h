@@ -95,14 +95,14 @@ private:
 
     ThreadStandardTesting *m_threadStandardTesting; //老化线程
     QMap<double,int> m_qZValueMap; //存放Z值容器
-    const int m_iMaxLightValue = 25000;
+    int m_iMaxLightValue;
     bool m_bIsStop; //是否停止
     bool m_bIsFinish; //是否完成
     StandardMachineLight sStandardMachineLight;//标准机灯光
     QTextStream qTextOutStream;//数据流
     QFile qFileName;//文件名
     StandardMachineCalibrateParams sParams;//标准机校准参数
-    const QString kstrDir = QCoreApplication::applicationDirPath() + "/camera";//文件保存路径
+    QString kstrDir;//文件保存路径
 
     CQprogress *cProgress;
 };

@@ -25,7 +25,6 @@
 #include <QComboBox>
 #include <QTableWidget>
 #include <QTextEdit>
-#include <QAxObject>
 #include <QSqlQuery>
 #include <string>
 #include <QTcpSocket>

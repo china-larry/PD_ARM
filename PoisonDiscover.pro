@@ -3,8 +3,20 @@
 # Project created by QtCreator 2018-11-07T09:56:22
 #
 #-------------------------------------------------
+Platform = $$system(qmake -v | grep arm)
+#参数未使用不警告
+QMAKE_CXXFLAGS +=  -Wno-unused-parameter
+QT       += core gui sql printsupport network multimedia
 
-QT       += core gui sql printsupport axcontainer network multimedia
+CONFIG(debug){
+    OBJECTS_DIR += build/debug_obj
+}else{
+    OBJECTS_DIR += build/release_obj
+    DEFINES += RELEASE
+}
+# 编译时文件路径
+RCC_DIR += build/tmp
+MOC_DIR += build/tmp
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -132,16 +144,49 @@ FORMS += \
     cqprogress.ui \
     DetectorPage/manualsetdialog.ui
 
-
-INCLUDEPATH   += $$PWD/AdjustLight/opencv/include
-                 $$PWD/AdjustLight/opencv/include/opencv
-                 $$PWD/AdjustLight/opencv/include/opencv2
+INCLUDEPATH   += $$PWD/include
+                 $$PWD/include/opencv
+                 $$PWD/include/opencv2
 
 
 DEPENDPATH += $$PWD/AdjustLight/opencv
-LIBS += $$PWD/AdjustLight/opencv/lib/libopencv_*.a
 
-LIBS += $$PWD/lib/libsetupapi.a
+
+#LIBS += $$PWD/lib/arm/libopencv_highgui.so \
+#        $$PWD/lib/arm/libopencv_core.so    \
+#        $$PWD/lib/arm/libopencv_imgproc.so \
+#        $$PWD/lib/arm/libopencv_calib3d.so \
+#        $$PWD/lib/arm/libopencv_features2d.so \
+#        $$PWD/lib/arm/libopencv_flann.so \
+#        $$PWD/lib/arm/libopencv_imgcodecs.so\
+#        $$PWD/lib/arm/libopencv_ml.so \
+#        $$PWD/lib/arm/libopencv_objdetect.so \
+#        $$PWD/lib/arm/libopencv_photo.so \
+#        $$PWD/lib/arm/libopencv_shape.so \
+#        $$PWD/lib/arm/libopencv_stitching.so \
+#        $$PWD/lib/arm/libopencv_superres.so \
+#        $$PWD/lib/arm/libopencv_video.so \
+#        $$PWD/lib/arm/libopencv_videoio.so \
+#        $$PWD/lib/arm/libopencv_videostab.so \
+#        $$PWD/lib/arm/libudev.so
+
+LIBS += $$PWD/lib/x11/libopencv_highgui.so \
+        $$PWD/lib/x11/libopencv_core.so    \
+        $$PWD/lib/x11/libopencv_imgproc.so \
+        $$PWD/lib/x11/libopencv_calib3d.so \
+        $$PWD/lib/x11/libopencv_features2d.so \
+        $$PWD/lib/x11/libopencv_flann.so \
+        $$PWD/lib/x11/libopencv_imgcodecs.so\
+        $$PWD/lib/x11/libopencv_ml.so \
+        $$PWD/lib/x11/libopencv_objdetect.so \
+        $$PWD/lib/x11/libopencv_photo.so \
+        $$PWD/lib/x11/libopencv_shape.so \
+        $$PWD/lib/x11/libopencv_stitching.so \
+        $$PWD/lib/x11/libopencv_superres.so \
+        $$PWD/lib/x11/libopencv_video.so \
+        $$PWD/lib/x11/libopencv_videoio.so \
+        $$PWD/lib/x11/libopencv_videostab.so \
+        $$PWD/lib/x11/libudev.so
 
 DISTFILES += \
     AdjustLight/Love Wondfo.ico \

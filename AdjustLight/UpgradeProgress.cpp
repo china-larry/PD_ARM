@@ -13,7 +13,7 @@
 #include <QFileDialog>
 
 #include "UpgradeProgress.h"
-#include "ui_upgradeprogress.h"
+#include "ui_UpgradeProgress.h"
 #include "crc16/crc16.h"
 #include "HidOpertaionUtility.h"
 #include "CHidCmdThread.h"

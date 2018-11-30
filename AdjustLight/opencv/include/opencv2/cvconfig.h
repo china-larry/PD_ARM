@@ -20,7 +20,7 @@
 /* #undef HAVE_CAMV4L */
 
 /* V4L2 capturing support */
-/* #undef HAVE_CAMV4L2 */
+#define HAVE_CAMV4L2
 
 /* Carbon windowing environment */
 /* #undef HAVE_CARBON */
@@ -53,7 +53,7 @@
 /* #undef HAVE_DC1394 */
 
 /* IEEE1394 capturing support - libdc1394 v2.x */
-/* #undef HAVE_DC1394_2 */
+#define HAVE_DC1394_2
 
 /* DirectX */
 /* #undef HAVE_DIRECTX */
@@ -63,13 +63,13 @@
 /* #undef HAVE_D3D9 */
 
 /* DirectShow Video Capture library */
-#define HAVE_DSHOW
+/* #undef HAVE_DSHOW */
 
 /* Eigen Matrix & Linear Algebra Library */
 /* #undef HAVE_EIGEN */
 
 /* FFMpeg video library */
-#define HAVE_FFMPEG
+/* #undef HAVE_FFMPEG */
 
 /* Geospatial Data Abstraction Library */
 /* #undef HAVE_GDAL */
@@ -78,10 +78,10 @@
 /* #undef HAVE_GSTREAMER */
 
 /* GTK+ 2.0 Thread support */
-/* #undef HAVE_GTHREAD */
+#define HAVE_GTHREAD
 
 /* GTK+ 2.x toolkit */
-/* #undef HAVE_GTK */
+#define HAVE_GTK
 
 /* Define to 1 if you have the <inttypes.h> header file. */
 /* #undef HAVE_INTTYPES_H */
@@ -90,8 +90,8 @@
 /* #undef HAVE_INTELPERC */
 
 /* Intel Integrated Performance Primitives */
-/* #undef HAVE_IPP */
-/* #undef HAVE_IPP_ICV_ONLY */
+#define HAVE_IPP
+#define HAVE_IPP_ICV_ONLY
 
 /* Intel IPP Async */
 /* #undef HAVE_IPP_A */
@@ -103,7 +103,7 @@
 #define HAVE_JPEG
 
 /* libpng/png.h needs to be included */
-/* #undef HAVE_LIBPNG_PNG_H */
+#define HAVE_LIBPNG_PNG_H
 
 /* GDCM DICOM codec */
 /* #undef HAVE_GDCM */
@@ -168,13 +168,13 @@
 /* #undef HAVE_UNICAP */
 
 /* Video for Windows support */
-#define HAVE_VFW
+/* #undef HAVE_VFW */
 
 /* V4L2 capturing support in videoio.h */
 /* #undef HAVE_VIDEOIO */
 
 /* Win32 UI */
-#define HAVE_WIN32UI
+/* #undef HAVE_WIN32UI */
 
 /* XIMEA camera support */
 /* #undef HAVE_XIMEA */

@@ -10,6 +10,7 @@ StandardMachineCalibrateDialog::StandardMachineCalibrateDialog(QWidget *parent) 
     ui(new Ui::StandardMachineCalibrateDialog)
 {
     ui->setupUi(this);
+    m_iMaxLightValue = 25000;
 
     connect(ui->ConfirmButton,SIGNAL(clicked()),this,SLOT(_SlotConfirm()));
 
@@ -169,7 +170,7 @@ void StandardMachineCalibrateDialog::_SlotGetZvalue(double dZvalue)
                    << dZvalue << "\n";
 
     qFileName.close();
-
+    kstrDir = QCoreApplication::applicationDirPath() + "/camera";//文件保存路径
     _RemoveFolderContent(kstrDir);
     if(m_bIsStop == true || m_bIsFinish == true)
     {

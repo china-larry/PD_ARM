@@ -15,9 +15,9 @@
 #include <QThread>
 #define PRO_DRUG_DETECTOR
 #ifdef PRO_DRUG_DETECTOR
-    #include "AdjustLight/qrcodedetector.h"
+    #include "AdjustLight/QrcodeDetector.h"
 #else
-    #include "qrcodedetector.h"
+    #include "QrcodeDetector.h"
 #endif
 #ifndef THREADTESTING_H
 #define THREADTESTING_H

@@ -25,12 +25,7 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QJsonValue>
-#include <windows.h>
-#include <windowsx.h>
-#include <dbt.h>
-#include <devguid.h>
-#include <SetupAPI.h>
-#include <InitGuid.h>
+
 #include <QDesktopWidget>
 #include <QRect>
 
@@ -72,43 +67,43 @@ MainWindow::MainWindow(QWidget *parent) :
     m_bLeftButtonCheck = false;
     m_bShowMaxFlag = true;// 第一次最大化
     //
-    static const GUID GUID_DEVINTERFACE_LIST[] =
-        {
-        // GUID_DEVINTERFACE_USB_DEVICE
-        //{ 0xA5DCBF10, 0x6530, 0x11D2, { 0x90, 0x1F, 0x00, 0xC0, 0x4F, 0xB9, 0x51, 0xED } },
-        // GUID_DEVINTERFACE_DISK
-        //{ 0x53f56307, 0xb6bf, 0x11d0, { 0x94, 0xf2, 0x00, 0xa0, 0xc9, 0x1e, 0xfb, 0x8b } },
-        // GUID_DEVINTERFACE_HID,
-        { 0x4D1E55B2, 0xF16F, 0x11CF, { 0x88, 0xCB, 0x00, 0x11, 0x11, 0x00, 0x00, 0x30 } },
-        // GUID_NDIS_LAN_CLASS
-        //{ 0xad498944, 0x762f, 0x11d0, { 0x8d, 0xcb, 0x00, 0xc0, 0x4f, 0xc3, 0x35, 0x8c } }
-        //// GUID_DEVINTERFACE_COMPORT
-        //{ 0x86e0d1e0, 0x8089, 0x11d0, { 0x9c, 0xe4, 0x08, 0x00, 0x3e, 0x30, 0x1f, 0x73 } },
-        //// GUID_DEVINTERFACE_SERENUM_BUS_ENUMERATOR
-        //{ 0x4D36E978, 0xE325, 0x11CE, { 0xBF, 0xC1, 0x08, 0x00, 0x2B, 0xE1, 0x03, 0x18 } },
-        //// GUID_DEVINTERFACE_PARALLEL
-        //{ 0x97F76EF0, 0xF883, 0x11D0, { 0xAF, 0x1F, 0x00, 0x00, 0xF8, 0x00, 0x84, 0x5C } },
-        //// GUID_DEVINTERFACE_PARCLASS
-        //{ 0x811FC6A5, 0xF728, 0x11D0, { 0xA5, 0x37, 0x00, 0x00, 0xF8, 0x75, 0x3E, 0xD1 } }
-        };
+//    static const GUID GUID_DEVINTERFACE_LIST[] =
+//        {
+//        // GUID_DEVINTERFACE_USB_DEVICE
+//        //{ 0xA5DCBF10, 0x6530, 0x11D2, { 0x90, 0x1F, 0x00, 0xC0, 0x4F, 0xB9, 0x51, 0xED } },
+//        // GUID_DEVINTERFACE_DISK
+//        //{ 0x53f56307, 0xb6bf, 0x11d0, { 0x94, 0xf2, 0x00, 0xa0, 0xc9, 0x1e, 0xfb, 0x8b } },
+//        // GUID_DEVINTERFACE_HID,
+//        { 0x4D1E55B2, 0xF16F, 0x11CF, { 0x88, 0xCB, 0x00, 0x11, 0x11, 0x00, 0x00, 0x30 } },
+//        // GUID_NDIS_LAN_CLASS
+//        //{ 0xad498944, 0x762f, 0x11d0, { 0x8d, 0xcb, 0x00, 0xc0, 0x4f, 0xc3, 0x35, 0x8c } }
+//        //// GUID_DEVINTERFACE_COMPORT
+//        //{ 0x86e0d1e0, 0x8089, 0x11d0, { 0x9c, 0xe4, 0x08, 0x00, 0x3e, 0x30, 0x1f, 0x73 } },
+//        //// GUID_DEVINTERFACE_SERENUM_BUS_ENUMERATOR
+//        //{ 0x4D36E978, 0xE325, 0x11CE, { 0xBF, 0xC1, 0x08, 0x00, 0x2B, 0xE1, 0x03, 0x18 } },
+//        //// GUID_DEVINTERFACE_PARALLEL
+//        //{ 0x97F76EF0, 0xF883, 0x11D0, { 0xAF, 0x1F, 0x00, 0x00, 0xF8, 0x00, 0x84, 0x5C } },
+//        //// GUID_DEVINTERFACE_PARCLASS
+//        //{ 0x811FC6A5, 0xF728, 0x11D0, { 0xA5, 0x37, 0x00, 0x00, 0xF8, 0x75, 0x3E, 0xD1 } }
+//        };
 
-        //注册插拔事件
-        HDEVNOTIFY hDevNotify;
-        DEV_BROADCAST_DEVICEINTERFACE NotifacationFiler;
-        ZeroMemory(&NotifacationFiler,sizeof(DEV_BROADCAST_DEVICEINTERFACE));
-        NotifacationFiler.dbcc_size = sizeof(DEV_BROADCAST_DEVICEINTERFACE);
-        NotifacationFiler.dbcc_devicetype = DBT_DEVTYP_DEVICEINTERFACE;
+//        //注册插拔事件
+//        HDEVNOTIFY hDevNotify;
+//        DEV_BROADCAST_DEVICEINTERFACE NotifacationFiler;
+//        ZeroMemory(&NotifacationFiler,sizeof(DEV_BROADCAST_DEVICEINTERFACE));
+//        NotifacationFiler.dbcc_size = sizeof(DEV_BROADCAST_DEVICEINTERFACE);
+//        NotifacationFiler.dbcc_devicetype = DBT_DEVTYP_DEVICEINTERFACE;
 
-        for(int i=0;i<sizeof(GUID_DEVINTERFACE_LIST)/sizeof(GUID);i++)
-        {
-            NotifacationFiler.dbcc_classguid = GUID_DEVINTERFACE_LIST[i];
-            hDevNotify = RegisterDeviceNotification((HANDLE)this->winId(),
-                                                    &NotifacationFiler,DEVICE_NOTIFY_WINDOW_HANDLE);
-            if(!hDevNotify)
-            {
-                qDebug() << "register error!";
-            }
-        }
+//        for(int i=0;i<sizeof(GUID_DEVINTERFACE_LIST)/sizeof(GUID);i++)
+//        {
+//            NotifacationFiler.dbcc_classguid = GUID_DEVINTERFACE_LIST[i];
+//            hDevNotify = RegisterDeviceNotification((HANDLE)this->winId(),
+//                                                    &NotifacationFiler,DEVICE_NOTIFY_WINDOW_HANDLE);
+//            if(!hDevNotify)
+//            {
+//                qDebug() << "register error!";
+//            }
+//        }
 
         qRegisterMetaType<DevConfigParams>("DevConfigParams");
 
@@ -207,214 +202,214 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event)
 
 bool MainWindow::nativeEvent(const QByteArray &eventType, void *message, long *result)
 {
-    MSG* msg = reinterpret_cast<MSG*>(message);
-    if (eventType == "windows_generic_MSG")
-        {
-            bool bResult = false;
+//    MSG* msg = reinterpret_cast<MSG*>(message);
+//    if (eventType == "windows_generic_MSG")
+//        {
+//            bool bResult = false;
 
-            if(msg->message == WM_DEVICECHANGE && msg->wParam >= DBT_DEVICEARRIVAL)
-            {
-                switch (msg->wParam)
-                {
-                case DBT_DEVICEARRIVAL:
-                {
-                    /*TODO*/
-                    PDEV_BROADCAST_HDR lpdb = (PDEV_BROADCAST_HDR )msg->lParam;
-                    if(lpdb->dbch_devicetype != DBT_DEVTYP_DEVICEINTERFACE)
-                    {
-                        bResult = true;
-                        break;
-                    }
-                    PDEV_BROADCAST_DEVICEINTERFACE pDevInf =(PDEV_BROADCAST_DEVICEINTERFACE)lpdb;
+//            if(msg->message == WM_DEVICECHANGE && msg->wParam >= DBT_DEVICEARRIVAL)
+//            {
+//                switch (msg->wParam)
+//                {
+//                case DBT_DEVICEARRIVAL:
+//                {
+//                    /*TODO*/
+//                    PDEV_BROADCAST_HDR lpdb = (PDEV_BROADCAST_HDR )msg->lParam;
+//                    if(lpdb->dbch_devicetype != DBT_DEVTYP_DEVICEINTERFACE)
+//                    {
+//                        bResult = true;
+//                        break;
+//                    }
+//                    PDEV_BROADCAST_DEVICEINTERFACE pDevInf =(PDEV_BROADCAST_DEVICEINTERFACE)lpdb;
 
-                    QString strName=QString::fromWCharArray(pDevInf->dbcc_name+4);
-                    int iPos = strName.indexOf("VID_");
-                    QString strVID;
-                    QString strPID;
-                    if(iPos > 0)
-                    {
-                        strVID = strName.mid(iPos + 4,4);
-                    }
+//                    QString strName=QString::fromWCharArray(pDevInf->dbcc_name+4);
+//                    int iPos = strName.indexOf("VID_");
+//                    QString strVID;
+//                    QString strPID;
+//                    if(iPos > 0)
+//                    {
+//                        strVID = strName.mid(iPos + 4,4);
+//                    }
 
-                    iPos = strName.indexOf("PID_");
-                    if(iPos > 0)
-                    {
-                        strPID = strName.mid(iPos + 4,4);
-                    }
-                    qDebug() << "strVID = " << strVID;
-                    qDebug() << "strPID = " << strPID;
-                    if(strVID == "0483" && strPID == "5750")
-                    {
-                        qDebug() << "USB add " << endl;
-                        CHidCmdThread::GetInstance()->ClearCmd();
-                         QThread::msleep(200);
-                        //打开设备
-                        if(CHidCmdThread::GetInstance()->GetStopped())
-                        {
-                            CHidCmdThread::GetInstance()->start(QThread::HighestPriority);
-                            while(!CHidCmdThread::GetInstance()->isRunning())
-                            {
-                                QApplication::processEvents();
-                            }
-                        }
-                        else
-                        {
-                            CHidCmdThread::GetInstance()->SetStopped(true);
-                            while(CHidCmdThread::GetInstance()->isRunning())
-                            {
-                                QApplication::processEvents();
-                            }
-                            CHidCmdThread::GetInstance()->start(QThread::HighestPriority);
-                            while(!CHidCmdThread::GetInstance()->isRunning())
-                            {
-                                QApplication::processEvents();
-                            }
-                        }
+//                    iPos = strName.indexOf("PID_");
+//                    if(iPos > 0)
+//                    {
+//                        strPID = strName.mid(iPos + 4,4);
+//                    }
+//                    qDebug() << "strVID = " << strVID;
+//                    qDebug() << "strPID = " << strPID;
+//                    if(strVID == "0483" && strPID == "5750")
+//                    {
+//                        qDebug() << "USB add " << endl;
+//                        CHidCmdThread::GetInstance()->ClearCmd();
+//                         QThread::msleep(200);
+//                        //打开设备
+//                        if(CHidCmdThread::GetInstance()->GetStopped())
+//                        {
+//                            CHidCmdThread::GetInstance()->start(QThread::HighestPriority);
+//                            while(!CHidCmdThread::GetInstance()->isRunning())
+//                            {
+//                                QApplication::processEvents();
+//                            }
+//                        }
+//                        else
+//                        {
+//                            CHidCmdThread::GetInstance()->SetStopped(true);
+//                            while(CHidCmdThread::GetInstance()->isRunning())
+//                            {
+//                                QApplication::processEvents();
+//                            }
+//                            CHidCmdThread::GetInstance()->start(QThread::HighestPriority);
+//                            while(!CHidCmdThread::GetInstance()->isRunning())
+//                            {
+//                                QApplication::processEvents();
+//                            }
+//                        }
 
-                        qDebug() << __LINE__;
+//                        qDebug() << __LINE__;
 
-                        while(!HIDOpertaionUtility::GetInstance()->CheckDeviceConnection())
-                        {
-                            QApplication::processEvents();
-                        }
+//                        while(!HIDOpertaionUtility::GetInstance()->CheckDeviceConnection())
+//                        {
+//                            QApplication::processEvents();
+//                        }
 
-                        QThread::msleep(500);
-
-
-                        //等待应答
-                        HIDOpertaionUtility::GetInstance()->_SetWaitForAck(false);
-                        //等待返回
-                        HIDOpertaionUtility::GetInstance()->_SetWaitForReturn(true);
-
-                        CHidCmdThread::GetInstance()->ClearCmd();
-
-                        qDebug() << __LINE__;
-
-                        if(m_pSettingPage->GetUpdateStates() == false)
-                        {
-                            qDebug() << "m_pSettingPage->GetUpdateStates() = " << m_pSettingPage->GetUpdateStates();
-                            CHidCmdThread::GetInstance()->AddReadDevParamsCmd();
-                        }
-
-                        qDebug() << __LINE__;
-                        GetQCameraInfo();
-                        VideoThread videoThread;
-                        videoThread.OpenVideo();
-                        videoThread.terminate();
-
-                        qDebug() << __LINE__;
-                        m_pDetectorPage->InitTestStates();
-                    }
-
-                    bResult = true;
-                    break;
-                }
-                case DBT_DEVICEREMOVECOMPLETE:
-                {
-                    /*TODO*/
-                    PDEV_BROADCAST_HDR lpdb = (PDEV_BROADCAST_HDR )msg->lParam;
-                    if(lpdb->dbch_devicetype != DBT_DEVTYP_DEVICEINTERFACE)
-                    {
-                        bResult = true;
-                        break;
-                    }
-                    qDebug() << "USB gone " << endl;
-
-                   PDEV_BROADCAST_DEVICEINTERFACE pDevInf =(PDEV_BROADCAST_DEVICEINTERFACE)lpdb;
-
-                   QString strName=QString::fromWCharArray(pDevInf->dbcc_name+4);
-                   int iPos = strName.indexOf("VID_");
-                   QString strVID;
-                   QString strPID;
-                   if(iPos > 0)
-                   {
-                       strVID = strName.mid(iPos + 4,4);
-                   }
-
-                   iPos = strName.indexOf("PID_");
-                   if(iPos > 0)
-                   {
-                       strPID = strName.mid(iPos + 4,4);
-                   }
-                   qDebug() << "strVID = " << strVID;
-                   qDebug() << "strPID = " << strPID;
-
-                   if(strVID == "0483" && strPID == "5750")
-                   {
-                       if(HIDOpertaionUtility::GetInstance()->CheckDeviceConnection() == false)
-                       {
-                           qDebug() << "USB pull out! ";
+//                        QThread::msleep(500);
 
 
-                           m_pDetectorPage->StopTest();
+//                        //等待应答
+//                        HIDOpertaionUtility::GetInstance()->_SetWaitForAck(false);
+//                        //等待返回
+//                        HIDOpertaionUtility::GetInstance()->_SetWaitForReturn(true);
 
-                           QMessageBox::warning(NULL, "Warning", "USB drive removed,Please reconnect the USB!",
-                                                QMessageBox::Ok, QMessageBox::Ok);
+//                        CHidCmdThread::GetInstance()->ClearCmd();
 
-                           SlotDetectorPageStopTest();
-                           CHidCmdThread::GetInstance()->ClearCmd();
-                           //CHidCmdThread::GetInstance()->SetStopped(true);
+//                        qDebug() << __LINE__;
+
+//                        if(m_pSettingPage->GetUpdateStates() == false)
+//                        {
+//                            qDebug() << "m_pSettingPage->GetUpdateStates() = " << m_pSettingPage->GetUpdateStates();
+//                            CHidCmdThread::GetInstance()->AddReadDevParamsCmd();
+//                        }
+
+//                        qDebug() << __LINE__;
+//                        GetQCameraInfo();
+//                        VideoThread videoThread;
+//                        videoThread.OpenVideo();
+//                        videoThread.terminate();
+
+//                        qDebug() << __LINE__;
+//                        m_pDetectorPage->InitTestStates();
+//                    }
+
+//                    bResult = true;
+//                    break;
+//                }
+//                case DBT_DEVICEREMOVECOMPLETE:
+//                {
+//                    /*TODO*/
+//                    PDEV_BROADCAST_HDR lpdb = (PDEV_BROADCAST_HDR )msg->lParam;
+//                    if(lpdb->dbch_devicetype != DBT_DEVTYP_DEVICEINTERFACE)
+//                    {
+//                        bResult = true;
+//                        break;
+//                    }
+//                    qDebug() << "USB gone " << endl;
+
+//                   PDEV_BROADCAST_DEVICEINTERFACE pDevInf =(PDEV_BROADCAST_DEVICEINTERFACE)lpdb;
+
+//                   QString strName=QString::fromWCharArray(pDevInf->dbcc_name+4);
+//                   int iPos = strName.indexOf("VID_");
+//                   QString strVID;
+//                   QString strPID;
+//                   if(iPos > 0)
+//                   {
+//                       strVID = strName.mid(iPos + 4,4);
+//                   }
+
+//                   iPos = strName.indexOf("PID_");
+//                   if(iPos > 0)
+//                   {
+//                       strPID = strName.mid(iPos + 4,4);
+//                   }
+//                   qDebug() << "strVID = " << strVID;
+//                   qDebug() << "strPID = " << strPID;
+
+//                   if(strVID == "0483" && strPID == "5750")
+//                   {
+//                       if(HIDOpertaionUtility::GetInstance()->CheckDeviceConnection() == false)
+//                       {
+//                           qDebug() << "USB pull out! ";
+
+
+//                           m_pDetectorPage->StopTest();
+
+//                           QMessageBox::warning(NULL, "Warning", "USB drive removed,Please reconnect the USB!",
+//                                                QMessageBox::Ok, QMessageBox::Ok);
+
+//                           SlotDetectorPageStopTest();
+//                           CHidCmdThread::GetInstance()->ClearCmd();
+//                           //CHidCmdThread::GetInstance()->SetStopped(true);
 
 
 
-                           m_pDetectorPage->PowerOffStates();
-                           VideoThread videoThread;
-                           videoThread.CloseVideo();
-                           videoThread.terminate();
+//                           m_pDetectorPage->PowerOffStates();
+//                           VideoThread videoThread;
+//                           videoThread.CloseVideo();
+//                           videoThread.terminate();
 
-                           bResult = true;
-
-
-                       }
-                   }
-
-                    break;
-                }
-                case DBT_DEVNODES_CHANGED:
-                    /*TODO*/
-                    bResult = true;
-                    break;
-
-                default:
-                    /*TODO*/
-                    bResult = false;
-                    break;
-                }
-            }
+//                           bResult = true;
 
 
-            return bResult;
-        }
-    if(msg->message == WM_NCHITTEST)
-        {// 窗口拖拽
-            int xPos = GET_X_LPARAM(msg->lParam) - this->frameGeometry().x();
-            int yPos = GET_Y_LPARAM(msg->lParam) - this->frameGeometry().y();
-            if(this->childAt(xPos,yPos) == 0)
-            {
-                *result = HTCAPTION;
-            }
-            else
-            {
-                return false;
-            }
-            if(xPos > 18 && xPos < 22)
-                *result = HTLEFT;
-            if(xPos > (this->width() - 22) && xPos < (this->width() - 18))
-                *result = HTRIGHT;
-            if(yPos > 18 && yPos < 22)
-                *result = HTTOP;
-            if(yPos > (this->height() - 22) && yPos < (this->height() - 18))
-                *result = HTBOTTOM;
-            if(xPos > 18 && xPos < 22 && yPos > 18 && yPos < 22)
-                *result = HTTOPLEFT;
-            if(xPos > (this->width() - 22) && xPos < (this->width() - 18) && yPos > 18 && yPos < 22)
-                *result = HTTOPRIGHT;
-            if(xPos > 18 && xPos < 22 && yPos > (this->height() - 22) && yPos < (this->height() - 18))
-                *result = HTBOTTOMLEFT;
-            if(xPos > (this->width() - 22) && xPos < (this->width() - 18) && yPos > (this->height() - 22) && yPos < (this->height() - 18))
-                *result = HTBOTTOMRIGHT;
-            return true;
-        }
+//                       }
+//                   }
+
+//                    break;
+//                }
+//                case DBT_DEVNODES_CHANGED:
+//                    /*TODO*/
+//                    bResult = true;
+//                    break;
+
+//                default:
+//                    /*TODO*/
+//                    bResult = false;
+//                    break;
+//                }
+//            }
+
+
+//            return bResult;
+//        }
+//    if(msg->message == WM_NCHITTEST)
+//        {// 窗口拖拽
+//            int xPos = GET_X_LPARAM(msg->lParam) - this->frameGeometry().x();
+//            int yPos = GET_Y_LPARAM(msg->lParam) - this->frameGeometry().y();
+//            if(this->childAt(xPos,yPos) == 0)
+//            {
+//                *result = HTCAPTION;
+//            }
+//            else
+//            {
+//                return false;
+//            }
+//            if(xPos > 18 && xPos < 22)
+//                *result = HTLEFT;
+//            if(xPos > (this->width() - 22) && xPos < (this->width() - 18))
+//                *result = HTRIGHT;
+//            if(yPos > 18 && yPos < 22)
+//                *result = HTTOP;
+//            if(yPos > (this->height() - 22) && yPos < (this->height() - 18))
+//                *result = HTBOTTOM;
+//            if(xPos > 18 && xPos < 22 && yPos > 18 && yPos < 22)
+//                *result = HTTOPLEFT;
+//            if(xPos > (this->width() - 22) && xPos < (this->width() - 18) && yPos > 18 && yPos < 22)
+//                *result = HTTOPRIGHT;
+//            if(xPos > 18 && xPos < 22 && yPos > (this->height() - 22) && yPos < (this->height() - 18))
+//                *result = HTBOTTOMLEFT;
+//            if(xPos > (this->width() - 22) && xPos < (this->width() - 18) && yPos > (this->height() - 22) && yPos < (this->height() - 18))
+//                *result = HTBOTTOMRIGHT;
+//            return true;
+//        }
 
         bool bTmp = QWidget::nativeEvent(eventType, message, result);
         return bTmp;

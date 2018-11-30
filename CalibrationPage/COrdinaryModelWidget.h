@@ -21,10 +21,10 @@
 #include <QProgressBar>
 #include <QTimer>
 #include "CommonDataWidget/CLabelLineEditWidget.h"
-#include "AdjustLight/ordinarybrightmess.h"
-#include "AdjustLight/hidopertaionutility.h"
-#include "AdjustLight/opencvutility.h"
-#include "CQprogress.h"
+#include "AdjustLight/OrdinaryBrightmess.h"
+#include "AdjustLight/HidOpertaionUtility.h"
+#include "AdjustLight/OpencvUtility.h"
+#include "cqprogress.h"
 
 class COrdinaryModelWidget : public QWidget
 {

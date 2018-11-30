@@ -1,9 +1,9 @@
 ﻿#include "ThreadTesting.h"
 #ifdef  PRO_DRUG_DETECTOR
     #include "AdjustLight/CHidCmdThread.h"
-    #include "AdjustLight/hidopertaionutility.h"
-    #include "AdjustLight/protocolutility.h"
-    #include "AdjustLight/opencvutility.h"
+    #include "AdjustLight/HidOpertaionUtility.h"
+    #include "AdjustLight/ProtocolUtility.h"
+    #include "AdjustLight/OpencvUtility.h"
     #include "AdjustLight/ParamsConfiguration.h"
     #include "AdjustLight/OrdinaryBrightmess.h"
 #else
